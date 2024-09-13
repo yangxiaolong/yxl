@@ -17,7 +17,7 @@ public class UserRepository {
         sleepAsMS(10);
         return ids.stream()
                 .distinct()
-                .map(id -> createUser(id))
+                .map(this::createUser)
                 .collect(toList());
     }
 

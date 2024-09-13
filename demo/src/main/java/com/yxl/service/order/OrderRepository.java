@@ -23,7 +23,7 @@ public class OrderRepository {
 
     public List<Order> getById(List<Long> ids) {
         return ids.stream()
-                .map(id -> createOrderById(id))
+                .map(this::createOrderById)
                 .collect(Collectors.toList());
     }
 

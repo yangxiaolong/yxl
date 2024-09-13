@@ -26,7 +26,7 @@ public class AddressRepository {
         sleepAsMS(10);
         return ids.stream()
                 .distinct()
-                .map(id -> createAddress(id))
+                .map(this::createAddress)
                 .collect(toList());
     }
 

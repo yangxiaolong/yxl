@@ -17,7 +17,7 @@ public class ProductRepository {
     public List<Product> getByIds(List<Long> ids){
         sleepAsMS(10);
         return ids.stream()
-                .map(id -> createProduct(id))
+                .map(this::createProduct)
                 .collect(toList());
     }
 
