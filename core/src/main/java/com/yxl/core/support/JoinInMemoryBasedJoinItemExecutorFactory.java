@@ -36,7 +36,7 @@ public class JoinInMemoryBasedJoinItemExecutorFactory extends AbstractAnnotation
     protected <DATA> BiConsumer<Object, List<Object>> createFoundFunction(Class<DATA> cls, Field field, JoinInMemory ann) {
         log.info("write field is {} for class {}", field.getName(), cls);
         boolean isCollection = Collection.class.isAssignableFrom(field.getType());
-        return new DataSetter(field.getName(), isCollection);
+        return new DataSetter<>(field.getName(), isCollection);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class JoinInMemoryBasedJoinItemExecutorFactory extends AbstractAnnotation
             return Function.identity();
         } else {
             log.info("Data Convert is {} for class {}, field {}", ann.joinDataConverter(), cls, field.getName());
-            return new DataGetter(ann.joinDataConverter());
+            return new DataGetter<>(ann.joinDataConverter());
         }
     }
 
@@ -54,21 +54,21 @@ public class JoinInMemoryBasedJoinItemExecutorFactory extends AbstractAnnotation
     protected <DATA> Function<Object, Object> createKeyGeneratorFromJoinData(Class<DATA> cls, Field field, JoinInMemory ann) {
         log.info("Key from join data is {} for class {}, field {}",
                 ann.keyFromJoinData(), cls, field.getName());
-        return new DataGetter(ann.keyFromJoinData());
+        return new DataGetter<>(ann.keyFromJoinData());
     }
 
     @Override
     protected <DATA> Function<List<Object>, List<Object>> createDataLoader(Class<DATA> cls, Field field, JoinInMemory ann) {
         log.info("data loader is {} for class {}, field {}",
                 ann.loader(), cls, field.getName());
-        return new DataGetter(ann.loader());
+        return new DataGetter<>(ann.loader());
     }
 
     @Override
     protected <DATA> Function<Object, Object> createKeyGeneratorFromData(Class<DATA> cls, Field field, JoinInMemory ann) {
         log.info("Key from source data is {} for class {}, field {}",
                 ann.keyFromJoinData(), cls, field.getName());
-        return new DataGetter(ann.keyFromSourceData());
+        return new DataGetter<>(ann.keyFromSourceData());
     }
 
     @Override
