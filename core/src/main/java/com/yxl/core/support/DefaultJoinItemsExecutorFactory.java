@@ -49,7 +49,8 @@ public class DefaultJoinItemsExecutorFactory implements JoinItemsExecutorFactory
         return buildJoinItemsExecutor(cls, joinInMemoryConfig, joinItemExecutors);
     }
 
-    private <D> JoinItemsExecutor<D> buildJoinItemsExecutor(Class<D> cls, JoinInMemoryConfig joinInMemoryConfig, List<JoinItemExecutor<D>> joinItemExecutors) {
+    private <D> JoinItemsExecutor<D> buildJoinItemsExecutor(
+            Class<D> cls, JoinInMemoryConfig joinInMemoryConfig, List<JoinItemExecutor<D>> joinItemExecutors) {
         // 使用 串行执行器
         if (joinInMemoryConfig == null || joinInMemoryConfig.executorType() == JoinInMemeoryExecutorType.SERIAL) {
             // 为什么log.info  无法识别?
