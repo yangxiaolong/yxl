@@ -32,9 +32,11 @@ public class ParallelJoinItemsExecutor<DATA> extends AbstractJoinItemsExecutor<D
 
     private List<JoinExecutorWithLevel> buildJoinExecutorWithLevel() {
         // 根据 level 进行排序，解决依赖问题
-        return getJoinItemExecutors().stream()
+        return getJoinItemExecutors()
+                .stream()
                 .collect(Collectors.groupingBy(JoinItemExecutor::runOnLevel))
-                .entrySet().stream()
+                .entrySet()
+                .stream()
                 .map(entry -> new JoinExecutorWithLevel(entry.getKey(), entry.getValue()))
                 .sorted(Comparator.comparingInt(o -> o.level))
                 .collect(Collectors.toList());
@@ -66,7 +68,8 @@ public class ParallelJoinItemsExecutor<DATA> extends AbstractJoinItemsExecutor<D
     }
 
     private List<Task> buildTasks(JoinExecutorWithLevel joinExecutorWithLevel, List<DATA> datas) {
-        return joinExecutorWithLevel.getJoinItemExecutors().stream()
+        return joinExecutorWithLevel.getJoinItemExecutors()
+                .stream()
                 .map(joinExecutor -> new Task(joinExecutor, datas))
                 .collect(Collectors.toList());
     }
