@@ -1,11 +1,11 @@
 package com.yxl.starter.configuration;
 
-import com.yxl.core.JoinItemExecutorFactory;
-import com.yxl.core.JoinItemsExecutorFactory;
-import com.yxl.core.JoinService;
-import com.yxl.core.support.DefaultJoinItemsExecutorFactory;
-import com.yxl.core.support.DefaultJoinService;
-import com.yxl.core.support.JoinInMemoryBasedJoinItemExecutorFactory;
+import com.yxl.factory.item.JoinItemExecutorFactory;
+import com.yxl.factory.items.JoinItemsExecutorFactory;
+import com.yxl.service.JoinService;
+import com.yxl.factory.items.DefaultJoinItemsExecutorFactory;
+import com.yxl.service.DefaultJoinService;
+import com.yxl.factory.item.JoinInMemoryBasedJoinItemExecutorFactory;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;

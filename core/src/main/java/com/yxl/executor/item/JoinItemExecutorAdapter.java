@@ -1,4 +1,4 @@
-package com.yxl.core.support;
+package com.yxl.executor.item;
 
 import com.google.common.base.Preconditions;
 import lombok.Builder;
@@ -11,6 +11,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Function;
 
 /**
+ *
  */
 @Slf4j
 @Builder
@@ -52,7 +53,7 @@ public class JoinItemExecutorAdapter<SOURCE_DATA, JOIN_KEY, JOIN_DATA, RESULT>
 
         if (lostCallback != null) {
             this.lostCallback = getDefaultLostFunction().andThen(lostCallback);
-        }else {
+        } else {
             this.lostCallback = getDefaultLostFunction();
         }
 

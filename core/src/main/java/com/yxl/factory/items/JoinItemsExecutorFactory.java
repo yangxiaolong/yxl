@@ -1,4 +1,6 @@
-package com.yxl.core;
+package com.yxl.factory.items;
+
+import com.yxl.executor.items.JoinItemsExecutor;
 
 /**
  *
@@ -12,4 +14,5 @@ public interface JoinItemsExecutorFactory {
      * @return
      */
     <D> JoinItemsExecutor<D> createFor(Class<D> cls);
+
 }

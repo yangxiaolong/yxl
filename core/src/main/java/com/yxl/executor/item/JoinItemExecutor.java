@@ -1,12 +1,13 @@
-package com.yxl.core;
+package com.yxl.executor.item;
 
 import java.util.List;
 
-
 public interface JoinItemExecutor<DATA> {
+
     void execute(List<DATA> datas);
 
-    default int runOnLevel(){
+    default int runOnLevel() {
         return 0;
     }
+
 }

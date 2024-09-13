@@ -1,4 +1,4 @@
-package com.yxl.core.support;
+package com.yxl.factory.item;
 
 import com.yxl.annotation.JoinInMemory;
 import lombok.extern.slf4j.Slf4j;

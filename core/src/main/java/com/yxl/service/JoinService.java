@@ -1,4 +1,4 @@
-package com.yxl.core;
+package com.yxl.service;
 
 import java.util.Collections;
 import java.util.List;

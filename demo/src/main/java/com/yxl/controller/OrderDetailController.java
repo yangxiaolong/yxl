@@ -1,6 +1,6 @@
 package com.yxl.controller;
 
-import com.yxl.core.JoinService;
+import com.yxl.service.JoinService;
 import com.yxl.service.order.Order;
 import com.yxl.service.order.OrderRepository;
 import com.yxl.vo.OrderDetailVO;

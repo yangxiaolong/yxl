@@ -1,6 +1,5 @@
-package com.yxl.core.support;
+package com.yxl.executor.item;
 
-import com.yxl.core.JoinItemExecutor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 
@@ -12,7 +11,6 @@ import static java.util.stream.Collectors.groupingBy;
 import static java.util.stream.Collectors.toList;
 
 /**
- *
  * @param <SOURCE_DATA> 原始数据
  * @param <JOIN_KEY>    join 使用的 key
  * @param <JOIN_DATA>   join 获取的 数据
