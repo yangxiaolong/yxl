@@ -27,20 +27,6 @@ import java.util.concurrent.TimeUnit;
 public class JoinInMemoryAutoConfiguration {
 
     @Bean
-    @ConditionalOnMissingBean
-    public JoinItemsExecutorFactory joinItemsExecutorFactory(
-            Collection<? extends JoinItemExecutorFactory> joinItemExecutorFactories,
-            Map<String, ExecutorService> executorServiceMap) {
-        return new DefaultJoinItemsExecutorFactory(joinItemExecutorFactories, executorServiceMap);
-    }
-
-    @Bean
-    @ConditionalOnMissingBean
-    public JoinService joinService(JoinItemsExecutorFactory joinItemsExecutorFactory) {
-        return new DefaultJoinService(joinItemsExecutorFactory);
-    }
-
-    @Bean
     public JoinInMemoryBasedJoinItemExecutorFactory joinInMemoryBasedJoinItemExecutorFactory(
             ApplicationContext applicationContext) {
         return new JoinInMemoryBasedJoinItemExecutorFactory(new BeanFactoryResolver(applicationContext));
@@ -58,6 +44,20 @@ public class JoinInMemoryAutoConfiguration {
                 new SynchronousQueue<>(),
                 basicThreadFactory,
                 new ThreadPoolExecutor.CallerRunsPolicy());
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public JoinItemsExecutorFactory joinItemsExecutorFactory(
+            Collection<? extends JoinItemExecutorFactory> joinItemExecutorFactories,
+            Map<String, ExecutorService> executorServiceMap) {
+        return new DefaultJoinItemsExecutorFactory(joinItemExecutorFactories, executorServiceMap);
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public JoinService joinService(JoinItemsExecutorFactory joinItemsExecutorFactory) {
+        return new DefaultJoinService(joinItemsExecutorFactory);
     }
 
 }
