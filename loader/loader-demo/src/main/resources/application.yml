@@ -1,0 +1,9 @@
+logging:
+  level:
+    root: info
+    com.lego.yxl: debug
+    org.springframework.web: trace
+    org.springframework.data.rest: trace
+
+server:
+  port: 8081
