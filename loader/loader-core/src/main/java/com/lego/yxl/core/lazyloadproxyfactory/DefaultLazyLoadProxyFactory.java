@@ -1,6 +1,6 @@
-package com.lego.yxl.core.support;
+package com.lego.yxl.core.lazyloadproxyfactory;
 
-import com.lego.yxl.core.LazyLoadProxyFactory;
+import com.lego.yxl.core.lazyloaderinterceptor.LazyLoaderInterceptorFactory;
 import org.springframework.aop.framework.ProxyFactory;
 
 public class DefaultLazyLoadProxyFactory

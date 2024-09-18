@@ -1,6 +1,8 @@
-package com.lego.yxl.core.support;
+package com.lego.yxl.core.lazyloaderinterceptor;
 
 import com.google.common.collect.Maps;
+import com.lego.yxl.core.propertylazyloader.PropertyLazyLoader;
+import com.lego.yxl.core.propertylazyloader.PropertyLazyLoaderFactory;
 import org.springframework.util.CollectionUtils;
 
 import java.util.Collections;

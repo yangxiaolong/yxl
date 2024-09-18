@@ -1,6 +1,6 @@
-package com.lego.yxl.core.support;
+package com.lego.yxl.core.lazyloadproxyfactory;
 
-import com.lego.yxl.core.LazyLoadProxyFactory;
+import com.lego.yxl.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import org.springframework.context.ApplicationContext;
 
 public class AutowiredLazyLoadProxyFactoryWrapper implements LazyLoadProxyFactory {

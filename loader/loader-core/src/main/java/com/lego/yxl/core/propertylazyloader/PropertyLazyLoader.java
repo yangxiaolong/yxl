@@ -1,4 +1,4 @@
-package com.lego.yxl.core.support;
+package com.lego.yxl.core.propertylazyloader;
 
 import lombok.Getter;
 import org.springframework.expression.BeanResolver;

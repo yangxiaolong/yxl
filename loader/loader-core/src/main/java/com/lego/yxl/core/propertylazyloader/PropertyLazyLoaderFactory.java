@@ -1,4 +1,4 @@
-package com.lego.yxl.core.support;
+package com.lego.yxl.core.propertylazyloader;
 
 import com.lego.yxl.core.annotation.LazyLoadBy;
 import org.apache.commons.lang3.reflect.FieldUtils;

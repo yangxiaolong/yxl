@@ -1,5 +1,6 @@
-package com.lego.yxl.core.support;
+package com.lego.yxl.core.lazyloaderinterceptor;
 
+import com.lego.yxl.core.propertylazyloader.PropertyLazyLoader;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.reflect.FieldUtils;
