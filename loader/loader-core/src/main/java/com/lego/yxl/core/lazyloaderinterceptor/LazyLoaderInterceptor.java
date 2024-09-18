@@ -50,11 +50,10 @@ public class LazyLoaderInterceptor implements InvocationHandler, MethodIntercept
                     FieldUtils.writeField(target, propertyName, data, true);
                 }
                 return data;
-            } else {
-                method.invoke(target, objects);
             }
         }
 
         return method.invoke(target, objects);
     }
+
 }
