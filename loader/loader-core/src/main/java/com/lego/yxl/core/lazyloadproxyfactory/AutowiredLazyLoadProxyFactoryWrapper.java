@@ -1,23 +1,24 @@
 package com.lego.yxl.core.lazyloadproxyfactory;
 
-import com.lego.yxl.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import org.springframework.context.ApplicationContext;
 
 public class AutowiredLazyLoadProxyFactoryWrapper implements LazyLoadProxyFactory {
+
     private final LazyLoadProxyFactory lazyLoadProxyFactory;
     private final ApplicationContext applicationContext;
 
     public AutowiredLazyLoadProxyFactoryWrapper(LazyLoadProxyFactory lazyLoadProxyFactory,
-                                         ApplicationContext applicationContext) {
+                                                ApplicationContext applicationContext) {
         this.lazyLoadProxyFactory = lazyLoadProxyFactory;
         this.applicationContext = applicationContext;
     }
 
     @Override
     public <T> T createProxyFor(T t) {
-        if (t != null){
+        if (t != null) {
             applicationContext.getAutowireCapableBeanFactory().autowireBean(t);
         }
         return lazyLoadProxyFactory.createProxyFor(t);
     }
+
 }
