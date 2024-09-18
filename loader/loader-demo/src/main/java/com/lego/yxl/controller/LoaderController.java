@@ -57,6 +57,8 @@ public class LoaderController {
 
         log.info("Get Price");
         Assertions.assertNotNull(proxyContext.getPrice());
+        // second get price
+        Assertions.assertNotNull(proxyContext.getPrice());
 
         log.info("Get Stock");
         Assertions.assertNotNull(proxyContext.getStock());
