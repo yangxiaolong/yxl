@@ -14,9 +14,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-/**
-
- */
 public class PropertyLazyLoaderFactory {
 
     private final ApplicationContext applicationContext;
@@ -25,24 +22,25 @@ public class PropertyLazyLoaderFactory {
         this.applicationContext = applicationContext;
     }
 
-    public List<PropertyLazyLoader> createFor(Class cls) {
+    public List<PropertyLazyLoader> createFor(Class<?> cls) {
         return FieldUtils.getAllFieldsList(cls).stream()
                 .map(this::createFromField)
                 .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
-    private PropertyLazyLoader createFromField(Field field){
+    private PropertyLazyLoader createFromField(Field field) {
         LazyLoadBy mergedAnnotation = AnnotatedElementUtils.findMergedAnnotation(field, LazyLoadBy.class);
-        if (mergedAnnotation == null){
+        if (mergedAnnotation == null) {
             return null;
         }
 
         String targetEl = mergedAnnotation.value();
         Annotation[] annotations = field.getAnnotations();
-        for (Annotation annotation : annotations){
-            AnnotationAttributes mergedAnnotationAttributes = AnnotatedElementUtils.findMergedAnnotationAttributes(field, annotation.annotationType(), true, true);
-            for (Map.Entry<String, Object> entry : mergedAnnotationAttributes.entrySet()){
+        for (Annotation annotation : annotations) {
+            AnnotationAttributes mergedAnnotationAttributes = AnnotatedElementUtils.findMergedAnnotationAttributes(
+                    field, annotation.annotationType(), true, true);
+            for (Map.Entry<String, Object> entry : mergedAnnotationAttributes.entrySet()) {
                 String key = "${" + entry.getKey() + "}";
                 String value = String.valueOf(entry.getValue());
                 targetEl = targetEl.replace(key, value);

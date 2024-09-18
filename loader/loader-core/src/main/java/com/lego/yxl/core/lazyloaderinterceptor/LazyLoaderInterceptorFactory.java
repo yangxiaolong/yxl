@@ -15,7 +15,7 @@ import static java.util.stream.Collectors.toMap;
 
 public class LazyLoaderInterceptorFactory {
 
-    private final Map<Class<?>, Map<String, PropertyLazyLoader>> loaderCache = Maps.newHashMap();
+    private final Map<Class<?>, Map<String, PropertyLazyLoader>> loaderCache = Maps.newConcurrentMap();
     private final PropertyLazyLoaderFactory propertyLazyLoaderFactory;
 
     public LazyLoaderInterceptorFactory(PropertyLazyLoaderFactory propertyLazyLoaderFactory) {
@@ -23,8 +23,7 @@ public class LazyLoaderInterceptorFactory {
     }
 
     public LazyLoaderInterceptor createFor(Class<?> cls, Object target) {
-        Map<String, PropertyLazyLoader> loaders = this.loaderCache.computeIfAbsent(cls,
-                this::createForClass);
+        Map<String, PropertyLazyLoader> loaders = this.loaderCache.computeIfAbsent(cls, this::createForClass);
 
         return new LazyLoaderInterceptor(loaders, target);
     }
