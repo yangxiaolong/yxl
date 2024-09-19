@@ -15,6 +15,7 @@
         <module>joininmemory</module>
         <module>loader</module>
         <module>common</module>
+        <module>splitter</module>
     </modules>
 
     <properties>
