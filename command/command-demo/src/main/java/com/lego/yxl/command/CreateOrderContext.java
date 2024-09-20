@@ -15,7 +15,7 @@ public class CreateOrderContext {
     @LazyLoadBy("#{@addressRepository.getById(command.userAddress)}")
     private Address address;
 
-    @LazyLoadBy("#{@productRepository.getByIds(${productIds})}")
+    @LazyLoadBy("#{@productRepository.getByIds(productIds)}")
     private List<Product> products;
 
     public List<Long> getProductIds() {
