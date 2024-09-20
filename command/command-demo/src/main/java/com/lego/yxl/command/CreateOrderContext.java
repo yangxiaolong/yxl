@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class CreateOrderContext {
     private final CreateOrderCommand command;
 
-    @LazyLoadBy("#{@addressRepository.getDefaultAddressByUserId(user.id)}")
+    @LazyLoadBy("#{@addressRepository.getById(command.userAddress)}")
     private Address address;
 
     @LazyLoadBy("#{@productRepository.getByIds(${productIds})}")
