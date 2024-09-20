@@ -1,6 +1,6 @@
 package com.lego.yxl.vo;
 
-import com.lego.yxl.core.annotation.JoinInMemory;
+import com.lego.yxl.annotation.JoinInMemory;
 import org.springframework.core.annotation.AliasFor;
 
 import java.lang.annotation.ElementType;

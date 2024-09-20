@@ -19,7 +19,7 @@
     <dependencies>
         <dependency>
             <artifactId>splitter-starter</artifactId>
-            <groupId>com.lego.yxl</groupId>
+            <groupId>com.lego</groupId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>

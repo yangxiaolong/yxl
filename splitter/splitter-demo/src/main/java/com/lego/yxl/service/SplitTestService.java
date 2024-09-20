@@ -1,8 +1,8 @@
 package com.lego.yxl.service;
 
 import com.google.common.base.Preconditions;
-import com.lego.yxl.core.annotation.Split;
-import com.lego.yxl.core.annotation.SplitParam;
+import com.lego.yxl.annotation.Split;
+import com.lego.yxl.annotation.SplitParam;
 import com.lego.yxl.param.AnnBasedInputParam;
 import com.lego.yxl.param.SplittableInputParam;
 import lombok.extern.slf4j.Slf4j;

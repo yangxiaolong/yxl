@@ -1,6 +1,6 @@
 package com.lego.yxl.controller;
 
-import com.lego.yxl.core.service.JoinService;
+import com.lego.yxl.service.JoinService;
 import com.lego.yxl.repository.order.OrderRepository;
 import com.lego.yxl.vo.OrderDetailVO;
 import com.lego.yxl.vo.OrderVO;

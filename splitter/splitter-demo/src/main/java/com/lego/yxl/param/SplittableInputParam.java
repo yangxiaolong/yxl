@@ -1,7 +1,7 @@
 package com.lego.yxl.param;
 
 import com.google.common.collect.Lists;
-import com.lego.yxl.core.common.SplittableParam;
+import com.lego.yxl.common.SplittableParam;
 import lombok.Builder;
 import lombok.Value;
 

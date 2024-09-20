@@ -1,7 +1,7 @@
 package com.lego.yxl.vo.v6;
 
-import com.lego.yxl.core.annotation.JoinInMemeoryExecutorType;
-import com.lego.yxl.core.annotation.JoinInMemoryConfig;
+import com.lego.yxl.annotation.JoinInMemeoryExecutorType;
+import com.lego.yxl.annotation.JoinInMemoryConfig;
 import com.lego.yxl.vo.*;
 import lombok.Data;
 

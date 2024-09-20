@@ -16,7 +16,7 @@
         <module>loader-starter</module>
     </modules>
 
-    <groupId>com.lego.yxl</groupId>
+    <groupId>com.lego</groupId>
     <artifactId>loader</artifactId>
     <version>1.0-SNAPSHOT</version>
 

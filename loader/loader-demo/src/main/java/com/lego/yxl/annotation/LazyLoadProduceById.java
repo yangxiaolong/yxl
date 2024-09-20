@@ -1,7 +1,5 @@
 package com.lego.yxl.annotation;
 
-import com.lego.yxl.core.annotation.LazyLoadBy;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;

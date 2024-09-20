@@ -1,10 +1,10 @@
 package com.lego.yxl.starter.configuration;
 
-import com.lego.yxl.core.lazyloadproxyfactory.LazyLoadProxyFactory;
-import com.lego.yxl.core.lazyloadproxyfactory.AutowiredLazyLoadProxyFactoryWrapper;
-import com.lego.yxl.core.lazyloadproxyfactory.DefaultLazyLoadProxyFactory;
-import com.lego.yxl.core.lazyloaderinterceptor.LazyLoaderInterceptorFactory;
-import com.lego.yxl.core.propertylazyloader.PropertyLazyLoaderFactory;
+import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
+import com.lego.yxl.lazyloadproxyfactory.AutowiredLazyLoadProxyFactoryWrapper;
+import com.lego.yxl.lazyloadproxyfactory.DefaultLazyLoadProxyFactory;
+import com.lego.yxl.lazyloaderinterceptor.LazyLoaderInterceptorFactory;
+import com.lego.yxl.propertylazyloader.PropertyLazyLoaderFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

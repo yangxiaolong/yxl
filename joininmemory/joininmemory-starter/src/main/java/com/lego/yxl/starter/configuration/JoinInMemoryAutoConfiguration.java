@@ -1,11 +1,11 @@
 package com.lego.yxl.starter.configuration;
 
-import com.lego.yxl.core.service.DefaultJoinService;
-import com.lego.yxl.core.service.JoinService;
-import com.lego.yxl.core.factory.item.JoinInMemoryBasedJoinItemExecutorFactory;
-import com.lego.yxl.core.factory.item.JoinItemExecutorFactory;
-import com.lego.yxl.core.factory.items.DefaultJoinItemsExecutorFactory;
-import com.lego.yxl.core.factory.items.JoinItemsExecutorFactory;
+import com.lego.yxl.service.DefaultJoinService;
+import com.lego.yxl.service.JoinService;
+import com.lego.yxl.factory.item.JoinInMemoryBasedJoinItemExecutorFactory;
+import com.lego.yxl.factory.item.JoinItemExecutorFactory;
+import com.lego.yxl.factory.items.DefaultJoinItemsExecutorFactory;
+import com.lego.yxl.factory.items.JoinItemsExecutorFactory;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.ApplicationContext;

@@ -1,6 +1,6 @@
 package com.lego.yxl.param;
 
-import com.lego.yxl.core.annotation.SplitParam;
+import com.lego.yxl.annotation.SplitParam;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

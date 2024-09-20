@@ -1,6 +1,6 @@
 package com.lego.yxl.context;
 
-import com.lego.yxl.core.annotation.LazyLoadBy;
+import com.lego.yxl.annotation.LazyLoadBy;
 import com.lego.yxl.repository.address.Address;
 import com.lego.yxl.repository.price.Price;
 import com.lego.yxl.repository.product.Product;

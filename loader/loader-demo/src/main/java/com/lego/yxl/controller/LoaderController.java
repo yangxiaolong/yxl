@@ -1,6 +1,6 @@
 package com.lego.yxl.controller;
 
-import com.lego.yxl.core.lazyloadproxyfactory.LazyLoadProxyFactory;
+import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
 import com.lego.yxl.context.CreateOrderCmd;
 import com.lego.yxl.context.CreateOrderContext;
 import com.lego.yxl.context.CreateOrderContextV1;

@@ -16,6 +16,8 @@
         <module>loader</module>
         <module>common</module>
         <module>splitter</module>
+        <module>command</module>
+        <module>validator</module>
     </modules>
 
     <properties>
