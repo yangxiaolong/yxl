@@ -55,7 +55,7 @@ public class Order implements AggRoot<Long> {
     @JoinColumn(name = "order_id")
     private List<PayRecord> payRecords = Lists.newArrayList();
 
-    public static Order createForSync(SyncOrderByIdContext context){
+    public static Order createForSync(SyncOrderByIdContext context) {
         return create(context);
     }
 
@@ -76,7 +76,7 @@ public class Order implements AggRoot<Long> {
                 .map(productForBuy -> {
                     Product product = productMap.get(productForBuy.getProductId());
                     return OrderItem.create(product, productForBuy.getAmount());
-                }).forEach(orderItem -> order.addOrderItem(orderItem));
+                }).forEach(order::addOrderItem);
 
         order.init();
 
@@ -94,8 +94,8 @@ public class Order implements AggRoot<Long> {
         this.items.add(orderItem);
     }
 
-    public void paySuccess(PayByIdSuccessCommand paySuccessCommand){
-        if (getStatus() != OrderStatus.CREATED){
+    public void paySuccess(PayByIdSuccessCommand paySuccessCommand) {
+        if (getStatus() != OrderStatus.CREATED) {
             throw new OrderStatusNotMatch();
         }
 
@@ -120,11 +120,14 @@ public class Order implements AggRoot<Long> {
 
     public void applySync(SyncOrderByIdContext context) {
         setStatus(OrderStatus.SYNC);
+
+        OrderSyncEvent event = new OrderSyncEvent(this);
+        this.events.add(event);
     }
 
     @PreUpdate
     @PrePersist
-    public void checkBiz(){
+    public void checkBiz() {
         // 进行业务校验
     }
 }

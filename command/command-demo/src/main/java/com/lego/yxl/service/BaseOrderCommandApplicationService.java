@@ -65,7 +65,7 @@ public class BaseOrderCommandApplicationService {
             List<Object> events = this.eventListeners.getEvents();
             Assertions.assertFalse(CollectionUtils.isEmpty(events));
             Object event = this.eventListeners.getEvents().get(0);
-            Assertions.assertTrue(event instanceof OrderCreatedEvent);
+            Assertions.assertTrue(event instanceof OrderSyncEvent);
         }
         {
             CreateOrderCommand createCommand = getCreateOrderCommand();
