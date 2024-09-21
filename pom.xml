@@ -18,6 +18,7 @@
         <module>splitter</module>
         <module>command</module>
         <module>validator</module>
+        <module>jpa-test</module>
     </modules>
 
     <properties>
