@@ -4,6 +4,7 @@ logging:
     com.lego.yxl: debug
     org.springframework.web: trace
     org.springframework.data.rest: trace
+    net.ttddyy.dsproxy.listener: trace
 
 server:
   port: 8082
@@ -16,5 +17,3 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/lego
     username: root
     password: 123456
-  jpa:
-    show-sql: true

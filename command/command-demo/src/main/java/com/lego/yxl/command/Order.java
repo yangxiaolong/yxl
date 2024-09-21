@@ -28,6 +28,7 @@ public class Order implements AggRoot<Long> {
     @Transient
     private final List<DomainEvent> events = Lists.newArrayList();
 
+    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
