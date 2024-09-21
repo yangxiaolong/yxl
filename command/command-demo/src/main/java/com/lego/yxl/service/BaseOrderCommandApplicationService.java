@@ -49,7 +49,7 @@ public class BaseOrderCommandApplicationService {
 
     public void sync() {
         {
-            SyncOrderByIdCommand command = getSyncOrderCommand(-1L);
+            SyncOrderByIdCommand command = getSyncOrderCommand(2L);
 
             Long orderId = this.orderCommandService.syncByOrderId(command).getId();
 
