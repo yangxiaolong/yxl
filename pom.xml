@@ -19,6 +19,7 @@
         <module>command</module>
         <module>validator</module>
         <module>jpa-test</module>
+        <module>faultrecovery</module>
     </modules>
 
     <properties>
