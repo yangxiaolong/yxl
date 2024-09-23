@@ -1,0 +1,20 @@
+#-------自动装配---------
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+    com.geekhalo.lego.starter.loader.LazyLoadAutoConfiguration,\
+    com.geekhalo.lego.starter.excelasbean.ExcelAsBeanAutoConfiguration,\
+    com.geekhalo.lego.starter.joininmemory.JoinInMemoryAutoConfiguration,\
+    com.geekhalo.lego.starter.loader.LazyLoadAutoConfiguration,\
+    com.geekhalo.lego.starter.singlequery.MyBatisBasedSingleQueryConfiguration,\
+    com.geekhalo.lego.starter.singlequery.JpaBasedSingleQueryConfiguration,\
+    com.geekhalo.lego.starter.splitter.SplitterAutoConfiguration,\
+  com.geekhalo.lego.starter.async.NormalAsyncAutoConfiguration,\
+  com.geekhalo.lego.starter.async.OrderedAsyncAutoConfiguration,\
+  com.geekhalo.lego.starter.delay.DelayBasedRocketMQAutoConfiguration,\
+  com.geekhalo.lego.starter.validator.ValidatorAutoConfiguration,\
+  com.geekhalo.lego.starter.web.AutoRegisterWebControllerConfiguration,\
+  com.geekhalo.lego.starter.msg.consumer.TabBasedDispatcherMessageConsumerAutoConfiguration,\
+  com.geekhalo.lego.starter.faultrecovery.smart.SmartFaultAutoConfiguration,\
+  com.geekhalo.lego.starter.threadpool.ThreadPoolExecutorMetricsAutoConfiguration,\
+  com.geekhalo.lego.starter.threadpool.ThreadPoolExecutorValidatorAutoConfiguration,\
+  com.geekhalo.lego.starter.threadpool.ThreadPoolExecutorUpdaterAutoConfiguration,\
+  com.geekhalo.lego.starter.threadpool.ThreadPoolTtlWrapperAutoConfiguration
