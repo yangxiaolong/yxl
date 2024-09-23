@@ -20,6 +20,8 @@
         <module>validator</module>
         <module>jpa-test</module>
         <module>faultrecovery</module>
+        <module>idempotent</module>
+        <module>singlequery</module>
     </modules>
 
     <properties>
