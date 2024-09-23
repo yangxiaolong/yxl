@@ -1,4 +1,4 @@
-package com.lego.yxl;
+package com.lego.yxl.service;
 
 import com.lego.yxl.annotation.Idempotent;
 import com.lego.yxl.annotation.IdempotentHandleType;

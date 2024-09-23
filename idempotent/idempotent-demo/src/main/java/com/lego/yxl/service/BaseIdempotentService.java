@@ -1,4 +1,4 @@
-package com.lego.yxl;
+package com.lego.yxl.service;
 
 import com.google.common.collect.Maps;
 
