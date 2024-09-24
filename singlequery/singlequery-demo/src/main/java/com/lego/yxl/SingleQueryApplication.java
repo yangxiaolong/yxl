@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@EnableJpaRepositories(basePackages = "com.lego.yxl")
+@EnableJpaRepositories(basePackages = "com.lego.yxl.singlequery.jpa")
 public class SingleQueryApplication {
 
     public static void main(String[] args) {
