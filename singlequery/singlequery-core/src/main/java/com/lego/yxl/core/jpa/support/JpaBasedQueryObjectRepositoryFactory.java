@@ -11,11 +11,6 @@ import org.springframework.util.Assert;
 
 import java.io.Serializable;
 
-/**
- * Created by taoli on 2022/9/24.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
 public class JpaBasedQueryObjectRepositoryFactory extends JpaRepositoryFactory {
     private final SpecificationConverterFactory specificationConverterFactory;
     private final Integer startPageIndex;

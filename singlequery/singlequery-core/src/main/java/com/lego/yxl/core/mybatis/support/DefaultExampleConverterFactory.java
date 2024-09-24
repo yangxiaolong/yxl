@@ -7,11 +7,7 @@ import com.lego.yxl.core.mybatis.support.handler.FieldAnnotationHandler;
 
 import java.util.List;
 
-/**
- * Created by taoli on 2022/8/26.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
+
 public class DefaultExampleConverterFactory implements ExampleConverterFactory {
     private final List<FieldAnnotationHandler> fieldAnnotationHandlers;
 

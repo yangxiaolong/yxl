@@ -9,11 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
-/**
- * Created by taoli on 2022/8/26.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
+
 @Configuration
 @ConditionalOnClass(name = "org.apache.ibatis.session.SqlSessionFactory")
 public class MyBatisBasedSingleQueryConfiguration {

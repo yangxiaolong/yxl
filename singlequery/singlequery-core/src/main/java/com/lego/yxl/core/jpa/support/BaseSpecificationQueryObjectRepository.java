@@ -21,11 +21,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
-/**
- * Created by taoli on 2022/8/30.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
 public class BaseSpecificationQueryObjectRepository<E>
         extends AbstractQueryRepository<E>
         implements SpecificationQueryObjectRepository<E> {

@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Created by taoli on 2022/7/26.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
  *
  * 分页参数
  */

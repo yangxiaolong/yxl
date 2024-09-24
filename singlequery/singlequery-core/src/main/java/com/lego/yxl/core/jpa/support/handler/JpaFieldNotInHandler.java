@@ -9,11 +9,7 @@ import jakarta.persistence.criteria.Root;
 import java.lang.reflect.Field;
 import java.util.Collection;
 
-/**
- * Created by taoli on 2022/8/31.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
+
 public class JpaFieldNotInHandler
     extends AbstractJpaAnnotationHandler<FieldNotIn>{
     public JpaFieldNotInHandler() {

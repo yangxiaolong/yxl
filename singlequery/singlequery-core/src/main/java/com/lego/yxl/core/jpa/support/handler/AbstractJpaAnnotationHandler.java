@@ -8,11 +8,6 @@ import org.apache.commons.lang3.reflect.FieldUtils;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-/**
- * Created by taoli on 2022/8/30.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
 abstract class AbstractJpaAnnotationHandler<A extends Annotation> implements JpaAnnotationHandler<A>{
     private final Class<A> annCls;
 

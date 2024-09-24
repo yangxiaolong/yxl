@@ -11,9 +11,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Created by taoli on 2022/8/26.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
  *
  * 分页返回结果
  */

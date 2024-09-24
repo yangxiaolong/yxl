@@ -8,11 +8,6 @@ import java.util.Objects;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-/**
- * Created by taoli on 2022/9/24.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
 public interface QueryObjectRepository<E> {
     /**
      * 是否为有效的 查询对象

@@ -11,12 +11,6 @@ import org.springframework.data.jpa.repository.support.JpaRepositoryFactoryBean;
 import org.springframework.data.repository.Repository;
 import org.springframework.data.repository.core.support.RepositoryFactorySupport;
 
-
-/**
- * Created by taoli on 2022/9/24.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
 public class JpaBasedQueryObjectRepositoryFactoryBean<T extends Repository<S, ID>, S, ID>
         extends JpaRepositoryFactoryBean<T, S, ID> {
     @Autowired

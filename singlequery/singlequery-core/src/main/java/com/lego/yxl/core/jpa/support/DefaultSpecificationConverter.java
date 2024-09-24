@@ -21,11 +21,6 @@ import java.lang.reflect.Field;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * Created by taoli on 2022/8/30.
- * gitee : https://gitee.com/litao851025/lego
- * 编程就像玩 Lego
- */
 @Slf4j
 public class DefaultSpecificationConverter<E>
         extends AbstractQueryConverter<Specification<E>>
