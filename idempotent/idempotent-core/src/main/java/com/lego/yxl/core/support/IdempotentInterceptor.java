@@ -10,14 +10,13 @@ import org.aopalliance.intercept.MethodInvocation;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class IdempotentInterceptor
-    implements MethodInterceptor {
-    private final Map<Method, IdempotentExecutor> cache = Maps.newHashMap();
+public class IdempotentInterceptor implements MethodInterceptor {
+
+    private final Map<Method, IdempotentExecutor> cache = Maps.newConcurrentMap();
     private final IdempotentMetaParser parser;
     private final IdempotentExecutorFactories factories;
 
-    public IdempotentInterceptor(IdempotentMetaParser parser,
-                                 IdempotentExecutorFactories factories) {
+    public IdempotentInterceptor(IdempotentMetaParser parser, IdempotentExecutorFactories factories) {
         this.parser = parser;
         this.factories = factories;
     }
@@ -25,7 +24,7 @@ public class IdempotentInterceptor
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
         IdempotentExecutor executor = this.cache.computeIfAbsent(invocation.getMethod(), this::createExecutor);
-        if (executor != null){
+        if (executor != null) {
             return executor.invoke(invocation);
         }
         return invocation.proceed();

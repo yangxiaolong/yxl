@@ -10,19 +10,19 @@ import java.util.Map;
 
 @Slf4j
 public class IdempotentExecutorFactories {
-    private final Map<String, IdempotentExecutorFactory> factoryMap = Maps.newHashMap();
+    private final Map<String, IdempotentExecutorFactory> factoryMap = Maps.newConcurrentMap();
 
-    public IdempotentExecutorFactories(Map<String, IdempotentExecutorFactory> factoryMap){
+    public IdempotentExecutorFactories(Map<String, IdempotentExecutorFactory> factoryMap) {
         this.factoryMap.putAll(factoryMap);
     }
 
     public IdempotentExecutor create(IdempotentMeta meta) {
-        if (meta == null){
+        if (meta == null) {
             return NllIdempotentExecutor.getInstance();
         }
 
         IdempotentExecutorFactory idempotentExecutorFactory = factoryMap.get(meta.executorFactory());
-        if (idempotentExecutorFactory == null){
+        if (idempotentExecutorFactory == null) {
             log.error("Failed to find IdempotentExecutorFactory for {}", meta.executorFactory());
             return NllIdempotentExecutor.getInstance();
         }

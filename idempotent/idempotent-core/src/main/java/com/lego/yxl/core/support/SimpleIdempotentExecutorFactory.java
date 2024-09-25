@@ -14,7 +14,7 @@ public class SimpleIdempotentExecutorFactory implements IdempotentExecutorFactor
     @Override
     public IdempotentExecutor create(IdempotentMeta meta) {
         return new SimpleIdempotentExecutor(meta,
-                idempotentKeyParser,
+                this.idempotentKeyParser,
                 this.serializer,
                 this.executionRecordRepository);
     }
