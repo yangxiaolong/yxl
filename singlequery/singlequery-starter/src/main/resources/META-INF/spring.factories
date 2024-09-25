@@ -1,4 +1,4 @@
 #-------自动装配---------
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
     com.lego.yxl.JpaBasedSingleQueryConfiguration,\
-    com.lego.yxl.MyBatisBasedSingleQueryConfiguration,
+    com.lego.yxl.MyBatisBasedSingleQueryConfiguration
