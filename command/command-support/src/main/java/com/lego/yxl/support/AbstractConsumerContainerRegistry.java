@@ -39,21 +39,21 @@ public class AbstractConsumerContainerRegistry implements BeanPostProcessor, Sma
 
     @Override
     public void start() {
-        if (this.running == true){
+        if (this.running) {
             return;
         }
         this.running = true;
-        this.consumerContainers.forEach(asyncConsumerContainer -> asyncConsumerContainer.start());
+        this.consumerContainers.forEach(ConsumerContainer::start);
     }
 
     @Override
     public void stop() {
-        if (this.running == false){
+        if (!this.running) {
             return;
         }
 
         this.running = false;
-        this.consumerContainers.forEach(asyncConsumerContainer -> asyncConsumerContainer.stop());
+        this.consumerContainers.forEach(ConsumerContainer::stop);
     }
 
     @Override
@@ -68,6 +68,7 @@ public class AbstractConsumerContainerRegistry implements BeanPostProcessor, Sma
 
     /**
      * 是否为 激活 的 Profile
+     *
      * @param consumerProfile
      * @return
      */

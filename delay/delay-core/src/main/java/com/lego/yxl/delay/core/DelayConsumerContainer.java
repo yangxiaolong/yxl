@@ -20,7 +20,7 @@ public class DelayConsumerContainer extends AbstractSingleMethodConsumerContaine
     private final DelayBasedRocketMQ delayBasedRocketMQ;
 
 
-    public DelayConsumerContainer(Environment environment,DelayBasedRocketMQ delayBasedRocketMQ,Object bean, Method method) {
+    public DelayConsumerContainer(Environment environment, DelayBasedRocketMQ delayBasedRocketMQ, Object bean, Method method) {
         super(environment, bean, method);
 
         Preconditions.checkArgument(delayBasedRocketMQ != null);
@@ -64,9 +64,10 @@ public class DelayConsumerContainer extends AbstractSingleMethodConsumerContaine
                     long costTime = System.currentTimeMillis() - now;
                     log.debug("consume {} cost: {} ms", messageExt.getMsgId(), costTime);
                 } catch (Exception e) {
-                    log.warn("consume message failed. messageId:{}, topic:{}, reconsumeTimes:{}", messageExt.getMsgId(), messageExt.getTopic(), messageExt.getReconsumeTimes(), e);
+                    log.warn("consume message failed. messageId:{}, topic:{}, reconsumeTimes:{}",
+                            messageExt.getMsgId(), messageExt.getTopic(), messageExt.getReconsumeTimes(), e);
 
-                    if (skipWhenException()){
+                    if (skipWhenException()) {
                         return ConsumeOrderlyStatus.SUCCESS;
                     }
                     context.setSuspendCurrentQueueTimeMillis(getDelayLevelWhenNextConsume());

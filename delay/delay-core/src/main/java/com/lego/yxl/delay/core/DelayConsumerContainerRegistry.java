@@ -13,10 +13,10 @@ import org.springframework.core.env.Environment;
 
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Objects;
 
 @Slf4j
-public class DelayConsumerContainerRegistry
-    extends AbstractConsumerContainerRegistry {
+public class DelayConsumerContainerRegistry extends AbstractConsumerContainerRegistry {
 
     public DelayConsumerContainerRegistry(Environment environment) {
         super(environment);
@@ -30,23 +30,24 @@ public class DelayConsumerContainerRegistry
         List<Method> methodsListWithAnnotation = MethodUtils.getMethodsListWithAnnotation(targetCls, DelayBasedRocketMQ.class);
 
         // 2. 为每个 @DelayBasedRocketMQ 注解方法 注册 RocketMQConsumerContainer
-        for(Method method : methodsListWithAnnotation){
-            if (method.isBridge()){
+        for (Method method : methodsListWithAnnotation) {
+            if (method.isBridge()) {
                 log.warn("method {} is bridge, break!", method);
                 continue;
             }
             DelayBasedRocketMQ annotation = AnnotatedElementUtils.findMergedAnnotation(method, DelayBasedRocketMQ.class);
+            if (Objects.isNull(annotation)) {
+                log.warn("method annotation DelayBasedRocketMQ {} is null, break!", method);
+                continue;
+            }
             String consumerProfile = annotation.consumerProfile();
-            if (!isActiveProfile(consumerProfile)){
+            if (!isActiveProfile(consumerProfile)) {
                 continue;
             }
 
             Object bean = AopProxyUtils.getSingletonTarget(proxy);
             DelayConsumerContainer delayConsumerContainer =
-                    new DelayConsumerContainer(this.getEnvironment(),
-                            annotation,
-                            bean,
-                            method);
+                    new DelayConsumerContainer(this.getEnvironment(), annotation, bean, method);
             delayConsumerContainer.afterPropertiesSet();
 
             this.getConsumerContainers().add(delayConsumerContainer);
