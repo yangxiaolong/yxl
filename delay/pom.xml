@@ -9,17 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.lego</groupId>
-    <artifactId>command</artifactId>
-    <version>1.0-SNAPSHOT</version>
-
+    <artifactId>delay</artifactId>
     <packaging>pom</packaging>
-
     <modules>
-        <module>command-agg</module>
-        <module>command-core</module>
-        <module>command-demo</module>
-        <module>command-support</module>
+        <module>delay-core</module>
+        <module>delay-demo</module>
+        <module>delay-starter</module>
     </modules>
 
     <properties>

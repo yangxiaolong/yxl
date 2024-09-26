@@ -22,6 +22,7 @@
         <module>faultrecovery</module>
         <module>idempotent</module>
         <module>singlequery</module>
+        <module>delay</module>
     </modules>
 
     <properties>
