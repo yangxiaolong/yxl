@@ -42,7 +42,7 @@ public class DelayService {
     }
 
     public void clean() {
-        this.tasks.clear();;
+        this.tasks.clear();
     }
 
     @Value

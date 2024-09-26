@@ -32,7 +32,7 @@ public class DelayMethodInterceptor
         implements MethodInterceptor {
     private final ExpressionParser expressionParser = new SpelExpressionParser();
     private final ParameterNameDiscoverer parameterNameDiscoverer;
-    private final Map<Method, DelayCacheItem> configCache = Maps.newHashMap();
+    private final Map<Method, DelayCacheItem> configCache = Maps.newConcurrentMap();
 
     public DelayMethodInterceptor(Environment environment,
                                   RocketMQTemplate rocketMQTemplate,

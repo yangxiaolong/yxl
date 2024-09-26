@@ -26,40 +26,44 @@ public class DelayController {
 
     @GetMapping("/delayCancelOrder")
     public void delayCancelOrder() throws Exception {
+        this.delayService.clean();
+
         Long orderId = RandomUtils.nextLong();
         String reason = "超时自动取消";
 
         this.delayService.delayCancelOrder(orderId, reason);
 
-        Assertions.assertFalse(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
+        Assertions.assertTrue(CollectionUtils.isEmpty(this.delayService.getTasks()));
 
         TimeUnit.SECONDS.sleep(4);
 
-        Assertions.assertFalse(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
+        Assertions.assertTrue(CollectionUtils.isEmpty(this.delayService.getTasks()));
 
         TimeUnit.SECONDS.sleep(6);
 
-        Assertions.assertTrue(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
+        Assertions.assertFalse(CollectionUtils.isEmpty(this.delayService.getTasks()));
 
     }
 
     @GetMapping("/delayCancelOrder_DelayTime")
     public void delayCancelOrder_DelayTime() throws Exception {
+        this.delayService.clean();
+
         Long orderId = RandomUtils.nextLong();
         String reason = "超时自动取消";
 
 
         this.delayService.delayCancelOrderForTimeout(orderId, reason, 3);
 
-        Assertions.assertFalse(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
+        Assertions.assertTrue(CollectionUtils.isEmpty(this.delayService.getTasks()));
 
         TimeUnit.SECONDS.sleep(9);
 
-        Assertions.assertFalse(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
+        Assertions.assertTrue(CollectionUtils.isEmpty(this.delayService.getTasks()));
 
         TimeUnit.SECONDS.sleep(11);
 
-        Assertions.assertTrue(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
+        Assertions.assertFalse(CollectionUtils.isEmpty(this.delayService.getTasks()));
 
     }
 
