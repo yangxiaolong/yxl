@@ -90,7 +90,8 @@ public class AsyncController {
     public void asyncForOrderTest1() throws InterruptedException {
 
         List<InputData> inputDatas = new ArrayList<>();
-        Long[] ids = new Long[]{RandomUtils.nextLong(), RandomUtils.nextLong(), RandomUtils.nextLong(), RandomUtils.nextLong()};
+        Long[] ids = new Long[]{RandomUtils.nextLong(), RandomUtils.nextLong(),
+                RandomUtils.nextLong(), RandomUtils.nextLong()};
         String name = String.valueOf(RandomUtils.nextLong());
         AsyncInputBean bean = createAsyncInputBean();
 
@@ -120,8 +121,10 @@ public class AsyncController {
 
             Assertions.assertEquals(inputDatas.size(), callDatas.size());
 
-            Map<Long, List<AsyncService.CallData>> callDataMap = callDatas.stream().collect(Collectors.groupingBy(AsyncService.CallData::getId));
-            Map<Long, List<InputData>> inputDataMap = inputDatas.stream().collect(Collectors.groupingBy(InputData::getId));
+            Map<Long, List<AsyncService.CallData>> callDataMap = callDatas.stream()
+                    .collect(Collectors.groupingBy(AsyncService.CallData::getId));
+            Map<Long, List<InputData>> inputDataMap = inputDatas.stream()
+                    .collect(Collectors.groupingBy(InputData::getId));
 
             for (Long id : ids) {
                 List<AsyncService.CallData> callDataToCheck = callDataMap.get(id);
@@ -146,7 +149,8 @@ public class AsyncController {
     public void asyncForOrderTest2() throws InterruptedException {
 
         List<InputData> inputDatas = new ArrayList<>();
-        Long[] ids = new Long[]{RandomUtils.nextLong(), RandomUtils.nextLong(), RandomUtils.nextLong(), RandomUtils.nextLong()};
+        Long[] ids = new Long[]{RandomUtils.nextLong(), RandomUtils.nextLong(),
+                RandomUtils.nextLong(), RandomUtils.nextLong()};
         String name = String.valueOf(RandomUtils.nextLong());
         AsyncInputBean bean = createAsyncInputBean();
 
@@ -176,7 +180,8 @@ public class AsyncController {
 
             Assertions.assertEquals(inputDatas.size(), callDatas.size());
 
-            Map<Long, List<AsyncService.CallData>> callDataMap = callDatas.stream().collect(Collectors.groupingBy(AsyncService.CallData::getId));
+            Map<Long, List<AsyncService.CallData>> callDataMap = callDatas.stream()
+                    .collect(Collectors.groupingBy(AsyncService.CallData::getId));
             Map<Long, List<InputData>> inputDataMap = inputDatas.stream().collect(Collectors.groupingBy(InputData::getId));
 
             for (Long id : ids) {
