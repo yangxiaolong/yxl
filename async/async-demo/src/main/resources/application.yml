@@ -1,0 +1,26 @@
+logging:
+  level:
+    root: info
+    com.lego.yxl: debug
+    org.springframework.web: trace
+    org.springframework.data.rest: trace
+    net.ttddyy.dsproxy.listener: trace
+
+server:
+  port: 8080
+
+rocketmq:
+  name-server: http://127.0.0.1:9876
+  producer:
+    group: async-demo
+
+async:
+  test:
+    normal:
+      topic: normal-async-test-topic
+      group1: normal-async-test-group1
+      group2: normal-async-test-group2
+    order:
+      topic: order-async-test-topic
+      group1: order-async-test-group1
+      group2: order-async-test-group2

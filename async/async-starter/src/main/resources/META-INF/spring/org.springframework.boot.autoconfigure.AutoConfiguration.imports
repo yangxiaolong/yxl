@@ -1,0 +1,2 @@
+com.lego.yxl.async.starter.NormalAsyncAutoConfiguration
+com.lego.yxl.async.starter.OrderedAsyncAutoConfiguration

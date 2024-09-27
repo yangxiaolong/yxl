@@ -23,6 +23,7 @@
         <module>idempotent</module>
         <module>singlequery</module>
         <module>delay</module>
+        <module>async</module>
     </modules>
 
     <properties>
