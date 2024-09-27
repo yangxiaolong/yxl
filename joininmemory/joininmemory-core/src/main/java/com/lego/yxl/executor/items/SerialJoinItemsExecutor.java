@@ -14,8 +14,7 @@ import java.util.concurrent.TimeUnit;
 @Slf4j
 public class SerialJoinItemsExecutor<DATA> extends AbstractJoinItemsExecutor<DATA> {
 
-    public SerialJoinItemsExecutor(Class<DATA> dataCls,
-                                   List<JoinItemExecutor<DATA>> joinItemExecutors) {
+    public SerialJoinItemsExecutor(Class<DATA> dataCls, List<JoinItemExecutor<DATA>> joinItemExecutors) {
         super(dataCls, joinItemExecutors);
     }
 

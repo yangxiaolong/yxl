@@ -2,7 +2,6 @@ package com.lego.yxl.factory.item;
 
 import com.lego.yxl.executor.item.JoinItemExecutor;
 import com.lego.yxl.executor.item.JoinItemExecutorAdapter;
-
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 
@@ -15,8 +14,6 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toList;
 
-/**
- */
 abstract class AbstractAnnotationBasedJoinItemExecutorFactory<A extends Annotation> implements JoinItemExecutorFactory {
 
     private final Class<A> annotationCls;
@@ -30,10 +27,12 @@ abstract class AbstractAnnotationBasedJoinItemExecutorFactory<A extends Annotati
         // 从 字段 上获取 注解，并将其转换为 JoinItemExecutor
         List<Field> fieldsListWithAnnotation = FieldUtils.getAllFieldsList(cls);
 
+        Function<Field, JoinItemExecutor<DATA>> joinFunction =
+                (field) -> createForField(cls, field, AnnotatedElementUtils.findMergedAnnotation(field, annotationCls));
+
         return fieldsListWithAnnotation.stream()
-                .map(field -> createForField(cls, field,
-                        AnnotatedElementUtils.findMergedAnnotation(field, annotationCls))
-                ).filter(Objects::nonNull)
+                .map(joinFunction)
+                .filter(Objects::nonNull)
                 .collect(toList());
     }
 
@@ -72,10 +71,8 @@ abstract class AbstractAnnotationBasedJoinItemExecutorFactory<A extends Annotati
     protected abstract <DATA> int createRunLevel(Class<DATA> cls, Field field, A ann);
 
     protected <DATA> String createName(Class<DATA> cls, Field field, A ann) {
-        return new StringBuilder()
-                .append("class[").append(cls.getSimpleName()).append("]")
-                .append("#field[").append(field.getName()).append("]")
-                .append("-").append(ann.getClass().getSimpleName())
-                .toString();
+        return "class[" + cls.getSimpleName() + "]" +
+                "#field[" + field.getName() + "]" +
+                "-" + ann.getClass().getSimpleName();
     }
 }
