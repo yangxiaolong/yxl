@@ -67,7 +67,8 @@ public class NormalAsyncConsumerContainer
                     long costTime = System.currentTimeMillis() - now;
                     log.debug("consume {} cost: {} ms", messageExt.getMsgId(), costTime);
                 } catch (Exception e) {
-                    log.warn("consume message failed. messageId:{}, topic:{}, reconsumeTimes:{}", messageExt.getMsgId(), messageExt.getTopic(), messageExt.getReconsumeTimes(), e);
+                    log.warn("consume message failed. messageId:{}, topic:{}, reconsumeTimes:{}",
+                            messageExt.getMsgId(), messageExt.getTopic(), messageExt.getReconsumeTimes(), e);
 
                     if (skipWhenException()){
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;

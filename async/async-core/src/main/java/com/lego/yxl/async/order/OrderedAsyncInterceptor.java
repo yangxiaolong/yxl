@@ -33,15 +33,14 @@ import static org.apache.commons.lang3.BooleanUtils.toBoolean;
  * 3. 调用 MQ 接口，发送消息 <br />
  */
 @Slf4j
-public class OrderedAsyncInterceptor
-        extends AbstractRocketMQSendInterceptor
-        implements MethodInterceptor {
+public class OrderedAsyncInterceptor extends AbstractRocketMQSendInterceptor implements MethodInterceptor {
 
     private final ParameterNameDiscoverer parameterNameDiscoverer;
     private final ExpressionParser expressionParser = new SpelExpressionParser();
     private final Map<Method, InvokeCacheItem> invokeCache = Maps.newConcurrentMap();
 
-    public OrderedAsyncInterceptor(Environment environment, RocketMQTemplate rocketMQTemplate, ParameterNameDiscoverer parameterNameDiscoverer) {
+    public OrderedAsyncInterceptor(Environment environment, RocketMQTemplate rocketMQTemplate,
+                                   ParameterNameDiscoverer parameterNameDiscoverer) {
         super(rocketMQTemplate, environment);
         Preconditions.checkArgument(parameterNameDiscoverer != null);
         this.parameterNameDiscoverer = parameterNameDiscoverer;
