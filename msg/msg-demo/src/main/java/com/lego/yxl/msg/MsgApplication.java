@@ -6,6 +6,7 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
  * https://mp.weixin.qq.com/s/zxGB6KNr8QFV57ILZWC_Ig
+ * https://mp.weixin.qq.com/s/J_x5HP9jd4CuEsv0JV4Qfw
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)

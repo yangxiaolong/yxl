@@ -26,13 +26,14 @@ public class ReliableMessageSendService {
 
     /**
      * 加载未发送的消息，进行重新发送
-     * @param startDate
-     * @param sizePreTask
+     *
+     * @param startDate   startDate
+     * @param sizePreTask sizePreTask
      */
-    public void loadAndResend(Date startDate, int sizePreTask){
+    public void loadAndResend(Date startDate, int sizePreTask) {
         Date latestUpdateTime = startDate;
         List<LocalMessage> localMessages = this.localMessageRepository.loadNotSuccessByUpdateGt(latestUpdateTime, sizePreTask);
-        while (CollectionUtils.isNotEmpty(localMessages)){
+        while (CollectionUtils.isNotEmpty(localMessages)) {
             log.info("load {} task by {} to resend", localMessages.size(), latestUpdateTime);
 
             retrySend(localMessages);
@@ -58,7 +59,7 @@ public class ReliableMessageSendService {
     private void addCallbackOrRunTask(SendMessageTask sendMessageTask) {
         if (TransactionSynchronizationManager.isSynchronizationActive()) {
             // 添加监听器，在事务提交后触发后续任务
-            TransactionSynchronization transactionSynchronization = new TransactionSynchronizationAdapter(){
+            TransactionSynchronization transactionSynchronization = new TransactionSynchronizationAdapter() {
                 @Override
                 public void afterCommit() {
                     sendMessageTask.run();
@@ -66,7 +67,7 @@ public class ReliableMessageSendService {
             };
             TransactionSynchronizationManager.registerSynchronization(transactionSynchronization);
             log.info("success to register synchronization for message {}", sendMessageTask.getLocalMessage());
-        }else {
+        } else {
             // 没有可以事务，直接触发后续任务
             log.info("No Transaction !!! begin to run task for message {}", sendMessageTask.getLocalMessage());
             sendMessageTask.run();
@@ -88,7 +89,7 @@ public class ReliableMessageSendService {
 
     private Date calLatestUpdateTime(List<LocalMessage> localMessages) {
         return localMessages.stream()
-                .map(localMessage -> localMessage.getUpdateTime())
+                .map(LocalMessage::getUpdateTime)
                 .max(Comparator.naturalOrder())
                 .orElse(new Date());
     }
@@ -97,7 +98,8 @@ public class ReliableMessageSendService {
         Date now = new Date();
         localMessages.stream()
                 .filter(message -> message.needRetry(now))
-                .map(localMessage ->new SendMessageTask(this.localMessageRepository, messageSender, localMessage))
-                .forEach(task -> task.run());
+                .map(localMessage -> new SendMessageTask(this.localMessageRepository, messageSender, localMessage))
+                .forEach(SendMessageTask::run);
     }
+
 }
