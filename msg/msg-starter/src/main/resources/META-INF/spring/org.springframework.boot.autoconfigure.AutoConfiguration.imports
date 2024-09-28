@@ -1,0 +1,2 @@
+com.lego.yxl.msg.starter.TabBasedDispatcherMessageConsumerAutoConfiguration
+com.lego.yxl.msg.starter.LocalTableBasedReliableMessageConfiguration
