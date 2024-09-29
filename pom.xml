@@ -25,6 +25,7 @@
         <module>delay</module>
         <module>async</module>
         <module>msg</module>
+        <module>feign</module>
     </modules>
 
     <properties>

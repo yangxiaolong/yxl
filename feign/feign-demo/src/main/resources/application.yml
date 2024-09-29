@@ -1,0 +1,10 @@
+logging:
+  level:
+    root: info
+    com.lego.yxl: debug
+    org.springframework.web: trace
+    org.springframework.data.rest: trace
+    net.ttddyy.dsproxy.listener: trace
+
+server:
+  port: 9090
