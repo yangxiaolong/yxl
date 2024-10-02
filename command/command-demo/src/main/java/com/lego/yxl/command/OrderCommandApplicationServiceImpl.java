@@ -1,7 +1,7 @@
 package com.lego.yxl.command;
 
 import com.lego.yxl.AggNotFoundException;
-import com.lego.yxl.ValidateService;
+import com.lego.yxl.core.ValidateService;
 import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

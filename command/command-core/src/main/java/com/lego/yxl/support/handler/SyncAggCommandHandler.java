@@ -2,7 +2,7 @@ package com.lego.yxl.support.handler;
 
 import com.google.common.base.Preconditions;
 import com.lego.yxl.AggRoot;
-import com.lego.yxl.ValidateService;
+import com.lego.yxl.core.ValidateService;
 import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
 import com.lego.yxl.support.AbstractEntity;
 import com.lego.yxl.support.handler.aggfactory.AggFactory;

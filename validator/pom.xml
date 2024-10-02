@@ -15,6 +15,7 @@
     <modules>
         <module>validator-core</module>
         <module>validator-starter</module>
+        <module>validator-demo</module>
     </modules>
 
     <properties>

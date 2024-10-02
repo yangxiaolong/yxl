@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.lego.yxl.AggRoot;
 import com.lego.yxl.Command;
 import com.lego.yxl.CommandRepository;
-import com.lego.yxl.ValidateService;
+import com.lego.yxl.core.ValidateService;
 import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
 import com.lego.yxl.support.handler.CreateAggCommandHandler;
 import com.lego.yxl.support.handler.SyncAggCommandHandler;
