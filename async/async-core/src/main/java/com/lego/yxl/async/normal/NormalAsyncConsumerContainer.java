@@ -16,15 +16,14 @@ import java.util.List;
 
 
 @Slf4j
-public class NormalAsyncConsumerContainer
-        extends AbstractSingleMethodConsumerContainer {
+public class NormalAsyncConsumerContainer extends AbstractSingleMethodConsumerContainer {
+
     private final AsyncBasedRocketMQ asyncBasedRocketMQ;
 
-
     protected NormalAsyncConsumerContainer(Environment environment,
-                                     AsyncBasedRocketMQ asyncBasedRocketMQ,
-                                     Object bean,
-                                     Method method) {
+                                           AsyncBasedRocketMQ asyncBasedRocketMQ,
+                                           Object bean,
+                                           Method method) {
         super(environment, bean, method);
 
         Preconditions.checkArgument(asyncBasedRocketMQ != null);
@@ -56,7 +55,6 @@ public class NormalAsyncConsumerContainer
 
     public class DefaultMessageListenerConcurrently implements MessageListenerConcurrently {
 
-        @SuppressWarnings("unchecked")
         @Override
         public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
             for (MessageExt messageExt : msgs) {
@@ -70,7 +68,7 @@ public class NormalAsyncConsumerContainer
                     log.warn("consume message failed. messageId:{}, topic:{}, reconsumeTimes:{}",
                             messageExt.getMsgId(), messageExt.getTopic(), messageExt.getReconsumeTimes(), e);
 
-                    if (skipWhenException()){
+                    if (skipWhenException()) {
                         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
                     }
 

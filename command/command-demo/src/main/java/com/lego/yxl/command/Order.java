@@ -10,7 +10,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 import java.util.Map;
@@ -28,7 +27,6 @@ public class Order implements AggRoot<Long> {
     @Transient
     private final List<DomainEvent> events = Lists.newArrayList();
 
-    @jakarta.persistence.Id
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

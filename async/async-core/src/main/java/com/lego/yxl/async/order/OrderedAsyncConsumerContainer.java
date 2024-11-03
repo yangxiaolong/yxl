@@ -49,7 +49,6 @@ public class OrderedAsyncConsumerContainer extends AbstractSingleMethodConsumerC
 
     public class DefaultMessageListenerOrderly implements MessageListenerOrderly {
 
-        @SuppressWarnings("unchecked")
         @Override
         public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
             for (MessageExt messageExt : msgs) {
