@@ -26,7 +26,7 @@ public class DelayConsumerContainerRegistry extends AbstractConsumerContainerReg
     @Override
     public Object postProcessAfterInitialization(Object proxy, String beanName) throws BeansException {
         // 1. 获取 @DelayBasedRocketMQ 注解方法
-        Class targetCls = AopUtils.getTargetClass(proxy);
+        Class<?> targetCls = AopUtils.getTargetClass(proxy);
         List<Method> methodsListWithAnnotation = MethodUtils.getMethodsListWithAnnotation(targetCls, DelayBasedRocketMQ.class);
 
         // 2. 为每个 @DelayBasedRocketMQ 注解方法 注册 RocketMQConsumerContainer

@@ -12,8 +12,8 @@ import org.springframework.core.env.Environment;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class AbstractConsumerContainerRegistry implements BeanPostProcessor, SmartLifecycle {
+
     @Getter(AccessLevel.PROTECTED)
     private final List<ConsumerContainer> consumerContainers = Lists.newArrayList();
 
@@ -77,11 +77,4 @@ public class AbstractConsumerContainerRegistry implements BeanPostProcessor, Sma
                 || Arrays.asList(getEnvironment().getActiveProfiles()).contains(consumerProfile);
     }
 
-    protected List<ConsumerContainer> getConsumerContainers() {
-        return this.consumerContainers;
-    }
-
-    protected Environment getEnvironment() {
-        return this.environment;
-    }
 }
