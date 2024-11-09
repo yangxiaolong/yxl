@@ -20,18 +20,17 @@ public abstract class IdempotentConfigurationSupport {
     private ExecutionResultSerializer serializer;
 
     protected IdempotentExecutorFactory createExecutorFactory(ExecutionRecordRepository executionRecordRepository) {
-        SimpleIdempotentExecutorFactory simpleIdempotentExecutorFactory
-                = new SimpleIdempotentExecutorFactory();
-        simpleIdempotentExecutorFactory.setIdempotentKeyParser(this.idempotentKeyParser);
-        simpleIdempotentExecutorFactory.setSerializer(this.serializer);
-        simpleIdempotentExecutorFactory.setExecutionRecordRepository(executionRecordRepository);
-        return simpleIdempotentExecutorFactory;
+        SimpleIdempotentExecutorFactory factory = new SimpleIdempotentExecutorFactory();
+        factory.setIdempotentKeyParser(this.idempotentKeyParser);
+        factory.setSerializer(this.serializer);
+        factory.setExecutionRecordRepository(executionRecordRepository);
+        return factory;
     }
 
     @Bean
     public PointcutAdvisor idempotentPointcutAdvisor(IdempotentInterceptor idempotentInterceptor) {
-        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(new AnnotationMatchingPointcut(null, Idempotent.class),
-                idempotentInterceptor);
+        AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null, Idempotent.class);
+        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, idempotentInterceptor);
         advisor.setOrder(0);
         return advisor;
     }

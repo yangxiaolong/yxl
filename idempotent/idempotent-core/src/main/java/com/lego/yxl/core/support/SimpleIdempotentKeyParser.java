@@ -9,19 +9,19 @@ import org.springframework.expression.spel.support.StandardEvaluationContext;
 
 import java.util.Map;
 
-public class SimpleIdempotentKeyParser implements IdempotentKeyParser{
+public class SimpleIdempotentKeyParser implements IdempotentKeyParser {
     private final ExpressionParser expressionParser = new SpelExpressionParser();
-    private final Map<String, Expression> expressionCache = Maps.newHashMap();
+    private final Map<String, Expression> expressionCache = Maps.newConcurrentMap();
 
     @Override
     public String parse(String[] names, Object[] param, String el) {
         EvaluationContext evaluationContext = new StandardEvaluationContext();
 
-        for (int i=0; i < names.length; i++) {
+        for (int i = 0; i < names.length; i++) {
             evaluationContext.setVariable(names[i], param[i]);
         }
 
-        Expression expression = expressionCache.computeIfAbsent(el, e -> this.expressionParser.parseExpression(e));
+        Expression expression = expressionCache.computeIfAbsent(el, this.expressionParser::parseExpression);
         Object value = expression.getValue(evaluationContext);
         return String.valueOf(value);
     }
