@@ -1,6 +1,6 @@
-package com.lego.yxl.core.normal;
+package com.lego.yxl.async.core.normal;
 
-import com.lego.yxl.core.annotation.AsyncBasedRocketMQ;
+import com.lego.yxl.async.core.annotation.AsyncBasedRocketMQ;
 import com.lego.yxl.support.AbstractConsumerContainerRegistry;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
-package com.lego.yxl.core.order;
+package com.lego.yxl.async.core.order;
 
 import com.google.common.base.Preconditions;
-import com.lego.yxl.core.annotation.AsyncForOrderedBasedRocketMQ;
+import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
 import com.lego.yxl.support.AbstractSingleMethodConsumerContainer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;

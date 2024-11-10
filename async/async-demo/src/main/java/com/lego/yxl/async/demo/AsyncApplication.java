@@ -1,4 +1,4 @@
-package com.lego.yxl.demo;
+package com.lego.yxl.async.demo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

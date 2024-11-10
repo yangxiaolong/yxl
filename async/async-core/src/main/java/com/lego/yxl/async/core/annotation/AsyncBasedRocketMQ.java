@@ -1,4 +1,4 @@
-package com.lego.yxl.core.annotation;
+package com.lego.yxl.async.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

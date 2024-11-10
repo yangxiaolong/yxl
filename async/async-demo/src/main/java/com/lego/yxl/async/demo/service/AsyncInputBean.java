@@ -1,4 +1,4 @@
-package com.lego.yxl.demo.service;
+package com.lego.yxl.async.demo.service;
 
 import lombok.Data;
 

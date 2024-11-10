@@ -1,7 +1,7 @@
-package com.lego.yxl.demo.controller;
+package com.lego.yxl.async.demo.controller;
 
-import com.lego.yxl.demo.service.AsyncInputBean;
-import com.lego.yxl.demo.service.AsyncService;
+import com.lego.yxl.async.demo.service.AsyncInputBean;
+import com.lego.yxl.async.demo.service.AsyncService;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;

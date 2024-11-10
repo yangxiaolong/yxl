@@ -1,8 +1,8 @@
-package com.lego.yxl.core.order;
+package com.lego.yxl.async.core.order;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import com.lego.yxl.core.annotation.AsyncForOrderedBasedRocketMQ;
+import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
 import com.lego.yxl.support.AbstractRocketMQSendInterceptor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;

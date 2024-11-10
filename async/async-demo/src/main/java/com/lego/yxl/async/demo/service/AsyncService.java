@@ -1,7 +1,7 @@
-package com.lego.yxl.demo.service;
+package com.lego.yxl.async.demo.service;
 
-import com.lego.yxl.core.annotation.AsyncBasedRocketMQ;
-import com.lego.yxl.core.annotation.AsyncForOrderedBasedRocketMQ;
+import com.lego.yxl.async.core.annotation.AsyncBasedRocketMQ;
+import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
 import lombok.Getter;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
