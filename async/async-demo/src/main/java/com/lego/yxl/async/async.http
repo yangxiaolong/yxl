@@ -1,0 +1,11 @@
+###
+GET http://localhost:8080/async/asyncTest1
+
+###
+GET http://localhost:8080/async/asyncTest2
+
+###
+GET http://localhost:8080/async/asyncForOrderTest1
+
+###
+GET http://localhost:8080/async/asyncForOrderTest2

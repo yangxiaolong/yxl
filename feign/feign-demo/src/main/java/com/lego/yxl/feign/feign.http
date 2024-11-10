@@ -1,0 +1,11 @@
+###
+GET http://localhost:9090/feign/postData
+
+###
+GET http://localhost:9090/feign/getData
+
+###
+GET http://localhost:9090/feign/postDataForError
+
+###
+GET http://localhost:9090/feign/customException

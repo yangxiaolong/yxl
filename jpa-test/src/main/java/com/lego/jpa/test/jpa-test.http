@@ -1,0 +1,14 @@
+###
+GET http://localhost:8080/order/create
+
+###
+GET http://localhost:8080/order/modifyAddress/32/address4
+
+###
+GET http://localhost:8080/order/modifyAddress_add
+
+###
+GET http://localhost:8080/order/modifyAddress_update
+
+###
+GET http://localhost:8080/order/paySuccess

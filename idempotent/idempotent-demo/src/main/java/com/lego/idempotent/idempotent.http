@@ -1,0 +1,18 @@
+###
+GET http://localhost:8080/db/idempotent/putForResult
+
+###
+GET http://localhost:8080/db/idempotent/putForError
+
+###
+GET http://localhost:8080/db/idempotent/putExceptionForResult
+
+###
+GET http://localhost:8080/db/idempotent/putExceptionForError
+
+###
+GET http://localhost:8080/db/idempotent/putWaitForResult
+
+
+###
+GET http://localhost:8080/redis/idempotent/putForResult
