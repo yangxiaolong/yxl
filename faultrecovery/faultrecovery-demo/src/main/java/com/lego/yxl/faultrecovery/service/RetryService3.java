@@ -1,8 +1,8 @@
-package com.lego.yxl.service;
+package com.lego.yxl.faultrecovery.service;
 
-import com.lego.yxl.annotation.SmartFault;
-import com.lego.yxl.annotation.Action;
-import com.lego.yxl.smart.ActionType;
+import com.lego.yxl.faultrecovery.core.annotation.SmartFault;
+import com.lego.yxl.faultrecovery.core.annotation.Action;
+import com.lego.yxl.faultrecovery.core.smart.ActionType;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Recover;

@@ -1,8 +1,8 @@
-package com.lego.yxl.controller;
+package com.lego.yxl.faultrecovery.controller;
 
-import com.lego.yxl.service.RetryService1;
-import com.lego.yxl.service.RetryService2;
-import com.lego.yxl.service.RetryService3;
+import com.lego.yxl.faultrecovery.service.RetryService1;
+import com.lego.yxl.faultrecovery.service.RetryService2;
+import com.lego.yxl.faultrecovery.service.RetryService3;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;

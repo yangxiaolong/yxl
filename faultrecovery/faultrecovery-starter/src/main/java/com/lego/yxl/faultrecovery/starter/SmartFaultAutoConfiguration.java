@@ -1,9 +1,9 @@
-package com.lego.yxl;
+package com.lego.yxl.faultrecovery.starter;
 
-import com.lego.yxl.annotation.SmartFault;
-import com.lego.yxl.executor.ActionTypeProvider;
-import com.lego.yxl.executor.ExceptionMapProvider;
-import com.lego.yxl.executor.SmartFaultMethodInterceptor;
+import com.lego.yxl.faultrecovery.core.annotation.SmartFault;
+import com.lego.yxl.faultrecovery.core.executor.ActionTypeProvider;
+import com.lego.yxl.faultrecovery.core.executor.ExceptionMapProvider;
+import com.lego.yxl.faultrecovery.core.executor.SmartFaultMethodInterceptor;
 import org.aopalliance.aop.Advice;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;

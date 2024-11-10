@@ -1,6 +1,6 @@
-package com.lego.yxl.smart;
+package com.lego.yxl.faultrecovery.core.smart;
 
-import com.lego.yxl.annotation.Action;
+import com.lego.yxl.faultrecovery.core.annotation.Action;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Order(Integer.MIN_VALUE)
 public class ActionAspect {
-    @Pointcut("@annotation(com.lego.yxl.annotation.Action)")
+    @Pointcut("@annotation(com.lego.yxl.faultrecovery.core.annotation.Action)")
     public void pointcut() {
     }
 

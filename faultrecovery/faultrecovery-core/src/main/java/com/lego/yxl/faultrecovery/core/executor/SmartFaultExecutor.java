@@ -1,9 +1,9 @@
-package com.lego.yxl.executor;
+package com.lego.yxl.faultrecovery.core.executor;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import com.lego.yxl.annotation.SmartFault;
-import com.lego.yxl.smart.ActionType;
+import com.lego.yxl.faultrecovery.core.annotation.SmartFault;
+import com.lego.yxl.faultrecovery.core.smart.ActionType;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.MethodInvocation;
 import org.springframework.core.annotation.AnnotationUtils;

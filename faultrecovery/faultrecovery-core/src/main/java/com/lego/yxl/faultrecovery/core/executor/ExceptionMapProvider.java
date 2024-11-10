@@ -1,4 +1,4 @@
-package com.lego.yxl.executor;
+package com.lego.yxl.faultrecovery.core.executor;
 
 import java.util.Map;
 

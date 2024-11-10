@@ -1,4 +1,4 @@
-package com.lego.yxl.smart;
+package com.lego.yxl.faultrecovery.core.smart;
 
 public enum ActionType {
     COMMAND, QUERY

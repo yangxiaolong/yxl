@@ -1,4 +1,4 @@
-package com.lego.yxl;
+package com.lego.yxl.faultrecovery;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

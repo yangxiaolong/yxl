@@ -1,6 +1,6 @@
-package com.lego.yxl.annotation;
+package com.lego.yxl.faultrecovery.core.annotation;
 
-import com.lego.yxl.smart.ActionType;
+import com.lego.yxl.faultrecovery.core.smart.ActionType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,7 +1,7 @@
-package com.lego.yxl.executor;
+package com.lego.yxl.faultrecovery.core.executor;
 
-import com.lego.yxl.smart.ActionContext;
-import com.lego.yxl.smart.ActionType;
+import com.lego.yxl.faultrecovery.core.smart.ActionContext;
+import com.lego.yxl.faultrecovery.core.smart.ActionType;
 import org.springframework.stereotype.Component;
 
 @Component

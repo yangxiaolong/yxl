@@ -1,4 +1,4 @@
-package com.lego.yxl.smart;
+package com.lego.yxl.faultrecovery.core.smart;
 
 public class ActionContext {
     private static final ThreadLocal<ActionType> ACTION_TYPE_THREAD_LOCAL = new ThreadLocal<>();

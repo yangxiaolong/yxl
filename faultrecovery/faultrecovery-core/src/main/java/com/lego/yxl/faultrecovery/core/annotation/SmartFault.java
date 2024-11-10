@@ -1,4 +1,4 @@
-package com.lego.yxl.annotation;
+package com.lego.yxl.faultrecovery.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
