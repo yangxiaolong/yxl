@@ -14,7 +14,7 @@ import com.lego.yxl.command.core.support.handler.converter.SmartResultConverters
 import com.lego.yxl.command.core.support.handler.preaction.PreOperation;
 import com.lego.yxl.command.core.support.handler.preaction.SmartPreOperations;
 import com.lego.yxl.core.ValidateService;
-import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
+import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;

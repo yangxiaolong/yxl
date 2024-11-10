@@ -14,7 +14,7 @@ import com.lego.yxl.command.core.support.handler.preaction.SmartPreOperations;
 import com.lego.yxl.command.core.Command;
 import com.lego.yxl.command.core.CommandRepository;
 import com.lego.yxl.core.ValidateService;
-import com.lego.yxl.lazyloadproxyfactory.LazyLoadProxyFactory;
+import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

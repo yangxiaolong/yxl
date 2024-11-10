@@ -1,6 +1,6 @@
 package com.lego.yxl.command.command;
 
-import com.lego.yxl.annotation.LazyLoadBy;
+import com.lego.yxl.loader.core.annotation.LazyLoadBy;
 import com.lego.yxl.repository.address.Address;
 import com.lego.yxl.repository.product.Product;
 import lombok.Data;

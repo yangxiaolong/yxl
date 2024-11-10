@@ -1,6 +1,6 @@
 package com.lego.yxl.validator.service;
 
-import com.lego.yxl.context.CreateOrderCmd;
+import com.lego.yxl.loader.context.CreateOrderCmd;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.validation.annotation.Validated;
 
