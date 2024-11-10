@@ -1,7 +1,7 @@
-package com.lego.yxl.delay.core;
+package com.lego.yxl.delay.core.core;
 
 import com.google.common.base.Preconditions;
-import com.lego.yxl.delay.annotation.DelayBasedRocketMQ;
+import com.lego.yxl.delay.core.annotation.DelayBasedRocketMQ;
 import com.lego.yxl.support.AbstractSingleMethodConsumerContainer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;

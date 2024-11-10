@@ -1,6 +1,6 @@
-package com.lego.yxl.delay.controller;
+package com.lego.yxl.delay.demo.controller;
 
-import com.lego.yxl.delay.service.DelayService;
+import com.lego.yxl.delay.demo.service.DelayService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;

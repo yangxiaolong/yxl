@@ -1,6 +1,6 @@
-package com.lego.yxl.delay.service;
+package com.lego.yxl.delay.demo.service;
 
-import com.lego.yxl.delay.annotation.DelayBasedRocketMQ;
+import com.lego.yxl.delay.core.annotation.DelayBasedRocketMQ;
 import lombok.Getter;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;

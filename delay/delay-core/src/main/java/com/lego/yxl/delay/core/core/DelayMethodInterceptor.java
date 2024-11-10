@@ -1,8 +1,8 @@
-package com.lego.yxl.delay.core;
+package com.lego.yxl.delay.core.core;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
-import com.lego.yxl.delay.annotation.DelayBasedRocketMQ;
+import com.lego.yxl.delay.core.annotation.DelayBasedRocketMQ;
 import com.lego.yxl.support.AbstractRocketMQSendInterceptor;
 import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
