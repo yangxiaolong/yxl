@@ -1,7 +1,7 @@
-package com.lego.yxl.async.normal;
+package com.lego.yxl.core.normal;
 
 import com.google.common.collect.Maps;
-import com.lego.yxl.async.annotation.AsyncBasedRocketMQ;
+import com.lego.yxl.core.annotation.AsyncBasedRocketMQ;
 import com.lego.yxl.support.AbstractRocketMQSendInterceptor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;

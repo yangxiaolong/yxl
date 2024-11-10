@@ -1,8 +1,8 @@
 package com.lego.yxl.async.starter;
 
-import com.lego.yxl.async.annotation.AsyncBasedRocketMQ;
-import com.lego.yxl.async.normal.NormalAsyncConsumerContainerRegistry;
-import com.lego.yxl.async.normal.NormalAsyncInterceptor;
+import com.lego.yxl.core.annotation.AsyncBasedRocketMQ;
+import com.lego.yxl.core.normal.NormalAsyncConsumerContainerRegistry;
+import com.lego.yxl.core.normal.NormalAsyncInterceptor;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.aop.PointcutAdvisor;

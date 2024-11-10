@@ -1,7 +1,7 @@
-package com.lego.yxl.async.normal;
+package com.lego.yxl.core.normal;
 
 import com.google.common.base.Preconditions;
-import com.lego.yxl.async.annotation.AsyncBasedRocketMQ;
+import com.lego.yxl.core.annotation.AsyncBasedRocketMQ;
 import com.lego.yxl.support.AbstractSingleMethodConsumerContainer;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;

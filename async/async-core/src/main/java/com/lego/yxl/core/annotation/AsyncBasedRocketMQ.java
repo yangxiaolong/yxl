@@ -1,4 +1,4 @@
-package com.lego.yxl.async.annotation;
+package com.lego.yxl.core.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -8,14 +8,7 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface AsyncForOrderedBasedRocketMQ {
-
-    /**
-     * 是否可用
-     * @return
-     */
-    String enable() default "true";
-
+public @interface AsyncBasedRocketMQ {
     /**
      * MQ topic
      * @return
@@ -27,12 +20,6 @@ public @interface AsyncForOrderedBasedRocketMQ {
      * @return
      */
     String tag() default "*";
-
-    /**
-     * 顺序消费设置的 hashKey
-     * @return
-     */
-    String shardingKey();
 
     /**
      * 消费组
@@ -51,6 +38,4 @@ public @interface AsyncForOrderedBasedRocketMQ {
      * @return
      */
     String consumerProfile() default "";
-
 }
-
