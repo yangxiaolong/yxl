@@ -1,6 +1,6 @@
 package com.lego.yxl.msg.starter;
 
-import com.lego.yxl.msg.consumer.TagBasedDispatcherConsumerContainerRegistry;
+import com.lego.yxl.msg.core.consumer.TagBasedDispatcherConsumerContainerRegistry;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;

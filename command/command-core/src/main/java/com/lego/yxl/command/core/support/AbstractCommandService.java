@@ -13,7 +13,7 @@ import com.lego.yxl.command.core.support.handler.converter.AggResultConverter;
 import com.lego.yxl.command.core.support.handler.preaction.SmartPreOperations;
 import com.lego.yxl.command.core.Command;
 import com.lego.yxl.command.core.CommandRepository;
-import com.lego.yxl.core.ValidateService;
+import com.lego.yxl.validator.core.ValidateService;
 import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

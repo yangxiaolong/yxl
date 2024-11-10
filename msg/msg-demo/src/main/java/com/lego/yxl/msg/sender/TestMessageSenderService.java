@@ -1,5 +1,7 @@
 package com.lego.yxl.msg.sender;
 
+import com.lego.yxl.msg.core.sender.Message;
+import com.lego.yxl.msg.core.sender.ReliableMessageSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

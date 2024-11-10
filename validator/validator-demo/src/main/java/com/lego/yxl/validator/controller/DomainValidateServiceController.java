@@ -1,6 +1,6 @@
 package com.lego.yxl.validator.controller;
 
-import com.lego.yxl.core.ValidateException;
+import com.lego.yxl.validator.core.ValidateException;
 import com.lego.yxl.loader.context.CreateOrderCmd;
 import com.lego.yxl.repository.product.Product;
 import com.lego.yxl.repository.stock.Stock;

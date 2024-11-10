@@ -1,9 +1,9 @@
 package com.lego.yxl.msg.starter;
 
-import com.lego.yxl.msg.sender.MessageSender;
-import com.lego.yxl.msg.sender.ReliableMessageCompensator;
-import com.lego.yxl.msg.sender.ReliableMessageSender;
-import com.lego.yxl.msg.sender.support.*;
+import com.lego.yxl.msg.core.sender.MessageSender;
+import com.lego.yxl.msg.core.sender.ReliableMessageCompensator;
+import com.lego.yxl.msg.core.sender.ReliableMessageSender;
+import com.lego.yxl.msg.core.sender.support.*;
 import org.springframework.context.annotation.Bean;
 
 import javax.sql.DataSource;

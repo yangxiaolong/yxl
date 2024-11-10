@@ -1,6 +1,8 @@
 package com.lego.yxl.msg.sender;
 
 import com.google.common.collect.Lists;
+import com.lego.yxl.msg.core.sender.Message;
+import com.lego.yxl.msg.core.sender.MessageSender;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.RandomUtils;

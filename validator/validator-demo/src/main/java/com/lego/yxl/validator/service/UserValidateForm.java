@@ -1,7 +1,7 @@
 package com.lego.yxl.validator.service;
 
-import com.lego.yxl.core.common.ValidateErrorHandler;
-import com.lego.yxl.core.common.Verifiable;
+import com.lego.yxl.validator.core.common.ValidateErrorHandler;
+import com.lego.yxl.validator.core.common.Verifiable;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 

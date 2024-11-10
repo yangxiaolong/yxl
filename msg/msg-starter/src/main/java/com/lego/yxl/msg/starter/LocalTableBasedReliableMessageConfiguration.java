@@ -1,6 +1,6 @@
 package com.lego.yxl.msg.starter;
 
-import com.lego.yxl.msg.sender.MessageSender;
+import com.lego.yxl.msg.core.sender.MessageSender;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

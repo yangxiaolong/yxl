@@ -7,7 +7,7 @@ import com.lego.yxl.command.core.support.handler.aggsyncer.AggSyncer;
 import com.lego.yxl.command.core.support.handler.contextfactory.ContextFactory;
 import com.lego.yxl.command.core.support.handler.converter.ResultConverter;
 import com.lego.yxl.command.core.support.handler.preaction.PreOperation;
-import com.lego.yxl.core.ValidateService;
+import com.lego.yxl.validator.core.ValidateService;
 import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import lombok.AccessLevel;
 import lombok.Getter;

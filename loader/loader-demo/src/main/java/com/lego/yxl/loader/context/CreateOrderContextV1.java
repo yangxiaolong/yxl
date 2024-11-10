@@ -7,7 +7,6 @@ import com.lego.yxl.repository.price.Price;
 import com.lego.yxl.repository.product.Product;
 import com.lego.yxl.repository.stock.Stock;
 import com.lego.yxl.repository.user.User;
-import com.lego.yxl1.annotation.*;
 import lombok.Data;
 
 @Data

@@ -1,7 +1,7 @@
 package com.lego.yxl.msg.consumer;
 
-import com.lego.yxl.msg.annotation.HandleTag;
-import com.lego.yxl.msg.annotation.TagBasedDispatcherMessageConsumer;
+import com.lego.yxl.msg.core.annotation.HandleTag;
+import com.lego.yxl.msg.core.annotation.TagBasedDispatcherMessageConsumer;
 
 
 @TagBasedDispatcherMessageConsumer(

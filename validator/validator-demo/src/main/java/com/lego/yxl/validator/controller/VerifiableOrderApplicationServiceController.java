@@ -1,6 +1,6 @@
 package com.lego.yxl.validator.controller;
 
-import com.lego.yxl.core.ValidateException;
+import com.lego.yxl.validator.core.ValidateException;
 import com.lego.yxl.validator.service.ValidateableOrder;
 import com.lego.yxl.validator.service.ValidateableOrderApplicationService;
 import org.junit.jupiter.api.Assertions;

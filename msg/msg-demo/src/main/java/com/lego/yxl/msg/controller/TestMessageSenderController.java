@@ -1,11 +1,11 @@
 package com.lego.yxl.msg.controller;
 
-import com.lego.yxl.msg.sender.Message;
-import com.lego.yxl.msg.sender.ReliableMessageCompensator;
+import com.lego.yxl.msg.core.sender.Message;
+import com.lego.yxl.msg.core.sender.ReliableMessageCompensator;
 import com.lego.yxl.msg.sender.TestMessageSender;
 import com.lego.yxl.msg.sender.TestMessageSenderService;
-import com.lego.yxl.msg.sender.support.LocalMessage;
-import com.lego.yxl.msg.sender.support.LocalMessageRepository;
+import com.lego.yxl.msg.core.sender.support.LocalMessage;
+import com.lego.yxl.msg.core.sender.support.LocalMessageRepository;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.jupiter.api.Assertions;

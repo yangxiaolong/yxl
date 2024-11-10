@@ -1,6 +1,6 @@
 package com.lego.yxl.validator.service;
 
-import com.lego.yxl.core.ValidateService;
+import com.lego.yxl.validator.core.ValidateService;
 import com.lego.yxl.loader.context.CreateOrderCmd;
 import com.lego.yxl.loader.context.CreateOrderContextV2;
 import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;

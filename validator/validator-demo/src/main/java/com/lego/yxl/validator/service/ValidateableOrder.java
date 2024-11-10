@@ -1,6 +1,6 @@
 package com.lego.yxl.validator.service;
 
-import com.lego.yxl.core.ValidateException;
+import com.lego.yxl.validator.core.ValidateException;
 import jakarta.persistence.*;
 import lombok.Data;
 
