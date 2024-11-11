@@ -4,10 +4,9 @@ import com.lego.yxl.faultrecovery.core.annotation.SmartFault;
 import com.lego.yxl.faultrecovery.core.executor.ActionTypeProvider;
 import com.lego.yxl.faultrecovery.core.executor.ExceptionMapProvider;
 import com.lego.yxl.faultrecovery.core.executor.SmartFaultMethodInterceptor;
-import org.aopalliance.aop.Advice;
 import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
-import org.springframework.aop.support.AbstractPointcutAdvisor;
+import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.Pointcuts;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
@@ -36,19 +35,7 @@ public class SmartFaultAutoConfiguration {
 
         Pointcut pointcut = Pointcuts.union(methodPointcut, clsPointcut);
 
-        //DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, smartFaultMethodInterceptor);
-
-        AbstractPointcutAdvisor advisor = new AbstractPointcutAdvisor() {
-            @Override
-            public Pointcut getPointcut() {
-                return pointcut;
-            }
-
-            @Override
-            public Advice getAdvice() {
-                return smartFaultMethodInterceptor;
-            }
-        };
+        DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, smartFaultMethodInterceptor);
         advisor.setOrder(-1000);
         return advisor;
     }

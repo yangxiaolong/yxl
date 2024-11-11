@@ -2,8 +2,10 @@ package com.lego.yxl.command.command;
 
 import com.lego.yxl.command.core.CommandForSync;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class SyncOrderByIdCommand
         extends CreateOrderCommand

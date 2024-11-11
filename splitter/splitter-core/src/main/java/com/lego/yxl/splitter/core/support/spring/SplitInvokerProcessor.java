@@ -10,7 +10,6 @@ import com.lego.yxl.splitter.core.support.spring.invoker.SingleParamSplitInvoker
 import com.lego.yxl.splitter.core.support.spring.invoker.SplitInvoker;
 import com.lego.yxl.splitter.core.support.spring.invoker.SplitInvokerRegistry;
 import com.lego.yxl.splitter.core.support.ParamSplitterBuilder;
-import com.lego.yxl1.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.springframework.aop.support.AopUtils;

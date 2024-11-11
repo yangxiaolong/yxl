@@ -1,7 +1,5 @@
 package com.lego.yxl.support;
 
-import lombok.Getter;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -18,8 +16,6 @@ public abstract class AbstractConsumerContainer implements ConsumerContainer, In
     private boolean running;
     private DefaultMQPushConsumer consumer;
 
-    @Getter
-    @Setter
     private int delayLevelWhenNextConsume = 1;
 
     public AbstractConsumerContainer(Environment environment, Object bean) {

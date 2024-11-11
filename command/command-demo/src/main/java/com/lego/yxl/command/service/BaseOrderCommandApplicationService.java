@@ -2,7 +2,6 @@ package com.lego.yxl.command.service;
 
 import com.google.common.collect.Lists;
 import com.lego.yxl.command.command.*;
-import com.lego.yxl.command.demo.command.*;
 import com.lego.yxl.command.query.OrderStatus;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;

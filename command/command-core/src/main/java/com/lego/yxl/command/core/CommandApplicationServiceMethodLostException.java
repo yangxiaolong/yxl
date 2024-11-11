@@ -1,6 +1,7 @@
 package com.lego.yxl.command.core;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.lang.reflect.Method;
@@ -9,6 +10,7 @@ import java.util.Set;
 /**
  * QueryServiceMethod 丢失异常；
  */
+@EqualsAndHashCode(callSuper = true)
 @Data
 @ToString(callSuper = true)
 public class CommandApplicationServiceMethodLostException extends RuntimeException{

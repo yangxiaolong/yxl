@@ -1,8 +1,10 @@
 package com.lego.yxl.feign.core;
 
+import lombok.EqualsAndHashCode;
 import lombok.Value;
 
 
+@EqualsAndHashCode(callSuper = true)
 @Value
 public class RpcException extends RuntimeException{
     private final String methodKey;

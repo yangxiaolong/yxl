@@ -10,7 +10,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-@EnableJpaRepositories(basePackages = "com.lego.yxl.command.demo.command")
+@EnableJpaRepositories(basePackages = "com.lego.yxl.command.command")
 public class CommandApplication {
 
     public static void main(String[] args) {
