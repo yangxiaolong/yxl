@@ -8,7 +8,8 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
 /**
  * https://mp.weixin.qq.com/s/5q6DohyVSS4JyprUibt1Sg
  */
-@SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
+@SpringBootApplication(exclude = DataSourceAutoConfiguration.class,
+        scanBasePackages = {"com.lego.yxl.loader", "com.lego.yxl.repository"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 public class LoaderApplication {
 
