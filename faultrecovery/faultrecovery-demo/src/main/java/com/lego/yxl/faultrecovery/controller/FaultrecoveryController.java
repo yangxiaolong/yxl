@@ -24,6 +24,8 @@ public class FaultrecoveryController {
 
     @GetMapping("/retry")
     public void retry() {
+        retryService1.clean();
+
         for (int i = 0; i < 100; i++) {
             retryService1.retry((long) i);
         }
@@ -35,6 +37,8 @@ public class FaultrecoveryController {
 
     @GetMapping("/fallback")
     public void fallback() {
+        retryService1.clean();
+
         for (int i = 0; i < 100; i++) {
             retryService1.fallback((long) i);
         }

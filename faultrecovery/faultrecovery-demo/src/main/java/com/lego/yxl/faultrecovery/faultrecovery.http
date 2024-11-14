@@ -2,4 +2,16 @@
 GET http://localhost:8083/faultrecovery/retry
 
 ###
+GET http://localhost:8083/faultrecovery/fallback
+
+###
+GET http://localhost:8083/faultrecovery/retry2
+
+###
+GET http://localhost:8083/faultrecovery/fallback2
+
+###
 GET http://localhost:8083/faultrecovery/retry3
+
+###
+GET http://localhost:8083/faultrecovery/fallback3
