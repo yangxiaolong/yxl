@@ -27,11 +27,13 @@ public class IdempotentConfiguration extends IdempotentConfigurationSupport {
     }
 
     @Bean("redisExecutorFactory")
+    @ConditionalOnBean(ExecutionRecordRepository.class)
     public IdempotentExecutorFactory redisExecutorFactory(ExecutionRecordRepository executionRecordRepository) {
         return createExecutorFactory(executionRecordRepository);
     }
 
     @Bean
+    @ConditionalOnBean(RedisTemplate.class)
     public ExecutionRecordRepository executionRecordRepository(RedisTemplate<String, ExecutionRecord> recordRedisTemplate) {
         return new RedisBasedExecutionRecordRepository("ide-%s-%s", Duration.ofDays(7), recordRedisTemplate);
     }
