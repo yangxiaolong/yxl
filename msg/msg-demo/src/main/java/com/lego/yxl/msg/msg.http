@@ -3,3 +3,16 @@ GET http://localhost:8080/msg/rocketmq/userEvents
 
 ###
 GET http://localhost:8080/msg/ann/userEvents
+
+
+###
+GET http://localhost:8080/msg/testNoTransaction
+
+###
+GET http://localhost:8080/msg/testTestSuccess
+
+###
+GET http://localhost:8080/msg/testTestError
+
+###
+GET http://localhost:8080/msg/loadAndSend
