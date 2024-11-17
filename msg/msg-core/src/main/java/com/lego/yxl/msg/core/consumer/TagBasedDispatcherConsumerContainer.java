@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 @Slf4j
 public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContainer {
@@ -67,6 +68,10 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
                 return;
             }
             HandleTag handleTag = AnnotatedElementUtils.findMergedAnnotation(method, HandleTag.class);
+            if (Objects.isNull(handleTag)) {
+                String msg = String.format("Tag %s is null", this.bean.getClass().getName());
+                throw new RuntimeException(msg);
+            }
             String tag = handleTag.value();
             if (this.tagMethods.containsKey(tag)) {
                 String msg = String.format("Tag %s On %s is duplicate", tag, this.bean.getClass().getName());
