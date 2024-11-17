@@ -1,2 +1,38 @@
 ###
 GET http://localhost:8082/splitter/splitByList
+
+###
+GET http://localhost:8082/splitter/testSplitByList
+
+###
+GET http://localhost:8082/splitter/splitByListAsSet
+
+###
+GET http://localhost:8082/splitter/testSplitByListAsSet
+
+###
+GET http://localhost:8082/splitter/splitByListAsCount
+
+###
+GET http://localhost:8082/splitter/testSplitByListAsCount
+
+###
+GET http://localhost:8082/splitter/testSplitByListAsCount
+
+###
+GET http://localhost:8082/splitter/splitByListAsLong
+
+###
+GET http://localhost:8082/splitter/testSplitByListAsLong
+
+###
+GET http://localhost:8082/splitter/splitByListAsLong2
+
+###
+GET http://localhost:8082/splitter/testSplitByListAsLong2
+
+###
+GET http://localhost:8082/splitter/splitByParam
+
+###
+GET http://localhost:8082/splitter/splitByParam_Splittable

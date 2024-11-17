@@ -24,7 +24,6 @@ import java.util.Map;
 
 /**
  * 对 Bean 进行功能加强
- *
  */
 public class SplitInvokerProcessor implements BeanPostProcessor {
 
@@ -49,11 +48,6 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
     }
 
     @Override
-    public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return bean;
-    }
-
-    @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
         process(bean);
         return bean;
@@ -64,10 +58,10 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
         MethodUtils.getMethodsListWithAnnotation(targetClass, Split.class).forEach(method -> {
             Split split = method.getAnnotation(Split.class);
 
-            SplitInvoker splitInvoker = null;
-            if (method.getParameterCount() == 1){
+            SplitInvoker splitInvoker;
+            if (method.getParameterCount() == 1) {
                 splitInvoker = buildSingleParamSplitInvoker(split, method);
-            }else {
+            } else {
                 splitInvoker = buildMultipleParamSplitInvoker(split, method);
             }
 
@@ -77,23 +71,23 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
 
     private SplitInvoker buildMultipleParamSplitInvoker(Split split, Method method) {
         Integer index = findParamIndex(method);
-        if (index == null){
+        if (index == null) {
             return null;
         }
 
         ParamSplitter paramSplitter = findParamSplitter(method.getParameterTypes()[index], split);
-        if (paramSplitter == null){
+        if (paramSplitter == null) {
             return null;
         }
 
         MethodExecutor methodExecutor = findMethodExecutor(split);
-        if (methodExecutor == null){
+        if (methodExecutor == null) {
             return null;
         }
 
         Class<?> returnType = method.getReturnType();
         ResultMerger resultMerger = findResultMerger(returnType, split);
-        if (resultMerger == null){
+        if (resultMerger == null) {
             return null;
         }
 
@@ -106,9 +100,9 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
 
     private Integer findParamIndex(Method method) {
         Parameter[] parameters = method.getParameters();
-        for (int i = 0; i < parameters.length; i ++){
+        for (int i = 0; i < parameters.length; i++) {
             Parameter parameter = parameters[i];
-            if (parameter.isAnnotationPresent(SplitParam.class)){
+            if (parameter.isAnnotationPresent(SplitParam.class)) {
                 return i;
             }
         }
@@ -117,30 +111,29 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
 
     private SplitInvoker buildSingleParamSplitInvoker(Split split, Method method) {
         ParamSplitter paramSplitter = findParamSplitter(method.getParameterTypes()[0], split);
-        if (paramSplitter == null){
+        if (paramSplitter == null) {
             return null;
         }
 
         MethodExecutor methodExecutor = findMethodExecutor(split);
-        if (methodExecutor == null){
+        if (methodExecutor == null) {
             return null;
         }
 
         Class<?> returnType = method.getReturnType();
         ResultMerger resultMerger = findResultMerger(returnType, split);
-        if (resultMerger == null){
+        if (resultMerger == null) {
             return null;
         }
 
         SplitService splitService = new DefaultSplitService(paramSplitter, methodExecutor, resultMerger);
 
         return new SingleParamSplitInvoker(splitService, method, split.sizePrePartition());
-
     }
 
     private MethodExecutor findMethodExecutor(Split split) {
         String config = split.executor();
-        if (StringUtils.isEmpty(config)){
+        if (StringUtils.isEmpty(config)) {
             config = DEFAULT_METHOD_EXECUTOR;
         }
         return this.executorMap.get(config);
@@ -148,37 +141,37 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
 
     private ParamSplitter findParamSplitter(Class<?> parameterType, Split split) {
         String config = split.paramSplitter();
-        if (StringUtils.isEmpty(config)){
-            for (ParamSplitter paramSplitter : splitterMap.values()){
+        if (StringUtils.isEmpty(config)) {
+            for (ParamSplitter paramSplitter : splitterMap.values()) {
                 if (paramSplitter instanceof SmartParamSplitter &&
-                        ((SmartParamSplitter)paramSplitter).support(parameterType)){
+                        ((SmartParamSplitter) paramSplitter).support(parameterType)) {
                     return paramSplitter;
                 }
             }
 
-            for (ParamSplitterBuilder paramSplitterBuilder : this.paramSplitterBuilders){
-                if (paramSplitterBuilder.support(parameterType)){
+            for (ParamSplitterBuilder paramSplitterBuilder : this.paramSplitterBuilders) {
+                if (paramSplitterBuilder.support(parameterType)) {
                     return paramSplitterBuilder.build(parameterType);
                 }
             }
             return null;
-        }else {
+        } else {
             return this.splitterMap.get(config);
         }
     }
 
     private ResultMerger findResultMerger(Class<?> returnType, Split split) {
         String config = split.resultMerger();
-        if (StringUtils.isEmpty(config)){
-            for (ResultMerger resultMerger : mergerMap.values()){
+        if (StringUtils.isEmpty(config)) {
+            for (ResultMerger resultMerger : mergerMap.values()) {
                 if (resultMerger instanceof SmartResultMerger &&
-                        ((SmartResultMerger)resultMerger).support(returnType)){
+                        ((SmartResultMerger) resultMerger).support(returnType)) {
                     return resultMerger;
                 }
             }
             return null;
-        }else {
-            return  this.mergerMap.get(config);
+        } else {
+            return this.mergerMap.get(config);
         }
     }
 
