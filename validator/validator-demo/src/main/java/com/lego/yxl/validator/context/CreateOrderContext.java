@@ -1,4 +1,4 @@
-package com.lego.yxl.loader.context;
+package com.lego.yxl.validator.context;
 
 import com.lego.yxl.repository.address.Address;
 import com.lego.yxl.repository.price.Price;

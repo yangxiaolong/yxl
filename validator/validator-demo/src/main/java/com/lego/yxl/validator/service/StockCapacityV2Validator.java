@@ -1,8 +1,8 @@
 package com.lego.yxl.validator.service;
 
+import com.lego.yxl.validator.context.CreateOrderContextV2;
 import com.lego.yxl.validator.core.FixTypeBusinessValidator;
 import com.lego.yxl.validator.core.common.ValidateErrorHandler;
-import com.lego.yxl.loader.context.CreateOrderContextV2;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 

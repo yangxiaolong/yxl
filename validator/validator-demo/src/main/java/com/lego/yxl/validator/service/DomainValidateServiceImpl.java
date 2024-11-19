@@ -1,8 +1,8 @@
 package com.lego.yxl.validator.service;
 
+import com.lego.yxl.validator.context.CreateOrderCmd;
+import com.lego.yxl.validator.context.CreateOrderContextV2;
 import com.lego.yxl.validator.core.ValidateService;
-import com.lego.yxl.loader.context.CreateOrderCmd;
-import com.lego.yxl.loader.context.CreateOrderContextV2;
 import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
