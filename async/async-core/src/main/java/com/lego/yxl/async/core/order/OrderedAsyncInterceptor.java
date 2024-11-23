@@ -4,7 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
 import com.lego.yxl.support.AbstractRocketMQSendInterceptor;
-import lombok.Value;
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
@@ -111,15 +111,13 @@ public class OrderedAsyncInterceptor extends AbstractRocketMQSendInterceptor imp
                 tag);
     }
 
-
-    @Value
-    class InvokeCacheItem {
+    @Data
+    static class InvokeCacheItem {
         private final boolean enable;
         private final String[] parameterNames;
         private final Expression expression;
         private final String topic;
         private final String tag;
-
     }
 
 }

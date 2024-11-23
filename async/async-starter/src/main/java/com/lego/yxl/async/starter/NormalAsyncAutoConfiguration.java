@@ -19,6 +19,7 @@ import org.springframework.core.env.Environment;
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @ConditionalOnBean(RocketMQTemplate.class)
 public class NormalAsyncAutoConfiguration {
+
     @Autowired
     private Environment environment;
 
@@ -37,8 +38,9 @@ public class NormalAsyncAutoConfiguration {
 
     @Bean
     public PointcutAdvisor asyncPointcutAdvisor(@Autowired NormalAsyncInterceptor sendMessageInterceptor) {
-        return new DefaultPointcutAdvisor(
-                new AnnotationMatchingPointcut(null, AsyncBasedRocketMQ.class),
-                sendMessageInterceptor);
+        AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(
+                null, AsyncBasedRocketMQ.class);
+        return new DefaultPointcutAdvisor(pointcut, sendMessageInterceptor);
     }
+
 }

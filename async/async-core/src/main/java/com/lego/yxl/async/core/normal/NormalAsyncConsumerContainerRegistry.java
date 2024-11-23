@@ -10,6 +10,7 @@ import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -35,10 +36,12 @@ public class NormalAsyncConsumerContainerRegistry extends AbstractConsumerContai
      */
     @SneakyThrows
     @Override
-    public Object postProcessAfterInitialization(Object proxy, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@Nonnull Object proxy, @Nonnull String beanName) throws BeansException {
         // 1. 获取 @AsyncBasedRocketMQ 注解方法
-        Class targetCls = AopUtils.getTargetClass(proxy);
+        Class<?> targetCls = AopUtils.getTargetClass(proxy);
         List<Method> methodsListWithAnnotation = MethodUtils.getMethodsListWithAnnotation(targetCls, AsyncBasedRocketMQ.class);
+
+        Object bean = AopProxyUtils.getSingletonTarget(proxy);
 
         // 2. 为每个 @AsyncBasedRocketMQ 注解方法 注册 NormalAsyncConsumerContainer
         for (Method method : methodsListWithAnnotation) {
@@ -53,7 +56,6 @@ public class NormalAsyncConsumerContainerRegistry extends AbstractConsumerContai
                 continue;
             }
 
-            Object bean = AopProxyUtils.getSingletonTarget(proxy);
             NormalAsyncConsumerContainer asyncConsumerContainer =
                     new NormalAsyncConsumerContainer(this.getEnvironment(), annotation, bean, method);
             asyncConsumerContainer.afterPropertiesSet();

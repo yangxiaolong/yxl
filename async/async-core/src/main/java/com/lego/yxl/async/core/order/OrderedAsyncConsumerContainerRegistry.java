@@ -10,6 +10,7 @@ import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -23,33 +24,35 @@ public class OrderedAsyncConsumerContainerRegistry extends AbstractConsumerConta
 
     @SneakyThrows
     @Override
-    public Object postProcessAfterInitialization(Object proxy, String s) throws BeansException {
+    public Object postProcessAfterInitialization(@Nonnull Object proxy, @Nonnull String beanName) throws BeansException {
         // 1. 获取 @AsyncForOrderedBasedRocketMQ 注解方法
-        Class targetCls = AopUtils.getTargetClass(proxy);
+        Class<?> targetCls = AopUtils.getTargetClass(proxy);
         List<Method> methodsListWithAnnotation = MethodUtils.getMethodsListWithAnnotation(targetCls, AsyncForOrderedBasedRocketMQ.class);
 
+        Object bean = AopProxyUtils.getSingletonTarget(proxy);
+
         // 2. 为每个 @AsyncForOrderedBasedRocketMQ 注解方法 注册 OrderedAsyncConsumerContainer
-        for(Method method : methodsListWithAnnotation){
-            if (method.isBridge()){
+        for (Method method : methodsListWithAnnotation) {
+            if (method.isBridge()) {
                 log.warn("method {} is bridge, break!", method);
                 continue;
             }
 
             AsyncForOrderedBasedRocketMQ annotation = method.getAnnotation(AsyncForOrderedBasedRocketMQ.class);
             String consumerProfile = annotation.consumerProfile();
-            if (!isActiveProfile(consumerProfile)){
+            if (!isActiveProfile(consumerProfile)) {
                 continue;
             }
 
-            Object bean = AopProxyUtils.getSingletonTarget(proxy);
-            OrderedAsyncConsumerContainer asyncConsumerContainer =
-                    new OrderedAsyncConsumerContainer(this.getEnvironment(),
-                            annotation,
-                            bean,
-                            method);
-            asyncConsumerContainer.afterPropertiesSet();
+            OrderedAsyncConsumerContainer consumerContainer = new OrderedAsyncConsumerContainer(
+                    this.getEnvironment(),
+                    annotation,
+                    bean,
+                    method
+            );
+            consumerContainer.afterPropertiesSet();
 
-            this.getConsumerContainers().add(asyncConsumerContainer);
+            this.getConsumerContainers().add(consumerContainer);
         }
         return proxy;
     }

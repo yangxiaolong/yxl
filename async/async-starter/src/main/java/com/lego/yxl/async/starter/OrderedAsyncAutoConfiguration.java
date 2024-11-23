@@ -17,11 +17,11 @@ import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.env.Environment;
 
-
 @Configuration
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @ConditionalOnBean(RocketMQTemplate.class)
 public class OrderedAsyncAutoConfiguration {
+
     @Autowired
     private Environment environment;
 
@@ -30,19 +30,20 @@ public class OrderedAsyncAutoConfiguration {
 
     private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
 
-
     @Bean
-    public OrderedAsyncInterceptor orderedAsyncInterceptor(){
+    public OrderedAsyncInterceptor orderedAsyncInterceptor() {
         return new OrderedAsyncInterceptor(this.environment, this.rocketMQTemplate, parameterNameDiscoverer);
     }
 
     @Bean
-    public OrderedAsyncConsumerContainerRegistry orderedAsyncConsumerContainerRegistry(){
+    public OrderedAsyncConsumerContainerRegistry orderedAsyncConsumerContainerRegistry() {
         return new OrderedAsyncConsumerContainerRegistry(this.environment);
     }
+
     @Bean
-    public PointcutAdvisor orderedAsyncPointcutAdvisor(@Autowired OrderedAsyncInterceptor sendMessageInterceptor){
-        return new DefaultPointcutAdvisor(new AnnotationMatchingPointcut(null, AsyncForOrderedBasedRocketMQ.class),
-                sendMessageInterceptor);
+    public PointcutAdvisor orderedAsyncPointcutAdvisor(@Autowired OrderedAsyncInterceptor sendMessageInterceptor) {
+        AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(
+                null, AsyncForOrderedBasedRocketMQ.class);
+        return new DefaultPointcutAdvisor(pointcut, sendMessageInterceptor);
     }
 }
