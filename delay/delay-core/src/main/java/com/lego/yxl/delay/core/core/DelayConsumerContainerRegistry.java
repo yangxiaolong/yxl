@@ -11,6 +11,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.List;
 import java.util.Objects;
@@ -24,10 +25,12 @@ public class DelayConsumerContainerRegistry extends AbstractConsumerContainerReg
 
     @SneakyThrows
     @Override
-    public Object postProcessAfterInitialization(Object proxy, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@Nonnull Object proxy, @Nonnull String beanName) throws BeansException {
         // 1. 获取 @DelayBasedRocketMQ 注解方法
         Class<?> targetCls = AopUtils.getTargetClass(proxy);
         List<Method> methodsListWithAnnotation = MethodUtils.getMethodsListWithAnnotation(targetCls, DelayBasedRocketMQ.class);
+
+        Object bean = AopProxyUtils.getSingletonTarget(proxy);
 
         // 2. 为每个 @DelayBasedRocketMQ 注解方法 注册 RocketMQConsumerContainer
         for (Method method : methodsListWithAnnotation) {
@@ -45,7 +48,6 @@ public class DelayConsumerContainerRegistry extends AbstractConsumerContainerReg
                 continue;
             }
 
-            Object bean = AopProxyUtils.getSingletonTarget(proxy);
             DelayConsumerContainer delayConsumerContainer =
                     new DelayConsumerContainer(this.getEnvironment(), annotation, bean, method);
             delayConsumerContainer.afterPropertiesSet();
@@ -54,4 +56,5 @@ public class DelayConsumerContainerRegistry extends AbstractConsumerContainerReg
         }
         return proxy;
     }
+
 }

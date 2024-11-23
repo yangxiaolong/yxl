@@ -9,6 +9,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.SmartLifecycle;
 import org.springframework.core.env.Environment;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class AbstractConsumerContainerRegistry implements BeanPostProcessor, Sma
     }
 
     @Override
-    public void stop(Runnable runnable) {
+    public void stop(@Nonnull Runnable runnable) {
         stop();
     }
 
