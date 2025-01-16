@@ -1,6 +1,7 @@
 package com.lego.yxl.loader.core.lazyloaderinterceptor;
 
 import com.lego.yxl.loader.core.propertylazyloader.PropertyLazyLoader;
+import jakarta.annotation.Nonnull;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.commons.lang3.reflect.FieldUtils;
@@ -24,9 +25,8 @@ public class LazyLoaderInterceptor implements InvocationHandler, MethodIntercept
     }
 
     @Override
-    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-        if (methodInvocation instanceof ProxyMethodInvocation) {
-            ProxyMethodInvocation proxyMethodInvocation = (ProxyMethodInvocation) methodInvocation;
+    public Object invoke(@Nonnull MethodInvocation methodInvocation) throws Throwable {
+        if (methodInvocation instanceof ProxyMethodInvocation proxyMethodInvocation) {
             return invoke(proxyMethodInvocation.getProxy(), proxyMethodInvocation.getMethod(), proxyMethodInvocation.getArguments());
         }
         return invoke(methodInvocation.getThis(), methodInvocation.getMethod(), methodInvocation.getArguments());
