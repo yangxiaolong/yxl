@@ -7,6 +7,7 @@ import org.springframework.context.expression.BeanFactoryResolver;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.util.CollectionUtils;
+import org.springframework.util.ObjectUtils;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
@@ -33,7 +34,7 @@ public class PropertyLazyLoaderFactory {
 
     private PropertyLazyLoader createFromField(Field field) {
         LazyLoadBy mergedAnnotation = AnnotatedElementUtils.findMergedAnnotation(field, LazyLoadBy.class);
-        if (mergedAnnotation == null) {
+        if (ObjectUtils.isEmpty(mergedAnnotation)) {
             return null;
         }
 
