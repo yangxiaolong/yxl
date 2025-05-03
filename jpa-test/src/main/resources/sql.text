@@ -1,27 +1,34 @@
-create table tb_order_address
-(
-    id     bigint      not null primary key auto_increment,
-    detail varchar(32) null
-) engine innodb;
-
 create table tb_order
 (
-    id              bigint auto_increment
-        primary key,
+    id              bigint primary key auto_increment,
     user_address_id bigint        null,
     user_id         varchar(32) null,
     status          varchar(32) null,
-    price           int         null
+    price           int         null,
+    vsn             int         null
+);
+
+create table tb_order_address
+(
+    id     bigint      primary key auto_increment,
+    detail varchar(32) null
 );
 
 create table tb_order_item
 (
-    id           bigint      not null primary key auto_increment,
+    id           bigint      primary key auto_increment,
     order_id     int         null,
     amount       int         null,
     price        int         null,
     product_id   int         null,
     product_name varchar(32) null,
     status       varchar(32) null
-) engine innodb;
+);
 
+select * from tb_order;
+select * from tb_order_item;
+select * from tb_order_address;
+
+delete from tb_order;
+delete from tb_order_item;
+delete from tb_order_address;

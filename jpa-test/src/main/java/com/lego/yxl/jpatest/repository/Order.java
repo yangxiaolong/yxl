@@ -7,6 +7,9 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
+import org.hibernate.annotations.BatchSize;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -32,6 +35,10 @@ public class Order {
     @Column(name = "price")
     private int price;
 
+    @Column(name = "vsn")
+    @Version
+    private int vsn;
+
     //  收货地址
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "user_address_id")
@@ -39,6 +46,9 @@ public class Order {
 
     //  订单项
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @BatchSize(size = 20)
+//    @Fetch(value = FetchMode.JOIN)  //只能根据id查询才有效
     @JoinColumn(name = "order_id")
     private List<OrderItem> items = new ArrayList<>();
 

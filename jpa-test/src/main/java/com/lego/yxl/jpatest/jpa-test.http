@@ -12,3 +12,13 @@ GET http://localhost:8080/order/modifyAddress_update
 
 ###
 GET http://localhost:8080/order/paySuccess
+
+
+###
+GET http://localhost:8080/order/page/users
+
+###
+GET http://localhost:8080/order/page/users/all
+
+###
+GET http://localhost:8080/order/page/users/findTop10ByStatusOrderByIdDesc
