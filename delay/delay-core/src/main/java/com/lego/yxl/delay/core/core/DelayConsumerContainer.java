@@ -14,11 +14,10 @@ import org.springframework.core.env.Environment;
 import java.lang.reflect.Method;
 import java.util.List;
 
-
 @Slf4j
 public class DelayConsumerContainer extends AbstractSingleMethodConsumerContainer {
-    private final DelayBasedRocketMQ delayBasedRocketMQ;
 
+    private final DelayBasedRocketMQ delayBasedRocketMQ;
 
     public DelayConsumerContainer(Environment environment, DelayBasedRocketMQ delayBasedRocketMQ, Object bean, Method method) {
         super(environment, bean, method);
@@ -38,7 +37,6 @@ public class DelayConsumerContainer extends AbstractSingleMethodConsumerContaine
         consumer.setConsumerGroup(consumerGroup);
         consumer.setNamesrvAddr(nameServerAddress);
 
-
         // 订阅 topic
         String topic = resolve(this.delayBasedRocketMQ.topic());
         String tag = resolve(this.delayBasedRocketMQ.tag());
@@ -50,7 +48,6 @@ public class DelayConsumerContainer extends AbstractSingleMethodConsumerContaine
         log.info("success to subscribe  {}, topic {}, tag {}, group {}", nameServerAddress, topic, tag, consumerGroup);
         return consumer;
     }
-
 
     private class DefaultMessageListenerOrderly implements MessageListenerOrderly {
 

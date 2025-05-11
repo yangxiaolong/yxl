@@ -23,6 +23,7 @@ public class DelayConsumerContainerRegistry extends AbstractConsumerContainerReg
         super(environment);
     }
 
+    @Nonnull
     @SneakyThrows
     @Override
     public Object postProcessAfterInitialization(@Nonnull Object proxy, @Nonnull String beanName) throws BeansException {

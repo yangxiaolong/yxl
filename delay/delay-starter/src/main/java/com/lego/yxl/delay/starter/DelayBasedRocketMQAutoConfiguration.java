@@ -5,6 +5,7 @@ import com.lego.yxl.delay.core.core.DelayConsumerContainerRegistry;
 import com.lego.yxl.delay.core.core.DelayMethodInterceptor;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
@@ -13,16 +14,12 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.DefaultParameterNameDiscoverer;
-import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.env.Environment;
 
-
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @ConditionalOnBean(RocketMQTemplate.class)
 public class DelayBasedRocketMQAutoConfiguration {
-    private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
 
     @Autowired
     private Environment environment;
@@ -32,7 +29,7 @@ public class DelayBasedRocketMQAutoConfiguration {
 
     @Bean
     public DelayMethodInterceptor delayInterceptor() {
-        return new DelayMethodInterceptor(this.environment, this.rocketMQTemplate, parameterNameDiscoverer);
+        return new DelayMethodInterceptor(this.environment, this.rocketMQTemplate);
     }
 
     @Bean
@@ -41,8 +38,8 @@ public class DelayBasedRocketMQAutoConfiguration {
     }
 
     @Bean
-    public PointcutAdvisor delayPointcutAdvisor(@Autowired DelayMethodInterceptor delayMethodInterceptor) {
-        return new DefaultPointcutAdvisor(new AnnotationMatchingPointcut(null, DelayBasedRocketMQ.class),
-                delayMethodInterceptor);
+    public PointcutAdvisor delayPointcutAdvisor(DelayMethodInterceptor delayMethodInterceptor) {
+        Pointcut pointcut = new AnnotationMatchingPointcut(null, DelayBasedRocketMQ.class);
+        return new DefaultPointcutAdvisor(pointcut, delayMethodInterceptor);
     }
 }

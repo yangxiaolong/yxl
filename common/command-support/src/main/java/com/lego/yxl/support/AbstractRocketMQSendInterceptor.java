@@ -9,7 +9,6 @@ import org.springframework.util.StringUtils;
 
 import java.util.Map;
 
-
 public class AbstractRocketMQSendInterceptor {
     protected final RocketMQTemplate rocketMQTemplate;
     protected final Environment environment;
@@ -66,10 +65,6 @@ public class AbstractRocketMQSendInterceptor {
 
     protected RocketMQTemplate getRocketMQTemplate() {
         return this.rocketMQTemplate;
-    }
-
-    protected Environment getEnvironment() {
-        return this.environment;
     }
 
 }

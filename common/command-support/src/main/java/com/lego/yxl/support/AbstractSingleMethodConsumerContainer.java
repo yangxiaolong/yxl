@@ -11,10 +11,8 @@ import java.lang.reflect.Method;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-
 @Slf4j
-public abstract class AbstractSingleMethodConsumerContainer
-        extends AbstractConsumerContainer {
+public abstract class AbstractSingleMethodConsumerContainer extends AbstractConsumerContainer {
     private final Method method;
 
     public AbstractSingleMethodConsumerContainer(Environment environment, Object bean, Method method) {
@@ -35,7 +33,7 @@ public abstract class AbstractSingleMethodConsumerContainer
         invokeMethod(body);
 
         long costTime = System.currentTimeMillis() - now;
-        log.info("consume message {}, cost: {} ms",  message.getMsgId(), costTime);
+        log.info("consume message {}, cost: {} ms", message.getMsgId(), costTime);
     }
 
     private void invokeMethod(byte[] body) throws IllegalAccessException, InvocationTargetException {

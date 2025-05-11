@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.env.Environment;
@@ -31,14 +32,11 @@ import java.util.Map;
 public class DelayMethodInterceptor extends AbstractRocketMQSendInterceptor implements MethodInterceptor {
 
     private final ExpressionParser expressionParser = new SpelExpressionParser();
-    private final ParameterNameDiscoverer parameterNameDiscoverer;
+    private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
     private final Map<Method, DelayCacheItem> configCache = Maps.newConcurrentMap();
 
-    public DelayMethodInterceptor(Environment environment,
-                                  RocketMQTemplate rocketMQTemplate,
-                                  ParameterNameDiscoverer parameterNameDiscoverer) {
+    public DelayMethodInterceptor(Environment environment, RocketMQTemplate rocketMQTemplate) {
         super(rocketMQTemplate, environment);
-        this.parameterNameDiscoverer = parameterNameDiscoverer;
     }
 
     @Override

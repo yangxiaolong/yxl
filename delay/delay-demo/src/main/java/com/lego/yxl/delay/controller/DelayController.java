@@ -41,7 +41,7 @@ public class DelayController {
 
         TimeUnit.SECONDS.sleep(6);
 
-        Assertions.assertFalse(CollectionUtils.isEmpty(this.delayService.getTasks()));
+        Assertions.assertTrue(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
 
     }
 
@@ -51,7 +51,6 @@ public class DelayController {
 
         Long orderId = RandomUtils.nextLong();
         String reason = "超时自动取消";
-
 
         this.delayService.delayCancelOrderForTimeout(orderId, reason, 3);
 
@@ -63,7 +62,7 @@ public class DelayController {
 
         TimeUnit.SECONDS.sleep(11);
 
-        Assertions.assertFalse(CollectionUtils.isEmpty(this.delayService.getTasks()));
+        Assertions.assertTrue(CollectionUtils.isNotEmpty(this.delayService.getTasks()));
 
     }
 
