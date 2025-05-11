@@ -14,7 +14,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- *
  * 并行执行器，任务在线程池中并发执行
  */
 public class ParallelMethodExecutor
@@ -37,12 +36,12 @@ public class ParallelMethodExecutor
     @Override
     protected <R, P> List<R> doExecute(Function<P, R> function, List<P> ps) {
         // 将拆分后的入参分为多组，并将其封装为 Task
-        List<Task> tasks = Lists.partition(ps, this.taskPreThread).stream()
+        List<Task<P, R>> tasks = Lists.partition(ps, this.taskPreThread).stream()
                 .map(p -> new Task<>(function, p))
                 .collect(Collectors.toList());
 
         // 只有一个任务，直接在调用线程中执行
-        if (tasks.size() == 1){
+        if (tasks.size() == 1) {
             return tasks.get(0).call();
         }
 
@@ -50,7 +49,7 @@ public class ParallelMethodExecutor
         List<Future<List<R>>> futures = Lists.newArrayListWithCapacity(tasks.size() - 1);
 
         // 将任务提交至线程池中执行
-        for (int i = 1; i< tasks.size();i ++){
+        for (int i = 1; i < tasks.size(); i++) {
             futures.add(this.executor.submit(tasks.get(i)));
         }
 
@@ -71,7 +70,7 @@ public class ParallelMethodExecutor
         List<R> result = Lists.newArrayListWithCapacity(all);
 
         // 获得所有执行结果
-        for (List<R> rs : batchResult){
+        for (List<R> rs : batchResult) {
             result.addAll(rs);
         }
 
@@ -80,9 +79,10 @@ public class ParallelMethodExecutor
 
     /**
      * 从Future 中获取执行结果
-     * @param futures
-     * @param <R>
-     * @return
+     *
+     * @param futures futures
+     * @param <R>     <R>
+     * @return 集合
      */
     private <R> Collection<? extends List<R>> getResultFromFuture(List<Future<List<R>>> futures) {
         return futures.stream()
@@ -98,6 +98,7 @@ public class ParallelMethodExecutor
     /**
      * 线程池任务，用于封装对 params 的依次调用 <br />
      * 一个 Task 会执行多次函数调用，从而在并发度和资源量间做平衡
+     *
      * @param <P> 入参
      * @param <R> 返回值
      */
@@ -114,7 +115,7 @@ public class ParallelMethodExecutor
         public List<R> call() {
             // 依次调用函数，并收集执行结果
             return this.params.stream()
-                    .map(p -> function.apply(p))
+                    .map(function)
                     .collect(Collectors.toList());
         }
 

@@ -58,8 +58,6 @@ public class DefaultSplitService<P, R> implements SplitService<P, R> {
         List<R> results = this.methodExecutor.execute(function, params);
 
         // 对执行结果进行合并处理
-        R result = this.resultMerger.merge(results);
-
-        return result;
+        return this.resultMerger.merge(results);
     }
 }

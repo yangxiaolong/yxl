@@ -17,7 +17,7 @@ public class SerialMethodExecutor
     @Override
     protected <R, P> List<R> doExecute(Function<P, R> function, List<P> ps) {
         return ps.stream()
-                .map(p -> function.apply(p))
+                .map(function)
                 .collect(Collectors.toList());
     }
 }

@@ -7,10 +7,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
+ *
  */
-public class SetResultMerger
-    extends AbstractFixTypeResultMerger<Set>
-    implements SmartResultMerger<Set> {
+public class SetResultMerger extends AbstractFixTypeResultMerger<Set> implements SmartResultMerger<Set> {
     @Override
     Set doMerge(List<Set> sets) {
         return (Set) sets.stream()

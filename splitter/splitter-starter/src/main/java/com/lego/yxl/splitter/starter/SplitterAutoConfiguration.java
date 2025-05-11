@@ -17,19 +17,22 @@ import com.lego.yxl.splitter.core.support.spring.SplitInvokerProcessor;
 import com.lego.yxl.splitter.core.support.spring.invoker.SplitInvokerRegistry;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
+import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.SynchronousQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
+
+import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRASTRUCTURE;
 
 /**
  * AutoConfiguration 自动配置主要完成：<br />
@@ -45,13 +48,29 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 6. ResultMerger，预制结果合并器
  */
-@Configuration
+@Configuration(proxyBeanMethods = false)
 @Slf4j
+@Role(ROLE_INFRASTRUCTURE)
 public class SplitterAutoConfiguration {
 
     @Bean
-    public PointcutAdvisor pointcutAdvisor(@Autowired SplitInterceptor splitInterceptor) {
-        return new DefaultPointcutAdvisor(new AnnotationMatchingPointcut(null, Split.class), splitInterceptor);
+    @Role(ROLE_INFRASTRUCTURE)
+    public SplitInvokerRegistry splitInvokerRegistry() {
+        return new SplitInvokerRegistry();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    @Role(ROLE_INFRASTRUCTURE)
+    public SplitInterceptor splitInterceptor(SplitInvokerRegistry splitInvokerRegistry) {
+        return new SplitInterceptor(splitInvokerRegistry);
+    }
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    public PointcutAdvisor pointcutAdvisor(SplitInterceptor splitInterceptor) {
+        Pointcut pointcut = new AnnotationMatchingPointcut(null, Split.class);
+        return new DefaultPointcutAdvisor(pointcut, splitInterceptor);
     }
 
     @Bean
@@ -61,23 +80,15 @@ public class SplitterAutoConfiguration {
 
     @Bean
     @ConditionalOnMissingBean
-    public SplitInterceptor splitInterceptor(SplitInvokerRegistry splitInvokerRegistry) {
-        return new SplitInterceptor(splitInvokerRegistry);
-    }
-
-
-    @Bean
-    public SplitInvokerRegistry splitInvokerRegistry() {
-        return new SplitInvokerRegistry();
+    @Role(ROLE_INFRASTRUCTURE)
+    public ParallelMethodExecutor defaultSplitExecutor(ExecutorService defaultExecutor) {
+        return new ParallelMethodExecutor(defaultExecutor, 2);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public ParallelMethodExecutor defaultSplitExecutor() {
-        return new ParallelMethodExecutor(createExecutor(), 2);
-    }
-
-    private ExecutorService createExecutor() {
+    @Role(ROLE_INFRASTRUCTURE)
+    public ExecutorService defaultExecutor() {
         int cpu = Runtime.getRuntime().availableProcessors();
         int nThreads = cpu * 100;
         BasicThreadFactory basicThreadFactory = new BasicThreadFactory.Builder()
@@ -95,41 +106,49 @@ public class SplitterAutoConfiguration {
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public ListResultMerger listResultMerger() {
         return new ListResultMerger();
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public LongResultMerger longResultMerger() {
         return new LongResultMerger();
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public IntResultMerger intResultMerger() {
         return new IntResultMerger();
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public SetResultMerger setResultMerger() {
         return new SetResultMerger();
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public ParamSplitter listParamSplitter() {
         return new ListParamSplitter();
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public ParamSplitter setParamSplitter() {
         return new SetParamSplitter();
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public AnnBasedParamSplitterBuilder annBasedParamSplitterBuilder(List<SmartParamSplitter> smartParamSplitters) {
         return new AnnBasedParamSplitterBuilder(smartParamSplitters);
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public SplittableParamSplitter splittableParamSplitter() {
         return new SplittableParamSplitter();
     }

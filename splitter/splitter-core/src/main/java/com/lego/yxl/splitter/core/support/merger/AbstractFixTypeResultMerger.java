@@ -13,8 +13,8 @@ abstract class AbstractFixTypeResultMerger<R>
     private final Class supportType;
 
     public AbstractFixTypeResultMerger() {
-        TypeToken<R> typeToken = new TypeToken<R>(getClass()) {};
-        this.supportType = (Class) typeToken.getRawType();
+        TypeToken<R> typeToken = new TypeToken<>(getClass()) {};
+        this.supportType = typeToken.getRawType();
     }
 
     @Override

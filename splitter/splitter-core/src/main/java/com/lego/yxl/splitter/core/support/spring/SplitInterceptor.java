@@ -14,10 +14,10 @@ import java.lang.reflect.Method;
 @Slf4j
 public class SplitInterceptor implements MethodInterceptor {
 
-    private final SplitInvokerRegistry splitService;
+    private final SplitInvokerRegistry splitInvokerRegistry;
 
-    public SplitInterceptor(SplitInvokerRegistry splitService) {
-        this.splitService = splitService;
+    public SplitInterceptor(SplitInvokerRegistry splitInvokerRegistry) {
+        this.splitInvokerRegistry = splitInvokerRegistry;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class SplitInterceptor implements MethodInterceptor {
         Object target = methodInvocation.getThis();
         Object[] params = methodInvocation.getArguments();
 
-        SplitInvoker splitInvoker = this.splitService.getByMethod(method);
+        SplitInvoker splitInvoker = this.splitInvokerRegistry.getByMethod(method);
         if (splitInvoker == null) {
             log.warn("failed to find split invoker for method {}", method);
             return method.invoke(target, params);

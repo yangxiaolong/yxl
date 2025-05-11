@@ -11,8 +11,7 @@ import java.util.Objects;
  *
  *  List 结果合并器
  */
-public class ListResultMerger
-        extends AbstractFixTypeResultMerger<List> {
+public class ListResultMerger extends AbstractFixTypeResultMerger<List> {
     @Override
     protected List defaultValue() {
         return Collections.emptyList();
@@ -20,7 +19,6 @@ public class ListResultMerger
 
     @Override
     List doMerge(List<List> lists) {
-
         int size = lists.stream()
                 .filter(Objects::nonNull)
                 .mapToInt(List::size)
