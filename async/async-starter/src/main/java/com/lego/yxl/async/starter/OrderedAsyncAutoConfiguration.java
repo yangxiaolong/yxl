@@ -5,6 +5,7 @@ import com.lego.yxl.async.core.order.OrderedAsyncConsumerContainerRegistry;
 import com.lego.yxl.async.core.order.OrderedAsyncInterceptor;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
@@ -13,13 +14,15 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.DefaultParameterNameDiscoverer;
-import org.springframework.core.ParameterNameDiscoverer;
+import org.springframework.context.annotation.Role;
 import org.springframework.core.env.Environment;
 
-@Configuration
+import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRASTRUCTURE;
+
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @ConditionalOnBean(RocketMQTemplate.class)
+@Role(ROLE_INFRASTRUCTURE)
 public class OrderedAsyncAutoConfiguration {
 
     @Autowired
@@ -28,22 +31,23 @@ public class OrderedAsyncAutoConfiguration {
     @Autowired
     private RocketMQTemplate rocketMQTemplate;
 
-    private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
-
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public OrderedAsyncInterceptor orderedAsyncInterceptor() {
-        return new OrderedAsyncInterceptor(this.environment, this.rocketMQTemplate, parameterNameDiscoverer);
+        return new OrderedAsyncInterceptor(this.environment, this.rocketMQTemplate);
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public OrderedAsyncConsumerContainerRegistry orderedAsyncConsumerContainerRegistry() {
         return new OrderedAsyncConsumerContainerRegistry(this.environment);
     }
 
     @Bean
-    public PointcutAdvisor orderedAsyncPointcutAdvisor(@Autowired OrderedAsyncInterceptor sendMessageInterceptor) {
-        AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(
-                null, AsyncForOrderedBasedRocketMQ.class);
-        return new DefaultPointcutAdvisor(pointcut, sendMessageInterceptor);
+    @Role(ROLE_INFRASTRUCTURE)
+    public PointcutAdvisor orderedAsyncPointcutAdvisor(OrderedAsyncInterceptor orderedAsyncInterceptor) {
+        Pointcut pointcut = new AnnotationMatchingPointcut(null, AsyncForOrderedBasedRocketMQ.class);
+        return new DefaultPointcutAdvisor(pointcut, orderedAsyncInterceptor);
     }
+
 }

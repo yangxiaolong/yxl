@@ -5,6 +5,7 @@ import com.lego.yxl.async.core.normal.NormalAsyncConsumerContainerRegistry;
 import com.lego.yxl.async.core.normal.NormalAsyncInterceptor;
 import org.apache.rocketmq.spring.autoconfigure.RocketMQAutoConfiguration;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.aop.Pointcut;
 import org.springframework.aop.PointcutAdvisor;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.springframework.aop.support.annotation.AnnotationMatchingPointcut;
@@ -13,11 +14,15 @@ import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Role;
 import org.springframework.core.env.Environment;
 
-@Configuration
+import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRASTRUCTURE;
+
+@Configuration(proxyBeanMethods = false)
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @ConditionalOnBean(RocketMQTemplate.class)
+@Role(ROLE_INFRASTRUCTURE)
 public class NormalAsyncAutoConfiguration {
 
     @Autowired
@@ -27,20 +32,22 @@ public class NormalAsyncAutoConfiguration {
     private RocketMQTemplate rocketMQTemplate;
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public NormalAsyncInterceptor asyncInterceptor() {
         return new NormalAsyncInterceptor(this.environment, this.rocketMQTemplate);
     }
 
     @Bean
+    @Role(ROLE_INFRASTRUCTURE)
     public NormalAsyncConsumerContainerRegistry asyncConsumerContainerRegistry() {
         return new NormalAsyncConsumerContainerRegistry(environment);
     }
 
     @Bean
-    public PointcutAdvisor asyncPointcutAdvisor(@Autowired NormalAsyncInterceptor sendMessageInterceptor) {
-        AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(
-                null, AsyncBasedRocketMQ.class);
-        return new DefaultPointcutAdvisor(pointcut, sendMessageInterceptor);
+    @Role(ROLE_INFRASTRUCTURE)
+    public PointcutAdvisor asyncPointcutAdvisor(NormalAsyncInterceptor asyncInterceptor) {
+        Pointcut pointcut = new AnnotationMatchingPointcut(null, AsyncBasedRocketMQ.class);
+        return new DefaultPointcutAdvisor(pointcut, asyncInterceptor);
     }
 
 }

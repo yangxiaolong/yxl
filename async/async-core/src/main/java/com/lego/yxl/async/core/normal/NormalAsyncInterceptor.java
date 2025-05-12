@@ -25,8 +25,7 @@ import java.util.Map;
  */
 
 @Slf4j
-public class NormalAsyncInterceptor extends AbstractRocketMQSendInterceptor
-        implements MethodInterceptor {
+public class NormalAsyncInterceptor extends AbstractRocketMQSendInterceptor implements MethodInterceptor {
     private final Map<Method, InvokeCacheItem> invokeCache = Maps.newConcurrentMap();
 
     public NormalAsyncInterceptor(Environment environment, RocketMQTemplate rocketMQTemplate) {

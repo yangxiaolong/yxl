@@ -14,7 +14,6 @@ import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 import java.util.List;
 
-
 @Slf4j
 public class OrderedAsyncConsumerContainerRegistry extends AbstractConsumerContainerRegistry {
 
@@ -22,6 +21,7 @@ public class OrderedAsyncConsumerContainerRegistry extends AbstractConsumerConta
         super(environment);
     }
 
+    @Nonnull
     @SneakyThrows
     @Override
     public Object postProcessAfterInitialization(@Nonnull Object proxy, @Nonnull String beanName) throws BeansException {

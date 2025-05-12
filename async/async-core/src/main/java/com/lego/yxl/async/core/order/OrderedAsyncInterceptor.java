@@ -1,6 +1,5 @@
 package com.lego.yxl.async.core.order;
 
-import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
 import com.lego.yxl.support.AbstractRocketMQSendInterceptor;
@@ -10,6 +9,7 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.springframework.core.DefaultParameterNameDiscoverer;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.core.env.Environment;
 import org.springframework.expression.EvaluationContext;
@@ -35,15 +35,12 @@ import static org.apache.commons.lang3.BooleanUtils.toBoolean;
 @Slf4j
 public class OrderedAsyncInterceptor extends AbstractRocketMQSendInterceptor implements MethodInterceptor {
 
-    private final ParameterNameDiscoverer parameterNameDiscoverer;
+    private final ParameterNameDiscoverer parameterNameDiscoverer = new DefaultParameterNameDiscoverer();
     private final ExpressionParser expressionParser = new SpelExpressionParser();
     private final Map<Method, InvokeCacheItem> invokeCache = Maps.newConcurrentMap();
 
-    public OrderedAsyncInterceptor(Environment environment, RocketMQTemplate rocketMQTemplate,
-                                   ParameterNameDiscoverer parameterNameDiscoverer) {
+    public OrderedAsyncInterceptor(Environment environment, RocketMQTemplate rocketMQTemplate) {
         super(rocketMQTemplate, environment);
-        Preconditions.checkArgument(parameterNameDiscoverer != null);
-        this.parameterNameDiscoverer = parameterNameDiscoverer;
     }
 
     @Override
@@ -73,7 +70,6 @@ public class OrderedAsyncInterceptor extends AbstractRocketMQSendInterceptor imp
 
         Object value = invokeCacheItem.getExpression().getValue(evaluationContext);
         String shardingKey = String.valueOf(value);
-
 
         // 构建 Message
         Message<String> msg = MessageBuilder

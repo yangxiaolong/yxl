@@ -34,6 +34,7 @@ public class NormalAsyncConsumerContainerRegistry extends AbstractConsumerContai
      * @return
      * @throws BeansException
      */
+    @Nonnull
     @SneakyThrows
     @Override
     public Object postProcessAfterInitialization(@Nonnull Object proxy, @Nonnull String beanName) throws BeansException {
