@@ -1,7 +1,7 @@
 package com.lego.yxl.command.core.support.method;
 
 import com.google.common.collect.Lists;
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.CommandForCreate;
 import com.lego.yxl.command.core.support.handler.CommandHandler;
 import com.lego.yxl.command.core.support.invoker.ServiceMethodInvoker;

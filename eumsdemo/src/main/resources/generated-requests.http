@@ -1,0 +1,26 @@
+###
+GET http://localhost:8080/enumDict/all
+
+###
+GET http://localhost:8080/enumDict/types
+
+###
+GET http://localhost:8080/enumDict/newsStatus
+
+
+###
+GET http://localhost:8080/enum/paramToEnum?newsStatus=1
+
+###
+GET http://localhost:8080/enum/pathToEnum/1
+
+###
+POST http://localhost:8080/enum/jsonToEnum
+Content-Type: application/json
+
+{
+  "newsStatus": 10
+}
+
+###
+GET http://localhost:8080/enum/bodyToJson

@@ -1,6 +1,6 @@
 package com.lego.yxl.command.core;
 
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import org.springframework.stereotype.Indexed;
 
 import java.lang.annotation.*;

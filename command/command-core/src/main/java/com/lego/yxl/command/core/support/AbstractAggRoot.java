@@ -1,8 +1,8 @@
 package com.lego.yxl.command.core.support;
 
 import com.google.common.collect.Lists;
-import com.lego.yxl.AggRoot;
-import com.lego.yxl.DomainEvent;
+import com.lego.yxl.agg.AggRoot;
+import com.lego.yxl.agg.DomainEvent;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import lombok.Data;

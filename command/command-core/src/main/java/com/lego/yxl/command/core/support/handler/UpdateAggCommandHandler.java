@@ -1,10 +1,10 @@
 package com.lego.yxl.command.core.support.handler;
 
 import com.google.common.base.Preconditions;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.support.handler.aggloader.AggLoader;
 import com.lego.yxl.command.core.support.handler.preaction.PreOperation;
 import com.lego.yxl.command.core.AggNotFoundException;
-import com.lego.yxl.AggRoot;
 import com.lego.yxl.validator.core.ValidateService;
 import com.lego.yxl.loader.core.lazyloadproxyfactory.LazyLoadProxyFactory;
 import lombok.Setter;

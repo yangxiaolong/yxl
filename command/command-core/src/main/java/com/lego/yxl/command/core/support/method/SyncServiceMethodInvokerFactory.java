@@ -1,13 +1,13 @@
 package com.lego.yxl.command.core.support.method;
 
 import com.google.common.collect.Lists;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.support.handler.CommandHandler;
 import com.lego.yxl.command.core.support.handler.SyncAggCommandHandler;
 import com.lego.yxl.command.core.support.handler.bizmethod.DefaultBizMethod;
 import com.lego.yxl.command.core.support.invoker.ServiceMethodInvoker;
 import com.lego.yxl.command.core.support.invoker.ServiceMethodInvokerFactory;
 import com.lego.yxl.command.core.CommandForSync;
-import com.lego.yxl.AggRoot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.CollectionUtils;
 

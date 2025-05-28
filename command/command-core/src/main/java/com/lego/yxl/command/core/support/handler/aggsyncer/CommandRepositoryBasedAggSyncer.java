@@ -1,7 +1,7 @@
 package com.lego.yxl.command.core.support.handler.aggsyncer;
 
 
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.CommandRepository;
 
 public class CommandRepositoryBasedAggSyncer<AGG extends AggRoot<?>>

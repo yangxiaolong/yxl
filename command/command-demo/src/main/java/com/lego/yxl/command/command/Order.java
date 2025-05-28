@@ -1,8 +1,8 @@
 package com.lego.yxl.command.command;
 
 import com.google.common.collect.Lists;
-import com.lego.yxl.AggRoot;
-import com.lego.yxl.DomainEvent;
+import com.lego.yxl.agg.AggRoot;
+import com.lego.yxl.agg.DomainEvent;
 import com.lego.yxl.command.query.OrderStatus;
 import com.lego.yxl.repository.address.Address;
 import com.lego.yxl.repository.product.Product;

@@ -1,6 +1,6 @@
 package com.lego.yxl.validator.core;
 
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.validator.core.common.ValidateErrorHandler;
 import org.springframework.stereotype.Component;
 

@@ -1,6 +1,6 @@
 package com.lego.yxl.command.core.support.handler;
 
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.support.handler.aggfactory.SmartAggFactories;
 import com.lego.yxl.command.core.support.handler.aggfactory.SmartAggFactory;
 import com.lego.yxl.command.core.support.handler.aggloader.SmartAggLoader;

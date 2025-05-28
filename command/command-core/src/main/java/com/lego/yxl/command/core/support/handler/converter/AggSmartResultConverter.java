@@ -1,6 +1,6 @@
 package com.lego.yxl.command.core.support.handler.converter;
 
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 
 public class AggSmartResultConverter<AGG extends AggRoot>
         implements SmartResultConverter<AGG, Object, AGG> {

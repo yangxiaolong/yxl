@@ -26,6 +26,7 @@
         <module>async</module>
         <module>msg</module>
         <module>feign</module>
+        <module>eumsdemo</module>
     </modules>
 
     <properties>

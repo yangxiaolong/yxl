@@ -1,7 +1,7 @@
 package com.lego.yxl.command.core.support.handler;
 
 import com.google.common.base.Preconditions;
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.support.handler.aggfactory.AggFactory;
 import com.lego.yxl.command.core.support.handler.aggloader.AggLoader;
 import com.lego.yxl.command.core.support.handler.preaction.PreOperation;

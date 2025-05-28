@@ -1,7 +1,7 @@
 package com.lego.yxl.command.core.support.handler.converter;
 
 import com.google.common.collect.Lists;
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 

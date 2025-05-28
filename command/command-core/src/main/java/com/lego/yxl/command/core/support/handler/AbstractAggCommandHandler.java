@@ -2,7 +2,7 @@ package com.lego.yxl.command.core.support.handler;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
-import com.lego.yxl.AggRoot;
+import com.lego.yxl.agg.AggRoot;
 import com.lego.yxl.command.core.support.handler.aggsyncer.AggSyncer;
 import com.lego.yxl.command.core.support.handler.contextfactory.ContextFactory;
 import com.lego.yxl.command.core.support.handler.converter.ResultConverter;
