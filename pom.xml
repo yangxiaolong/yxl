@@ -27,6 +27,7 @@
         <module>msg</module>
         <module>feign</module>
         <module>eumsdemo</module>
+        <module>like</module>
     </modules>
 
     <properties>

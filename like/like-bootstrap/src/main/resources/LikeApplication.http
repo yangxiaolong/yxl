@@ -1,0 +1,51 @@
+###
+POST http://localhost:8080/feignService/action/command/like
+Content-Type: application/json
+
+{
+  "userId": 8,
+  "targetType": "test",
+  "targetId": 3
+}
+
+###
+POST http://localhost:8080/feignService/action/command/unlike
+Content-Type: application/json
+
+{
+  "userId": 8,
+  "targetType": "test",
+  "targetId": 3
+}
+
+###
+POST http://localhost:8080/feignService/action/command/dislike
+Content-Type: application/json
+
+{
+  "userId": 8,
+  "targetType": "test",
+  "targetId": 3
+}
+
+###
+POST http://localhost:8080/feignService/action/command/unDislike
+Content-Type: application/json
+
+{
+  "userId": 8,
+  "targetType": "test",
+  "targetId": 3
+}
+
+###
+GET http://127.0.0.1:8080/feignService/targetCount/query/getLikeCountByTarget?type=test&ids=3
+
+###
+GET http://127.0.0.1:8080/feignService/targetCount/query/getDislikeCountByType?type=test&ids=3
+
+###
+GET http://localhost:8080/feignService/action/query/getLikeByUserAndType?userId=8&type=test
+
+###
+GET http://localhost:8080/feignService/action/query/getDislikeByUserAndType?userId=8&type=test

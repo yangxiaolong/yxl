@@ -1,0 +1,71 @@
+logging:
+  level:
+    root: info
+    com.geekhale: debug
+    org.springframework.web: trace
+    org.springframework.data.rest: trace
+    net.ttddyy.dsproxy.listener: trace
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/like
+    username: root
+    password: 123456
+
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    hibernate:
+      ddl-auto: none
+    #show-sql: true
+
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*' #metrics,info,health
+    enabled-by-default: true
+
+rocketmq:
+  name-server: http://127.0.0.1:9876
+  producer:
+    group: like-service
+
+target:
+  count:
+    dislike:
+      cache:
+        # 是否开启缓存
+        enable: true
+      async:
+        # 是否开启异步更新
+        enable: true
+        # 异步更新所使用的 topic
+        topic: dislike-target-count-async-topic
+        # 异步更新使用的消费者组
+        consumerGroup: dislike-target-count-async-group
+    like:
+      cache:
+        # 是否开启缓存
+        enable: true
+      async:
+        # 是否开启异步更新
+        enable: true
+        # 异步更新所使用的 topic
+        topic: like-target-count-async-topic
+        # 异步更新使用的消费者组
+        consumerGroup: like-target-count-async-group
+
+like:
+  event:
+    #开启领域事件
+    enable: true
+    #指定领域事件发送的 topic
+    topic: like-event-topic

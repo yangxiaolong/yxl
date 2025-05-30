@@ -1,0 +1,110 @@
+spring:
+  shardingsphere:
+    mode:
+      type: Memory
+    datasource:
+      names: action-ds0, action-ds1, count-ds0, count-ds1
+
+      action-ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/like_action_0?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: 123456
+
+      action-ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/like_action_1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: 123456
+
+      count-ds0:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/like_count_0?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: 123456
+
+      count-ds1:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306/like_count_1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+        username: root
+        password: 123456
+
+    rules:
+      sharding:
+        tables:
+          dislike_action:
+            actual-data-nodes: action-ds0.dislike_action_$->{0..7},action-ds1.dislike_action_$->{8..15}
+            table-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user-id-mod-16
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user-id-mod-2
+
+          like_action:
+            actual-data-nodes: action-ds0.like_action_$->{0..7},action-ds1.like_action_$->{8..15}
+            table-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user-id-mod-16
+            database-strategy:
+              standard:
+                sharding-column: user_id
+                sharding-algorithm-name: user-id-mod-2
+
+          dislike_target_count:
+            actual-data-nodes: count-ds0.dislike_target_count_$->{0..7},count-ds1.dislike_target_count_$->{8..15}
+            table-strategy:
+              standard:
+                sharding-column: target_id
+                sharding-algorithm-name: target-id-mod-16
+            database-strategy:
+              standard:
+                sharding-column: target_id
+                sharding-algorithm-name: target-id-mod-2
+
+          like_target_count:
+            actual-data-nodes: count-ds0.like_target_count_$->{0..7},count-ds1.like_target_count_$->{8..15}
+            table-strategy:
+              standard:
+                sharding-column: target_id
+                sharding-algorithm-name: target-id-mod-16
+            database-strategy:
+              standard:
+                sharding-column: target_id
+                sharding-algorithm-name: target-id-mod-2
+
+        sharding-algorithms:
+          user-id-mod-16:
+            type: INLINE
+            props:
+              algorithm-expression: dislike_action_$->{Math.abs(user_id.hashCode()) % 16}
+          user-id-mod-2:
+            type: INLINE
+            props:
+              algorithm-expression: action-ds$->{Math.floorDiv(Math.abs(user_id.hashCode()) % 16, 8)}
+          target-id-mod-16:
+            type: INLINE
+            props:
+              algorithm-expression: dislike_target_count_$->{Math.abs(target_id.hashCode()) % 16}
+          target-id-mod-2:
+            type: INLINE
+            props:
+              algorithm-expression: count-ds$->{Math.floorDiv(Math.abs(target_id.hashCode()) % 16, 8)}
+
+        key-generators:
+          snowflake:
+            type: SNOWFLAKE
+            props:
+              column-type: BIGINT
+              algorithm-expression: SNOWFLAKE_HASH(id, 12)
+              matrix-handling-type: SHARDING_DEFAULT
+
+    props:
+      sql-show: true

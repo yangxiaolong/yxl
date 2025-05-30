@@ -32,7 +32,6 @@ public abstract class AbstractAggRoot extends AbstractEntity implements AggRoot<
 
     private void clearEvent() {
         this.events.clear();
-        ;
     }
 
     protected void addEvent(DomainEvent domainEvent) {
