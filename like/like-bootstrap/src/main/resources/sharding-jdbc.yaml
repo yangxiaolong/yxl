@@ -1,0 +1,110 @@
+# 主要是配置，官网文档地址https://shardingsphere.apache.org/document/5.5.2/cn/user-manual/shardingsphere-jdbc/yaml-config/mode/
+mode:
+  type: Standalone
+dataSources:
+  action-ds0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/like_action_0?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  action-ds1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/like_action_1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  count-ds0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/like_count_0?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+  count-ds1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/like_count_1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+rules:
+  - !SHARDING
+    tables:
+      dislike_action:
+        actualDataNodes: action-ds0.dislike_action_$->{0..7},action-ds1.dislike_action_$->{8..15}
+        databaseStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: action_database_inline
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: dislike_action_inline
+      like_action:
+        actualDataNodes: action-ds0.like_action_$->{0..7},action-ds1.like_action_$->{8..15}
+        databaseStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: action_database_inline
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: like_action_inline
+
+      dislike_target_count:
+        actualDataNodes: count-ds0.dislike_target_count_$->{0..7},count-ds1.dislike_target_count_$->{8..15}
+        databaseStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: count_database_inline
+        tableStrategy:
+          standard:
+            shardingColumn: user_id
+            shardingAlgorithmName: dislike_count_inline
+      like_target_count:
+        actualDataNodes: count-ds0.like_target_count_$->{0..7},count-ds1.like_target_count_$->{8..15}
+        databaseStrategy:
+          standard:
+            shardingColumn: target_id
+            shardingAlgorithmName: count_database_inline
+        tableStrategy:
+          standard:
+            shardingColumn: target_id
+            shardingAlgorithmName: like_count_inline
+
+    shardingAlgorithms:
+      action_database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: action-ds$->{Math.floorDiv((Math.abs(user_id.hashCode()) % 16), 8)}
+      dislike_action_inline:
+        type: INLINE
+        props:
+          strategy: STANDARD
+          algorithm-expression: dislike_action_$->{Math.abs(user_id.hashCode()) % 16}
+      like_action_inline:
+        type: INLINE
+        props:
+          strategy: STANDARD
+          algorithm-expression: like_action_$->{Math.abs(user_id.hashCode()) % 16}
+
+      count_database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: count-ds$->{Math.floorDiv(Math.abs(target_id.hashCode()) % 16, 8)}
+      dislike_count_inline:
+        type: INLINE
+        props:
+          strategy: STANDARD
+          algorithm-expression: dislike_target_count_$->{Math.abs(target_id.hashCode()) % 16}
+      like_count_inline:
+        type: INLINE
+        props:
+          strategy: STANDARD
+          algorithm-expression: like_target_count_$->{Math.abs(target_id.hashCode()) % 16}
+
+props:
+  sql-show: true

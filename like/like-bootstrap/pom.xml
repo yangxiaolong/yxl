@@ -64,12 +64,26 @@
             <version>1.9.1</version>
         </dependency>
 
-        <!--<dependency>
+        <dependency>
             <groupId>org.apache.shardingsphere</groupId>
             <artifactId>shardingsphere-jdbc</artifactId>
             <version>5.5.2</version>
-        </dependency>-->
-
+        </dependency>
     </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>32.1.2-jre</version>
+            </dependency>
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-runtime</artifactId>
+                <version>4.10.1</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
 </project>
