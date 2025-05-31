@@ -1,0 +1,34 @@
+logging:
+  level:
+    root: info
+    com.geekhale: debug
+    org.springframework.web: trace
+    org.springframework.data.rest: trace
+    net.ttddyy.dsproxy.listener: trace
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/tinyurl
+    username: root
+    password: 123456
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379
+
+tinyurl:
+  number:
+    generator:
+#      type: db-single
+      type: db-batch
+#      type: redis-single
+#      type: redis-batch
+    codec:
+      type: custom-base
+  cache:
+    enable: true

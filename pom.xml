@@ -28,6 +28,7 @@
         <module>feign</module>
         <module>eumsdemo</module>
         <module>like</module>
+        <module>tinyurl</module>
     </modules>
 
     <properties>

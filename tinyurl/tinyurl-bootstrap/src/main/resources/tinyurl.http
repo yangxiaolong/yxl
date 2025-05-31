@@ -1,0 +1,46 @@
+###
+POST http://localhost:8080/tinyurl/command/_createCommon
+Content-Type: application/json
+
+{
+  "enableCache": true,
+  "enableCacheSync": true,
+  "url": "https://www.baeldung.com/"
+}
+
+###
+POST http://localhost:8080/tinyurl/command/_createExpire
+Content-Type: application/json
+
+{
+  "enableCache": true,
+  "enableCacheSync": true,
+  "url": "https://www.baeldung.com/java-weekly-596",
+  "beginTime": "2025-05-09T04:00:14.770Z",
+  "expireTime": "2030-07-09T04:00:14.770Z"
+}
+
+###
+POST http://localhost:8080/tinyurl/command/_createLimitAccessCount
+Content-Type: application/json
+
+{
+  "enableCache": true,
+  "enableCacheSync": true,
+  "url": "https://www.baeldung.com/java-weekly-595",
+  "maxCount": 3
+}
+
+###
+POST http://localhost:8080/tinyurl/command/43/_disable/
+
+
+###
+GET http://localhost:8080/tinyurl/query/queryByCode/A
+
+###
+GET http://localhost:8080/tinyurl/query/accessByCode/S
+
+
+###
+GET http://localhost:8080/s/D
