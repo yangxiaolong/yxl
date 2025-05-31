@@ -8,14 +8,22 @@ logging:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/tinyurl
-    username: root
-    password: 123456
+    #driver-class-name: com.mysql.cj.jdbc.Driver
+    #url: jdbc:mysql://127.0.0.1:3306/tinyurl
+    #username: root
+    #password: 123456
+
+    driver-class-name: org.apache.shardingsphere.driver.ShardingSphereDriver
+    url: jdbc:shardingsphere:classpath:sharding-jdbc.yaml
+
   jpa:
     hibernate:
       ddl-auto: none
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
   data:
     redis:
       host: 127.0.0.1
@@ -24,10 +32,10 @@ spring:
 tinyurl:
   number:
     generator:
-#      type: db-single
+      #type: db-single
       type: db-batch
-#      type: redis-single
-#      type: redis-batch
+      #type: redis-single
+      #type: redis-batch
     codec:
       type: custom-base
   cache:

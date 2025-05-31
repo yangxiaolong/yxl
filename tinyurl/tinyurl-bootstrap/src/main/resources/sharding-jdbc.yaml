@@ -1,0 +1,51 @@
+# 主要是配置，官网文档地址https://shardingsphere.apache.org/document/5.5.2/cn/user-manual/shardingsphere-jdbc/yaml-config/mode/
+mode:
+  type: Standalone
+dataSources:
+  tinyurl-ds0:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/tinyurl_0?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+  tinyurl-ds1:
+    dataSourceClassName: com.zaxxer.hikari.HikariDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    jdbcUrl: jdbc:mysql://127.0.0.1:3306/tinyurl_1?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+rules:
+  - !SHARDING
+    tables:
+      # 分片表配置（与原配置中的 tiny_url 表对应）
+      tiny_url:
+        actualDataNodes: tinyurl-ds0.tiny_url_$->{0..7},tinyurl-ds1.tiny_url_$->{8..15}
+        # 分库策略
+        databaseStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: database_inline
+        # 分表策略
+        tableStrategy:
+          standard:
+            shardingColumn: id
+            shardingAlgorithmName: tiny_url_inline
+
+    shardingAlgorithms:
+      database_inline:
+        type: INLINE
+        props:
+          algorithm-expression: tinyurl-ds$->{Math.floorDiv((Math.abs(id.hashCode()) % 16), 8)}
+      tiny_url_inline:
+        type: INLINE
+        props:
+          strategy: STANDARD
+          algorithm-expression: tiny_url_$->{Math.abs(id.hashCode()) % 16}
+
+  - !BROADCAST
+    tables:
+      - number_generator
+
+props:
+  sql-show: true
