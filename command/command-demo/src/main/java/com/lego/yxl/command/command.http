@@ -3,3 +3,22 @@ GET http://localhost:8082/command/create
 
 ###
 GET http://localhost:8082/command/sync
+
+###
+GET http://localhost:8082/command/paySuccess
+
+###
+GET http://localhost:8082/command/cancel
+
+
+###
+GET http://localhost:8082/command-proxy/create
+
+###
+GET http://localhost:8082/command-proxy/sync
+
+###
+GET http://localhost:8082/command-proxy/paySuccess
+
+###
+GET http://localhost:8082/command-proxy/cancel

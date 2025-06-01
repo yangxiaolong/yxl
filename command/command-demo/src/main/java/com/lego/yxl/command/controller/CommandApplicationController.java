@@ -1,7 +1,7 @@
 package com.lego.yxl.command.controller;
 
 import com.lego.yxl.command.command.OrderCommandApplicationService;
-import com.lego.yxl.command.command.OrderCommandApplicationServiceImpl;
+import com.lego.yxl.command.command.OrderCommandApplicationServiceProxy;
 import com.lego.yxl.command.service.BaseOrderCommandApplicationServiceTest;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/command")
+@RequestMapping("/command-proxy")
 @Slf4j
-public class CommandController extends BaseOrderCommandApplicationServiceTest {
+public class CommandApplicationController extends BaseOrderCommandApplicationServiceTest {
 
     @Resource
-    private OrderCommandApplicationServiceImpl orderCommandService;
+    private OrderCommandApplicationServiceProxy orderCommandService;
 
     @Override
     public OrderCommandApplicationService orderCommandService() {

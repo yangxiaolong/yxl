@@ -1,5 +1,6 @@
 package com.lego.yxl.command;
 
+import com.lego.yxl.command.core.EnableCommandApplicationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
@@ -11,6 +12,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = {"com.lego.yxl"})
 @EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableJpaRepositories(basePackages = "com.lego.yxl.command.command")
+@EnableCommandApplicationService(
+        basePackages = "com.lego.yxl.command.command"
+)
 public class CommandApplication {
 
     public static void main(String[] args) {

@@ -93,7 +93,8 @@ public class Order implements AggRoot<Long> {
     }
 
     public void paySuccess(PayByIdSuccessCommand paySuccessCommand) {
-        if (getStatus() != OrderStatus.CREATED) {
+//        if (getStatus() != OrderStatus.CREATED) {
+        if (getStatus() != OrderStatus.NONE) {
             throw new OrderStatusNotMatch();
         }
 

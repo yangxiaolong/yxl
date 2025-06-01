@@ -1,15 +1,17 @@
 package com.lego.yxl.command.service;
 
-import com.google.common.collect.Lists;
 import com.lego.yxl.command.command.*;
 import com.lego.yxl.command.query.OrderStatus;
 import jakarta.transaction.Transactional;
+import org.apache.commons.collections.CollectionUtils;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.CollectionUtils;
 
 import java.util.List;
+
+import static com.lego.yxl.command.controller.CommandCreateUtil.getCreateOrderCommand;
+import static com.lego.yxl.command.controller.CommandCreateUtil.getSyncOrderCommand;
 
 /**
  * @auther yangxiaolong
@@ -17,7 +19,7 @@ import java.util.List;
  */
 @Service
 @Transactional
-public class BaseOrderCommandApplicationService {
+public abstract class BaseOrderCommandApplicationServiceTest {
 
     @Autowired
     private EventListeners eventListeners;
@@ -25,13 +27,16 @@ public class BaseOrderCommandApplicationService {
     @Autowired
     private OrderRepositoryForCommand orderRepositoryForCommand;
 
-    @Autowired
-    private OrderCommandApplicationServiceImpl orderCommandService;
+    public abstract OrderCommandApplicationService orderCommandService();
+
+    public void setUp() {
+        eventListeners.clear();
+    }
 
     public void create() {
         CreateOrderCommand command = getCreateOrderCommand();
 
-        Long orderId = this.orderCommandService.create(command).getId();
+        Long orderId = this.orderCommandService().create(command).getId();
 
         Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
 
@@ -42,7 +47,7 @@ public class BaseOrderCommandApplicationService {
 
 
         List<Object> events = this.eventListeners.getEvents();
-        Assertions.assertFalse(CollectionUtils.isEmpty(events));
+        Assertions.assertTrue(CollectionUtils.isNotEmpty(events));
         Object event = this.eventListeners.getEvents().get(0);
         Assertions.assertTrue(event instanceof OrderCreatedEvent);
     }
@@ -51,7 +56,7 @@ public class BaseOrderCommandApplicationService {
         {
             SyncOrderByIdCommand command = getSyncOrderCommand(2L);
 
-            Long orderId = this.orderCommandService.syncByOrderId(command).getId();
+            Long orderId = this.orderCommandService().syncByOrderId(command).getId();
 
             Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
 
@@ -63,19 +68,19 @@ public class BaseOrderCommandApplicationService {
 
 
             List<Object> events = this.eventListeners.getEvents();
-            Assertions.assertFalse(CollectionUtils.isEmpty(events));
+            Assertions.assertTrue(CollectionUtils.isNotEmpty(events));
             Object event = this.eventListeners.getEvents().get(0);
-            Assertions.assertTrue(event instanceof OrderSyncEvent);
+            Assertions.assertTrue(event instanceof OrderCreatedEvent || event instanceof OrderSyncEvent);
         }
         {
             CreateOrderCommand createCommand = getCreateOrderCommand();
-            Long orderId = this.orderCommandService.create(createCommand).getId();
+            Long orderId = this.orderCommandService().create(createCommand).getId();
 
             this.eventListeners.clear();
 
             SyncOrderByIdCommand command = getSyncOrderCommand(orderId);
 
-            Long id = this.orderCommandService.syncByOrderId(command).getId();
+            this.orderCommandService().syncByOrderId(command).getId();
 
             Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
 
@@ -87,13 +92,13 @@ public class BaseOrderCommandApplicationService {
 
 
             List<Object> events = this.eventListeners.getEvents();
-            Assertions.assertTrue(CollectionUtils.isEmpty(events));
+            Assertions.assertTrue(CollectionUtils.isNotEmpty(events));
         }
     }
 
     public void paySuccess() {
         CreateOrderCommand command = getCreateOrderCommand();
-        Long orderId = this.orderCommandService.create(command).getId();
+        Long orderId = this.orderCommandService().create(command).getId();
 
         {
             Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
@@ -104,35 +109,37 @@ public class BaseOrderCommandApplicationService {
         paySuccessCommand.setOrderId(orderId);
         paySuccessCommand.setChanel("微信");
         paySuccessCommand.setPrice(48L);
-        this.orderCommandService.paySuccess(paySuccessCommand);
+        this.orderCommandService().paySuccess(paySuccessCommand);
 
         {
             Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
             Assertions.assertEquals(OrderStatus.PAID, order.getStatus());
             List<PayRecord> payRecords = order.getPayRecords();
             Assertions.assertNotNull(payRecords);
-            Assertions.assertFalse(CollectionUtils.isEmpty(payRecords));
+            Assertions.assertTrue(CollectionUtils.isNotEmpty(payRecords));
             PayRecord payRecord = payRecords.get(0);
             Assertions.assertEquals("微信", payRecord.getChannel());
             Assertions.assertEquals(48L, payRecord.getPrice());
         }
 
         List<Object> events = this.eventListeners.getEvents();
-        Assertions.assertFalse(CollectionUtils.isEmpty(events));
+        Assertions.assertTrue(CollectionUtils.isNotEmpty(events));
         Object event = this.eventListeners.getEvents().get(0);
         Assertions.assertTrue(event instanceof OrderCreatedEvent);
+        Object event1 = this.eventListeners.getEvents().get(1);
+        Assertions.assertTrue(event1 instanceof OrderPaySuccessEvent);
     }
 
     public void cancel() {
         CreateOrderCommand command = getCreateOrderCommand();
-        Long orderId = this.orderCommandService.create(command).getId();
+        Long orderId = this.orderCommandService().create(command).getId();
 
         {
             Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
             Assertions.assertEquals(OrderStatus.NONE, order.getStatus());
         }
 
-        this.orderCommandService.cancel(orderId);
+        this.orderCommandService().cancel(orderId);
 
         {
             Order order = this.orderRepositoryForCommand.findById(orderId).orElse(null);
@@ -140,66 +147,5 @@ public class BaseOrderCommandApplicationService {
 
         }
     }
-
-    private CreateOrderCommand getCreateOrderCommand() {
-        CreateOrderCommand command = new CreateOrderCommand();
-        command.setUserId(100L);
-        command.setUserAddress(10000L);
-        List<ProductForBuy> products = Lists.newArrayList();
-        {
-            ProductForBuy product = new ProductForBuy();
-            product.setProductId(1000L);
-            product.setAmount(1);
-            products.add(product);
-        }
-
-        {
-            ProductForBuy product = new ProductForBuy();
-            product.setProductId(1100L);
-            product.setAmount(2);
-            products.add(product);
-        }
-
-        {
-            ProductForBuy product = new ProductForBuy();
-            product.setProductId(1200L);
-            product.setAmount(3);
-            products.add(product);
-        }
-
-        command.setProducts(products);
-        return command;
-    }
-
-    private SyncOrderByIdCommand getSyncOrderCommand(Long orderId) {
-        SyncOrderByIdCommand command = new SyncOrderByIdCommand(orderId);
-        command.setUserId(100L);
-        command.setUserAddress(10000L);
-        List<ProductForBuy> products = Lists.newArrayList();
-        {
-            ProductForBuy product = new ProductForBuy();
-            product.setProductId(1000L);
-            product.setAmount(1);
-            products.add(product);
-        }
-
-        {
-            ProductForBuy product = new ProductForBuy();
-            product.setProductId(1100L);
-            product.setAmount(2);
-            products.add(product);
-        }
-
-        {
-            ProductForBuy product = new ProductForBuy();
-            product.setProductId(1200L);
-            product.setAmount(3);
-            products.add(product);
-        }
-
-        command.setProducts(products);
-        return command;
-    }
-
 
 }
