@@ -5,11 +5,13 @@ import com.lego.yxl.bitop.intop.IntMaskOp;
 import com.lego.yxl.command.core.support.AbstractAggRoot;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Date;
 
+@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "tiny_url")
 @Data

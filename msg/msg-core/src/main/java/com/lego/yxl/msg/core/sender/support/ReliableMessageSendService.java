@@ -1,11 +1,10 @@
 package com.lego.yxl.msg.core.sender.support;
 
-import com.lego.yxl.msg.core.sender.MessageSender;
 import com.lego.yxl.msg.core.sender.Message;
+import com.lego.yxl.msg.core.sender.MessageSender;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.transaction.support.TransactionSynchronization;
-import org.springframework.transaction.support.TransactionSynchronizationAdapter;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.util.Comparator;
@@ -59,7 +58,7 @@ public class ReliableMessageSendService {
     private void addCallbackOrRunTask(SendMessageTask sendMessageTask) {
         if (TransactionSynchronizationManager.isSynchronizationActive()) {
             // 添加监听器，在事务提交后触发后续任务
-            TransactionSynchronization transactionSynchronization = new TransactionSynchronizationAdapter() {
+            TransactionSynchronization transactionSynchronization = new TransactionSynchronization() {
                 @Override
                 public void afterCommit() {
                     sendMessageTask.run();
