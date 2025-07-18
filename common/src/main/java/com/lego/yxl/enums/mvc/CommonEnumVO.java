@@ -34,7 +34,6 @@ public class CommonEnumVO {
         return commonEnums.stream()
                 .filter(Objects::nonNull)
                 .map(CommonEnumVO::from)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 }

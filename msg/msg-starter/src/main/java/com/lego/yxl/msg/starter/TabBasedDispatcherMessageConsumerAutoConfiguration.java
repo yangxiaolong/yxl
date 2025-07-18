@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-
 @Configuration
 @AutoConfigureAfter(RocketMQAutoConfiguration.class)
 @ConditionalOnBean(RocketMQTemplate.class)
@@ -19,7 +18,7 @@ public class TabBasedDispatcherMessageConsumerAutoConfiguration {
     private Environment environment;
 
     @Bean
-    public TagBasedDispatcherConsumerContainerRegistry tagBasedDispatcherConsumerContainerRegistry(){
+    public TagBasedDispatcherConsumerContainerRegistry tagBasedDispatcherConsumerContainerRegistry() {
         return new TagBasedDispatcherConsumerContainerRegistry(environment);
     }
 }

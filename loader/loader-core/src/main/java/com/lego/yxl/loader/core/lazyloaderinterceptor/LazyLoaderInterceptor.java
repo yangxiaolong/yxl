@@ -26,10 +26,13 @@ public class LazyLoaderInterceptor implements InvocationHandler, MethodIntercept
 
     @Override
     public Object invoke(@Nonnull MethodInvocation methodInvocation) throws Throwable {
+        Object proxy;
         if (methodInvocation instanceof ProxyMethodInvocation proxyMethodInvocation) {
-            return invoke(proxyMethodInvocation.getProxy(), proxyMethodInvocation.getMethod(), proxyMethodInvocation.getArguments());
+            proxy = proxyMethodInvocation.getProxy();
+        } else {
+            proxy = methodInvocation.getThis();
         }
-        return invoke(methodInvocation.getThis(), methodInvocation.getMethod(), methodInvocation.getArguments());
+        return invoke(proxy, methodInvocation.getMethod(), methodInvocation.getArguments());
     }
 
     @Override
