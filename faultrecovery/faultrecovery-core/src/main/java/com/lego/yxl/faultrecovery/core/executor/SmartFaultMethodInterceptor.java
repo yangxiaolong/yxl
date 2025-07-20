@@ -14,6 +14,7 @@ import org.springframework.core.annotation.Order;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Optional;
 
 @Slf4j
 @Order(-100)
@@ -29,13 +30,26 @@ public class SmartFaultMethodInterceptor implements MethodInterceptor {
     public SmartFaultMethodInterceptor(ActionTypeProvider actionTypeProvider,
                                        ExceptionMapProvider exceptionMapProvider) {
         Preconditions.checkArgument(actionTypeProvider != null);
-
-        this.exceptionMapProvider = exceptionMapProvider != null ?
-                exceptionMapProvider :
-                () -> Collections.singletonMap(Exception.class, true);
+        this.exceptionMapProvider = Optional.ofNullable(exceptionMapProvider)
+                .orElse(() -> Collections.singletonMap(Exception.class, true));
         this.actionTypeProvider = actionTypeProvider;
     }
 
+    @Override
+    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
+        if (!enable) {
+            return methodInvocation.proceed();
+        }
+
+        Method methodBySmartFault = methodInvocation.getMethod();
+        SmartFaultExecutor smartFaultExecutor = this.methodSmartFaultExecutorCache
+                .computeIfAbsent(methodBySmartFault, method -> buildSmartFaultExecutor(methodInvocation));
+        if (smartFaultExecutor != null) {
+            return smartFaultExecutor.invoke(methodInvocation);
+        }
+
+        return methodInvocation.proceed();
+    }
 
     private SmartFaultExecutor buildSmartFaultExecutor(MethodInvocation methodInvocation) {
         Method methodBySmartFault = methodInvocation.getMethod();
@@ -68,22 +82,5 @@ public class SmartFaultMethodInterceptor implements MethodInterceptor {
         } catch (Exception e) {
             return null;
         }
-    }
-
-    @Override
-    public Object invoke(MethodInvocation methodInvocation) throws Throwable {
-        if (!enable) {
-            return methodInvocation.proceed();
-        }
-
-        Method methodBySmartFault = methodInvocation.getMethod();
-
-        SmartFaultExecutor smartFaultExecutor = this.methodSmartFaultExecutorCache
-                .computeIfAbsent(methodBySmartFault, method -> buildSmartFaultExecutor(methodInvocation));
-        if (smartFaultExecutor != null) {
-            return smartFaultExecutor.invoke(methodInvocation);
-        }
-
-        return methodInvocation.proceed();
     }
 }

@@ -63,11 +63,12 @@ public class SmartFaultExecutor {
         int maxRetryCount = this.smartFault.maxRetry();
         maxRetryCount = maxRetryCount <= 0 ? 3 : maxRetryCount;
 
-        Map<Class<? extends Throwable>, Boolean> retryableExceptions = buildExecptions();
+        Map<Class<? extends Throwable>, Boolean> retryableExceptions = buildExceptions();
 
         boolean retryNotExcluded = this.smartFault.include().length == 0;
 
-        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy(maxRetryCount, retryableExceptions, false, retryNotExcluded);
+        SimpleRetryPolicy retryPolicy = new SimpleRetryPolicy(maxRetryCount,
+                retryableExceptions, false, retryNotExcluded);
 
         retryTemplate.setRetryPolicy(retryPolicy);
 
@@ -77,7 +78,7 @@ public class SmartFaultExecutor {
         return retryTemplate;
     }
 
-    private Map<Class<? extends Throwable>, Boolean> buildExecptions() {
+    private Map<Class<? extends Throwable>, Boolean> buildExceptions() {
 
         Map<Class<? extends Throwable>, Boolean> result = Maps.newHashMap();
         Map<Class<? extends Throwable>, Boolean> defExceptionMap = this.exceptionMapProvider.get();
