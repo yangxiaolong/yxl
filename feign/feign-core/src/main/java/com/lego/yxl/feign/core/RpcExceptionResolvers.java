@@ -5,7 +5,6 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 
 import java.util.List;
 
-
 public class RpcExceptionResolvers {
     private final List<RpcExceptionResolver> exceptionResolvers = Lists.newArrayList();
 

@@ -10,7 +10,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 
-
 @Slf4j
 public class RpcErrorDecoder implements ErrorDecoder {
     private final RpcExceptionResolvers rpcExceptionResolvers;
