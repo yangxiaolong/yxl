@@ -2,10 +2,12 @@ package com.lego.yxl.wide;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Setter;
 
 import java.util.List;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @Setter(AccessLevel.PRIVATE)
 public class WideIndexBatchUpdateContext<ITEM_TYPE extends Enum<ITEM_TYPE> & WideItemType<ITEM_TYPE>>

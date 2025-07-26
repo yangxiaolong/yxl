@@ -78,7 +78,8 @@ public class SimpleWidePatrolService<
 
     @Override
     public <KEY> void updateItem(ITEM_TYPE itemType, KEY key) {
-        WideItemDataProvider<ITEM_TYPE, Object, ? extends WideItemData<ITEM_TYPE, ?>> wideItemDataProvider = findWideItemDataProvider(itemType);
+        WideItemDataProvider<ITEM_TYPE, Object, ? extends WideItemData<ITEM_TYPE, ?>>
+                wideItemDataProvider = findWideItemDataProvider(itemType);
         if (wideItemDataProvider == null) {
             log.warn("Failed to find data provider for type {}", itemType);
             return;
@@ -88,7 +89,8 @@ public class SimpleWidePatrolService<
         List<MASTER_ID> errorIds = Lists.newArrayList();
         this.getWideCommandRepository().consumeByItem(itemType, key, wide -> {
             WideWrapper<WIDE> wrapperForWide = createWrapperForWide(wide);
-            WideIndexCompareContext<ITEM_TYPE> context = new WideIndexCompareContext<>(itemType, itemData, wrapperForWide);
+            WideIndexCompareContext<ITEM_TYPE> context
+                    = new WideIndexCompareContext<>(itemType, itemData, wrapperForWide);
             if (!wide.isSameWithItem(context)) {
                 log.info("id {} Item Not Same, item {}, wide {}", wide.getId(), itemData, wide);
                 errorIds.add(wide.getId());
