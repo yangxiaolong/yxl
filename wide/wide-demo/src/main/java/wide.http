@@ -1,0 +1,77 @@
+###
+GET http://localhost:9200/
+
+###
+GET http://localhost:9200/_cluster/health
+
+###
+GET http://localhost:9200/_cat/indices?v
+
+###
+DELETE http://localhost:9200/wide_order
+
+### 创建ES索引index
+PUT http://localhost:9200/wide_order
+Content-Type: application/json
+
+{
+  "mappings": {
+    "properties": {
+      "id": {
+        "type": "integer"
+      },
+      "userId": {
+        "type": "integer"
+      },
+      "addressId": {
+        "type": "integer"
+      },
+      "productId": {
+        "type": "integer"
+      },
+      "orderDescr": {
+        "type": "text"
+      },
+      "userName": {
+        "type": "text"
+      },
+      "addressDetail": {
+        "type": "text"
+      },
+      "productName": {
+        "type": "text"
+      },
+      "productPrice": {
+        "type": "float"
+      }
+    }
+  }
+}
+
+### es7
+POST http://localhost:9200/wide_order/_doc/_search
+Content-Type: application/json
+
+{}
+
+### es8
+POST http://localhost:9200/wide_order/_search
+Content-Type: application/json
+
+{}
+
+
+###
+GET http://localhost:8080/wide/index
+
+###
+GET http://localhost:8080/wide/updateOrder
+
+###
+GET http://localhost:8080/wide/updateUser
+
+###
+GET http://localhost:8080/wide/updateAddress
+
+###
+GET http://localhost:8080/wide/updateProduct

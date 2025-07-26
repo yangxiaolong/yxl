@@ -29,6 +29,7 @@
         <module>eumsdemo</module>
         <module>like</module>
         <module>tinyurl</module>
+        <module>wide</module>
     </modules>
 
     <properties>
