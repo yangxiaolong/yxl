@@ -31,8 +31,8 @@ public class BindFromBasedWideWrapperFactory<W extends Wide> implements WideWrap
             return null;
         }
         Map<Class, List<FieldMapper>> fieldMappers =
-                this.fieldMappersCache.computeIfAbsent(wide.getClass(), cls -> parse(cls));
-        return new BindFromBasedWideWrapper(wide, fieldMappers, this.conversionService);
+                this.fieldMappersCache.computeIfAbsent(wide.getClass(), this::parse);
+        return new BindFromBasedWideWrapper<>(wide, fieldMappers, this.conversionService);
     }
 
     private Map<Class, List<FieldMapper>> parse(Class<?> wideClass) {
@@ -40,15 +40,13 @@ public class BindFromBasedWideWrapperFactory<W extends Wide> implements WideWrap
         Field[] fields = FieldUtils.getFieldsWithAnnotation(wideClass, BindFrom.class);
         for (Field wideField : fields) {
             BindFrom bindFrom = AnnotatedElementUtils.findMergedAnnotation(wideField, BindFrom.class);
-            if (bindFrom != null) {
-                Field itemField = FieldUtils.getField(bindFrom.sourceClass(), bindFrom.field(), true);
-                if (itemField != null) {
-                    FieldMapper fieldMapper = new FieldMapper(itemField, wideField);
-                    result.computeIfAbsent(bindFrom.sourceClass(), cls -> new ArrayList<>())
-                            .add(fieldMapper);
-                } else {
-                    log.warn("Field Config Error, Field Not Found on {} {}", wideField, bindFrom);
-                }
+            Field itemField = FieldUtils.getField(bindFrom.sourceClass(), bindFrom.field(), true);
+            if (itemField != null) {
+                FieldMapper fieldMapper = new FieldMapper(itemField, wideField);
+                result.computeIfAbsent(bindFrom.sourceClass(), cls -> new ArrayList<>())
+                        .add(fieldMapper);
+            } else {
+                log.warn("Field Config Error, Field Not Found on {} {}", wideField, bindFrom);
             }
         }
         return result;

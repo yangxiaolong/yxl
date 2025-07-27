@@ -3,9 +3,12 @@ package com.lego.yxl.wide.es;
 import com.lego.yxl.wide.BindFrom;
 import com.lego.yxl.wide.WideItemKey;
 import com.lego.yxl.wide.WideOrderType;
-import com.lego.yxl.wide.jpa.*;
+import com.lego.yxl.wide.jpa.Address;
+import com.lego.yxl.wide.jpa.Order;
+import com.lego.yxl.wide.jpa.Product;
+import com.lego.yxl.wide.jpa.User;
 import com.lego.yxl.wide.support.BindFromBasedWide;
-import jakarta.persistence.*;
+import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -16,8 +19,8 @@ import java.util.Collections;
 import java.util.List;
 
 @EqualsAndHashCode(callSuper = true)
-@Entity
-@Table(name = "t_wide_order")
+//@Entity
+//@Table(name = "t_wide_order")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

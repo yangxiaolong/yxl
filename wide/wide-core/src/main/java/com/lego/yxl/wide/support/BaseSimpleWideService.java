@@ -51,7 +51,7 @@ public class BaseSimpleWideService<
     private void bindItemDatas(List<WIDE> wides) {
         Map<WIDE, WideWrapper<WIDE>> wrapperCache = Maps.newHashMap();
 
-        for (WideItemDataProvider<TYPE, ? extends Object, ? extends WideItemData<TYPE, ?>> itemProvider
+        for (WideItemDataProvider<TYPE, ?, ? extends WideItemData<TYPE, ?>> itemProvider
                 : this.wideItemDataProviders) {
             TYPE supportType = itemProvider.getSupportType();
             // 获取关联 Key 信息
@@ -68,11 +68,11 @@ public class BaseSimpleWideService<
                 // 获取单个 wide 的 Item key 信息
                 List itemsKeys = wide.getItemsKeyByType(supportType).stream()
                         .filter(Objects::nonNull)
-                        .map(itemKey -> ((WideItemKey) itemKey).getKey())
+                        .map(WideItemKey::getKey)
                         .collect(Collectors.toList());
                 // 转为为 item Data 信息
                 List itemDatas = (List) itemsKeys.stream()
-                        .map(k -> itemMap.get(k))
+                        .map(itemMap::get)
                         .collect(Collectors.toList());
 
                 WideWrapper<WIDE> wideWrapper = wrapperCache.computeIfAbsent(wide,
@@ -95,13 +95,11 @@ public class BaseSimpleWideService<
 
     protected WideItemDataProvider<TYPE, Object, ? extends WideItemData<TYPE, ?>>
     findWideItemDataProvider(TYPE itemType) {
-        WideItemDataProvider<TYPE, Object, ? extends WideItemData<TYPE, ?>> wideItemProvider =
-                (WideItemDataProvider<TYPE, Object, ? extends WideItemData<TYPE, ?>>)
-                        this.getWideItemDataProviders().stream()
-                                .filter(wideItemDataProvider -> wideItemDataProvider.support(itemType))
-                                .findFirst()
-                                .orElse(null);
-        return wideItemProvider;
+        return (WideItemDataProvider<TYPE, Object, ? extends WideItemData<TYPE, ?>>)
+                this.getWideItemDataProviders().stream()
+                        .filter(wideItemDataProvider -> wideItemDataProvider.support(itemType))
+                        .findFirst()
+                        .orElse(null);
     }
 
     protected WideWrapper<WIDE> createWrapperForWide(WIDE wide) {

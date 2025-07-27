@@ -2,8 +2,6 @@ package com.lego.yxl.wide.config;
 
 import com.lego.yxl.wide.*;
 import com.lego.yxl.wide.es.WideOrder;
-import com.lego.yxl.wide.WideOrderPatrolService;
-import com.lego.yxl.wide.WideOrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,19 +18,19 @@ public class WideOrderConfiguration extends WideConfigurationSupport<Long, WideO
     private List<WideItemDataProvider<WideOrderType, ?, ? extends WideItemData<WideOrderType, ?>>> wideItemDataProviders;
 
     @Bean
-    public WideIndexService<Long, WideOrderType> createWideIndexService(){
+    public WideIndexService<Long, WideOrderType> createWideIndexService() {
         return super.createWideIndexService();
     }
 
     @Bean
-    public WideOrderPatrolService wideOrderPatrolService(){
+    public WideOrderPatrolService wideOrderPatrolService() {
         return new WideOrderPatrolService(createWidePatrolService());
     }
 
     @Bean
     protected WideService<Long, WideOrderType> createWideService(
             WideIndexService<Long, WideOrderType> wideIndexService,
-            WideOrderPatrolService wideOrderPatrolService){
+            WideOrderPatrolService wideOrderPatrolService) {
         return super.createWideService(wideIndexService, wideOrderPatrolService);
     }
 

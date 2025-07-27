@@ -16,22 +16,24 @@ public abstract class WideConfigurationSupport<
 
     protected WideService<MASTER_DATA_ID, ITEM_TYPE> createWideService(
             WideIndexService<MASTER_DATA_ID, ITEM_TYPE> wideIndexService,
-            WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> widePatrolService){
+            WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> widePatrolService) {
         WideService wideService = new WideService<>();
         wideService.setIndexService(wideIndexService);
         wideService.setPatrolService(widePatrolService);
+
         wideService.init();
+
         return wideService;
     }
 
-    protected WideIndexService<MASTER_DATA_ID, ITEM_TYPE> createWideIndexService(){
-        WideFactory<MASTER_DATA_ID, WIDE> wideFactory= getWideFactory();
+    protected WideIndexService<MASTER_DATA_ID, ITEM_TYPE> createWideIndexService() {
+        WideFactory<MASTER_DATA_ID, WIDE> wideFactory = getWideFactory();
         WideWrapperFactory<WIDE> wideWrapperFactory = getWideWrapperFactory();
         WideCommandRepository<MASTER_DATA_ID, ITEM_TYPE, WIDE> wideCommandRepository = getWideCommandRepository();
-        List<WideItemDataProvider<ITEM_TYPE, ? extends Object, ? extends WideItemData<ITEM_TYPE, ?>>> wideItemProviders
+        List<WideItemDataProvider<ITEM_TYPE, ?, ? extends WideItemData<ITEM_TYPE, ?>>> wideItemProviders
                 = getWideItemProviders();
 
-        SimpleWideIndexService<MASTER_DATA_ID, WIDE, ITEM_TYPE> simpleWideIndexService = new SimpleWideIndexService();
+        SimpleWideIndexService<MASTER_DATA_ID, WIDE, ITEM_TYPE> simpleWideIndexService = new SimpleWideIndexService<>();
         simpleWideIndexService.setWideWrapperFactory(wideWrapperFactory);
         simpleWideIndexService.setWideFactory(wideFactory);
         simpleWideIndexService.setWideItemDataProviders(wideItemProviders);
@@ -39,14 +41,14 @@ public abstract class WideConfigurationSupport<
         return simpleWideIndexService;
     }
 
-    protected WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> createWidePatrolService(){
-        WideFactory<MASTER_DATA_ID, WIDE> wideFactory= getWideFactory();
+    protected WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> createWidePatrolService() {
+        WideFactory<MASTER_DATA_ID, WIDE> wideFactory = getWideFactory();
         WideWrapperFactory<WIDE> wideWrapperFactory = getWideWrapperFactory();
         WideCommandRepository<MASTER_DATA_ID, ITEM_TYPE, WIDE> wideCommandRepository = getWideCommandRepository();
-        List<WideItemDataProvider<ITEM_TYPE, ? extends Object, ? extends WideItemData<ITEM_TYPE, ?>>> wideItemProviders
+        List<WideItemDataProvider<ITEM_TYPE, ?, ? extends WideItemData<ITEM_TYPE, ?>>> wideItemProviders
                 = getWideItemProviders();
 
-        SimpleWidePatrolService<MASTER_DATA_ID, WIDE, ITEM_TYPE> widePatrolService = new SimpleWidePatrolService();
+        SimpleWidePatrolService<MASTER_DATA_ID, WIDE, ITEM_TYPE> widePatrolService = new SimpleWidePatrolService<>();
         widePatrolService.setWideWrapperFactory(wideWrapperFactory);
         widePatrolService.setWideFactory(wideFactory);
         widePatrolService.setWideItemDataProviders(wideItemProviders);
@@ -60,7 +62,7 @@ public abstract class WideConfigurationSupport<
 
     protected abstract List<WideItemDataProvider<ITEM_TYPE, ? extends Object, ? extends WideItemData<ITEM_TYPE, ?>>> getWideItemProviders();
 
-    protected WideWrapperFactory<WIDE> getWideWrapperFactory(){
+    protected WideWrapperFactory<WIDE> getWideWrapperFactory() {
         return new BindFromBasedWideWrapperFactory<>(new GenericConversionService());
     }
 

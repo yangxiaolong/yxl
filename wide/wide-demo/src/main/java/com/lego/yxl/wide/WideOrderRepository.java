@@ -26,15 +26,19 @@ public class WideOrderRepository implements WideCommandRepository<Long, WideOrde
 
     @Override
     public <KEY> void consumeByItem(WideOrderType wideOrderType, KEY key, Consumer<WideOrder> wideConsumer) {
+        doUpdateByItem(wideOrderType, (Long) key, wideConsumer);
+    }
+
+    private void doUpdateByItem(WideOrderType wideOrderType, Long key, Consumer<WideOrder> wideConsumer) {
         switch (wideOrderType) {
             case PRODUCT:
-                this.wideOrderDao.findByProductId((Long) key).forEach(wideConsumer);
+                this.wideOrderDao.findByProductId(key).forEach(wideConsumer);
             case ADDRESS:
-                this.wideOrderDao.findByAddressId((Long) key).forEach(wideConsumer);
+                this.wideOrderDao.findByAddressId(key).forEach(wideConsumer);
             case ORDER:
-                this.wideOrderDao.findById((Long) key).ifPresent(wideConsumer);
+                this.wideOrderDao.findById(key).ifPresent(wideConsumer);
             case USER:
-                this.wideOrderDao.findByUserId((Long) key).forEach(wideConsumer);
+                this.wideOrderDao.findByUserId(key).forEach(wideConsumer);
         }
     }
 
@@ -46,16 +50,7 @@ public class WideOrderRepository implements WideCommandRepository<Long, WideOrde
     @Override
     public <KEY> void updateByItem(WideOrderType wideOrderType, KEY key, Consumer<WideOrder> wideConsumer) {
         Consumer<WideOrder> updateAndSave = wideConsumer.andThen(wideOrder -> wideOrderDao.save(wideOrder));
-        switch (wideOrderType) {
-            case PRODUCT:
-                this.wideOrderDao.findByProductId((Long) key).forEach(updateAndSave);
-            case ADDRESS:
-                this.wideOrderDao.findByAddressId((Long) key).forEach(updateAndSave);
-            case ORDER:
-                this.wideOrderDao.findById((Long) key).ifPresent(updateAndSave);
-            case USER:
-                this.wideOrderDao.findByUserId((Long) key).forEach(updateAndSave);
-        }
+        doUpdateByItem(wideOrderType, (Long) key, updateAndSave);
     }
 
     @Override
