@@ -75,3 +75,7 @@ GET http://localhost:8080/wide/updateAddress
 
 ###
 GET http://localhost:8080/wide/updateProduct
+
+###
+mqadmin.cmd consumerProgress -n 127.0.0.1:9876 -g order_patrol_group_index
+mqadmin.cmd consumerProgress -n 127.0.0.1:9876 -g order_patrol_group_update

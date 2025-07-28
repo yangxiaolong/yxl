@@ -7,7 +7,7 @@ import lombok.Setter;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 @Data
 @Setter(AccessLevel.PRIVATE)
 public class WideIndexBatchUpdateContext<ITEM_TYPE extends Enum<ITEM_TYPE> & WideItemType<ITEM_TYPE>>

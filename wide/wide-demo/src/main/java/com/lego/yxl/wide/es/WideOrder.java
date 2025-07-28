@@ -18,7 +18,7 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.util.Collections;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = false)
 //@Entity
 //@Table(name = "t_wide_order")
 @Data

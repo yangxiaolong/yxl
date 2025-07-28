@@ -16,7 +16,7 @@ public class WideOrderPatrolService implements WidePatrolService<Long, WideOrder
     @Override
     @DelayBasedRocketMQ(topic = "wide_order_patrol",
             tag = "SingleIndex",
-            consumerGroup = "order_patrol_group",
+            consumerGroup = "order_patrol_group_index",
             delayLevel = 2)
     public void index(Long aLong) {
         this.widePatrolService.index(aLong);
@@ -36,7 +36,7 @@ public class WideOrderPatrolService implements WidePatrolService<Long, WideOrder
     @DelayBasedRocketMQ(
             topic = "wide_order_patrol",
             tag = "UpdateByItem",
-            consumerGroup = "order_patrol_group",
+            consumerGroup = "order_patrol_group_update",
             delayLevel = 2)
     public void updateItem(WideOrderType wideOrderType, Long id) {
         this.widePatrolService.updateItem(wideOrderType, id);

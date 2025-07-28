@@ -2,8 +2,7 @@ package com.lego.yxl.wide.support;
 
 import com.google.common.collect.Lists;
 import com.lego.yxl.wide.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -15,9 +14,8 @@ import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@EqualsAndHashCode(callSuper = true)
 @Slf4j
-@Data
+@Setter
 public class SimpleWidePatrolService<
         MASTER_ID, // 主数据 id
         WIDE extends Wide<MASTER_ID, ITEM_TYPE>, // 宽表类型
@@ -94,6 +92,8 @@ public class SimpleWidePatrolService<
             if (!wide.isSameWithItem(context)) {
                 log.info("id {} Item Not Same, item {}, wide {}", wide.getId(), itemData, wide);
                 errorIds.add(wide.getId());
+            } else {
+                log.info("id {} Item Same", wide.getId());
             }
         });
 
