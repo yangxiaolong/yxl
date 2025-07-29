@@ -23,7 +23,7 @@ public class BaseSimpleWideService<
     private WideWrapperFactory<WIDE> wideWrapperFactory;
 
     @Getter(AccessLevel.PROTECTED)
-    private final List<WideItemDataProvider<TYPE, ? extends Object, ? extends WideItemData<TYPE, ?>>>
+    private final List<WideItemDataProvider<TYPE, ?, ? extends WideItemData<TYPE, ?>>>
             wideItemDataProviders = Lists.newArrayList();
 
     @Getter(AccessLevel.PROTECTED)

@@ -17,7 +17,7 @@ public abstract class WideConfigurationSupport<
     protected WideService<MASTER_DATA_ID, ITEM_TYPE> createWideService(
             WideIndexService<MASTER_DATA_ID, ITEM_TYPE> wideIndexService,
             WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> widePatrolService) {
-        WideService wideService = new WideService<>();
+        WideService<MASTER_DATA_ID, ITEM_TYPE> wideService = new WideService<>();
         wideService.setIndexService(wideIndexService);
         wideService.setPatrolService(widePatrolService);
 
@@ -60,7 +60,7 @@ public abstract class WideConfigurationSupport<
 
     protected abstract WideCommandRepository<MASTER_DATA_ID, ITEM_TYPE, WIDE> getWideCommandRepository();
 
-    protected abstract List<WideItemDataProvider<ITEM_TYPE, ? extends Object, ? extends WideItemData<ITEM_TYPE, ?>>> getWideItemProviders();
+    protected abstract List<WideItemDataProvider<ITEM_TYPE, ?, ? extends WideItemData<ITEM_TYPE, ?>>> getWideItemProviders();
 
     protected WideWrapperFactory<WIDE> getWideWrapperFactory() {
         return new BindFromBasedWideWrapperFactory<>(new GenericConversionService());
