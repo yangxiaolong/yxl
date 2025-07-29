@@ -17,13 +17,7 @@ public abstract class WideConfigurationSupport<
     protected WideService<MASTER_DATA_ID, ITEM_TYPE> createWideService(
             WideIndexService<MASTER_DATA_ID, ITEM_TYPE> wideIndexService,
             WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> widePatrolService) {
-        WideService<MASTER_DATA_ID, ITEM_TYPE> wideService = new WideService<>();
-        wideService.setIndexService(wideIndexService);
-        wideService.setPatrolService(widePatrolService);
-
-        wideService.init();
-
-        return wideService;
+        return new WideService<>(wideIndexService, widePatrolService);
     }
 
     protected WideIndexService<MASTER_DATA_ID, ITEM_TYPE> createWideIndexService() {

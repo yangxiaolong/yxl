@@ -1,23 +1,27 @@
 package com.lego.yxl.wide;
 
 import com.google.common.base.Preconditions;
-import jakarta.annotation.PostConstruct;
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 
 import java.util.List;
 
-@Data
 @Getter(AccessLevel.PRIVATE)
 public class WideService<
         MASTER_DATA_ID, // 主数据 ID
         ITEM_TYPE extends Enum<ITEM_TYPE> & WideItemType<ITEM_TYPE> // 关联数据类型
         > {
-    private WideIndexService<MASTER_DATA_ID, ITEM_TYPE> indexService;
-    private WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> patrolService;
+    private final WideIndexService<MASTER_DATA_ID, ITEM_TYPE> indexService;
+    private final WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> patrolService;
 
-    @PostConstruct
+    public WideService(WideIndexService<MASTER_DATA_ID, ITEM_TYPE> indexService,
+                       WidePatrolService<MASTER_DATA_ID, ITEM_TYPE> patrolService) {
+        this.indexService = indexService;
+        this.patrolService = patrolService;
+
+        init();
+    }
+
     public void init() {
         Preconditions.checkArgument(indexService != null);
         if (this.patrolService != null) {

@@ -2,7 +2,6 @@ package com.lego.yxl.wide.support;
 
 import com.google.common.collect.Lists;
 import com.lego.yxl.wide.*;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 
@@ -15,7 +14,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Slf4j
-@Setter
 public class SimpleWidePatrolService<
         MASTER_ID, // 主数据 id
         WIDE extends Wide<MASTER_ID, ITEM_TYPE>, // 宽表类型
@@ -24,6 +22,11 @@ public class SimpleWidePatrolService<
         implements WidePatrolService<MASTER_ID, ITEM_TYPE> {
 
     private Consumer<List<MASTER_ID>> reindexConsumer;
+
+    @Override
+    public void setReindexConsumer(Consumer<List<MASTER_ID>> reindexConsumer) {
+        this.reindexConsumer = reindexConsumer;
+    }
 
     private void reindexByMasterId(List<MASTER_ID> ids) {
         if (CollectionUtils.isNotEmpty(ids) && reindexConsumer != null) {
