@@ -1,6 +1,8 @@
-package com.lego.yxl.wide;
+package com.lego.yxl.wide.core;
 
 import com.google.common.collect.Lists;
+import com.lego.yxl.wide.WideCommandRepository;
+import com.lego.yxl.wide.WideItemData;
 import com.lego.yxl.wide.es.WideOrder;
 import com.lego.yxl.wide.es.WideOrderESDao;
 import org.springframework.beans.factory.annotation.Autowired;

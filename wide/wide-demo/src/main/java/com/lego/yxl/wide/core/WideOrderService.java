@@ -1,5 +1,6 @@
-package com.lego.yxl.wide;
+package com.lego.yxl.wide.core;
 
+import com.lego.yxl.wide.WideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

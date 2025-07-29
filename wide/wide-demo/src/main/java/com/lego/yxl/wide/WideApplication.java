@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EnableElasticsearchRepositories(basePackages = "com.lego.yxl.wide.es")
 @EnableJpaRepositories(basePackages = {"com.lego.yxl.wide.jpa"})
-@SpringBootApplication(scanBasePackages = {"com.lego.yxl.wide", "com.lego.yxl.delay"})
+@SpringBootApplication(scanBasePackages = {"com.lego.yxl.wide", "com.lego.yxl.delay.starter"})
 @EnableAspectJAutoProxy(proxyTargetClass = true, exposeProxy = true)
 public class WideApplication {
 

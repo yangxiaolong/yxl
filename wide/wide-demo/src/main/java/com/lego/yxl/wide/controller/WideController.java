@@ -1,7 +1,7 @@
 package com.lego.yxl.wide.controller;
 
 import com.lego.yxl.wide.es.WideOrder;
-import com.lego.yxl.wide.WideOrderService;
+import com.lego.yxl.wide.core.WideOrderService;
 import com.lego.yxl.wide.es.WideOrderESDao;
 import com.lego.yxl.wide.jpa.*;
 import org.junit.jupiter.api.Assertions;

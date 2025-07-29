@@ -1,6 +1,9 @@
 package com.lego.yxl.wide.config;
 
 import com.lego.yxl.wide.*;
+import com.lego.yxl.wide.core.WideOrderPatrolService;
+import com.lego.yxl.wide.core.WideOrderRepository;
+import com.lego.yxl.wide.core.WideOrderType;
 import com.lego.yxl.wide.es.WideOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

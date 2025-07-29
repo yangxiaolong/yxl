@@ -1,5 +1,6 @@
-package com.lego.yxl.wide;
+package com.lego.yxl.wide.core;
 
+import com.lego.yxl.wide.WideItemDataProvider;
 import com.lego.yxl.wide.jpa.Address;
 import com.lego.yxl.wide.jpa.AddressDao;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,7 +2,7 @@ package com.lego.yxl.wide.es;
 
 import com.lego.yxl.wide.BindFrom;
 import com.lego.yxl.wide.WideItemKey;
-import com.lego.yxl.wide.WideOrderType;
+import com.lego.yxl.wide.core.WideOrderType;
 import com.lego.yxl.wide.jpa.Address;
 import com.lego.yxl.wide.jpa.Order;
 import com.lego.yxl.wide.jpa.Product;

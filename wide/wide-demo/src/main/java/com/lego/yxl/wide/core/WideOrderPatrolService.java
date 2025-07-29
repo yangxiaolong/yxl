@@ -1,6 +1,7 @@
-package com.lego.yxl.wide;
+package com.lego.yxl.wide.core;
 
 import com.lego.yxl.delay.core.annotation.DelayBasedRocketMQ;
+import com.lego.yxl.wide.WidePatrolService;
 import org.springframework.aop.framework.AopContext;
 
 import java.util.List;

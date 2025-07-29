@@ -1,7 +1,7 @@
 package com.lego.yxl.wide.jpa;
 
 import com.lego.yxl.wide.WideItemData;
-import com.lego.yxl.wide.WideOrderType;
+import com.lego.yxl.wide.core.WideOrderType;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

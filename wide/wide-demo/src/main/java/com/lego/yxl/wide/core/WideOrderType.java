@@ -1,4 +1,6 @@
-package com.lego.yxl.wide;
+package com.lego.yxl.wide.core;
+
+import com.lego.yxl.wide.WideItemType;
 
 public enum WideOrderType implements WideItemType<WideOrderType> {
     ORDER, // 订单主数据
