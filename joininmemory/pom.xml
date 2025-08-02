@@ -16,29 +16,7 @@
         <module>joininmemory-starter</module>
     </modules>
 
-    <groupId>com.lego</groupId>
     <artifactId>joininmemory</artifactId>
     <version>1.0-SNAPSHOT</version>
-
-    <properties>
-        <guava-version>18.0</guava-version>
-        <commons.lang3-version>3.7</commons.lang3-version>
-        <commons.collections-version>3.2.2</commons.collections-version>
-    </properties>
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava-version}</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>${commons.lang3-version}</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
 </project>
