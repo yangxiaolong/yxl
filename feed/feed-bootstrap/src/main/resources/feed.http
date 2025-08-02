@@ -1,0 +1,16 @@
+###
+GET http://localhost:8080/feedCommand/dispatcher
+
+###
+GET http://localhost:8080/feedCommand/merge
+
+###
+GET http://localhost:8080/feedCommand/status
+
+
+###
+GET http://localhost:8080/feedJpa/load
+
+
+###
+GET http://localhost:8080/feedRedis/load

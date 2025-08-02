@@ -9,14 +9,16 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>eumsdemo</artifactId>
-
-    <dependencies>
-        <dependency>
-            <groupId>com.lego</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-    </dependencies>
+    <artifactId>feed</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>feed-api</module>
+        <module>feed-app</module>
+        <module>feed-bootstrap</module>
+        <module>feed-domain</module>
+        <module>feed-feign-client</module>
+        <module>feed-feign-service</module>
+        <module>feed-infrastructure</module>
+    </modules>
 
 </project>
