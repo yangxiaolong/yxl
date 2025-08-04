@@ -1,6 +1,6 @@
 package com.geekhalo.tinyurl.domain;
 
-import com.lego.yxl.command.core.CommandForUpdateById;
+import com.lego.yxl.core.command.CommandForUpdateById;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 

@@ -1,0 +1,21 @@
+logging:
+  level:
+    root: info
+    com.lego.yxl: debug
+    org.springframework.web: trace
+    org.springframework.data.rest: trace
+    net.ttddyy.dsproxy.listener: trace
+
+server:
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/lego
+    username: root
+    password: 123456
+  data:
+    redis:
+      host: 127.0.0.1
+      port: 6379

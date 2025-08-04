@@ -4,7 +4,7 @@ logging:
     com.geekhale: debug
     org.springframework.web: trace
     org.springframework.data.rest: trace
-    net.ttddyy.dsproxy.listener: trace
+#    net.ttddyy.dsproxy.listener: trace
 
 spring:
   datasource:

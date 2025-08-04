@@ -1,0 +1,13 @@
+package com.lego.yxl.command.command;
+
+import com.lego.yxl.core.command.NoCommandApplicationService;
+
+@NoCommandApplicationService
+public interface OrderCommandApplicationService extends CustomOrderCommandService{
+
+    Order create(CreateOrderCommand command);
+
+    void paySuccess(PayByIdSuccessCommand command);
+
+    Order syncByOrderId(SyncOrderByIdCommand command);
+}

@@ -4,7 +4,7 @@ import com.geekhalo.like.domain.dislike.DislikeTargetCount;
 import com.geekhalo.like.domain.dislike.DislikeTargetCountRepository;
 import com.geekhalo.like.domain.target.ActionTarget;
 import com.geekhalo.like.infra.support.TargetCountCache;
-import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
+import com.lego.yxl.core.async.annotation.AsyncForOrderedBasedRocketMQ;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;

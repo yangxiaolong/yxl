@@ -1,6 +1,6 @@
 package com.geekhalo.like.domain.user;
 
-import com.lego.yxl.loader.core.annotation.LazyLoadBy;
+import com.lego.yxl.core.loader.annotation.LazyLoadBy;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

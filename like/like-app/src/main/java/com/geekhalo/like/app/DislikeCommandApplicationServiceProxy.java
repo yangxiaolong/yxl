@@ -2,7 +2,7 @@ package com.geekhalo.like.app;
 
 import com.geekhalo.like.domain.dislike.DislikeAction;
 import com.geekhalo.like.domain.dislike.DislikeActionRepository;
-import com.lego.yxl.command.core.CommandApplicationServiceDefinition;
+import com.lego.yxl.core.command.CommandApplicationServiceDefinition;
 
 @CommandApplicationServiceDefinition(
         domainClass = DislikeAction.class,

@@ -1,6 +1,6 @@
 package com.geekhalo.tinyurl.domain;
 
-import com.lego.yxl.command.core.CommandForCreate;
+import com.lego.yxl.core.command.CommandForCreate;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 

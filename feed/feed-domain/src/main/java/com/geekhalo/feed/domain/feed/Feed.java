@@ -6,7 +6,7 @@ import com.geekhalo.feed.domain.feed.disable.DisableFeedContext;
 import com.geekhalo.feed.domain.feed.disable.FeedDisabledEvent;
 import com.geekhalo.feed.domain.feed.enable.EnableFeedContext;
 import com.geekhalo.feed.domain.feed.enable.FeedEnabledEvent;
-import com.lego.yxl.command.core.support.AbstractAggRoot;
+import com.lego.yxl.core.command.support.AbstractAggRoot;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;

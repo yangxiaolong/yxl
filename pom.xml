@@ -7,38 +7,18 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>3.4.1</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath/>
     </parent>
-
-
 
     <packaging>pom</packaging>
     <modules>
-        <module>joininmemory</module>
-        <module>loader</module>
-        <module>common</module>
-        <module>splitter</module>
-        <module>command</module>
-        <module>validator</module>
-        <module>jpa-test</module>
-        <module>faultrecovery</module>
-        <module>idempotent</module>
-        <module>singlequery</module>
-        <module>delay</module>
-        <module>async</module>
-        <module>msg</module>
-        <module>feign</module>
-        <module>eumsdemo</module>
         <module>like</module>
         <module>tinyurl</module>
-        <module>wide</module>
         <module>feed</module>
+        <module>lego-core</module>
+        <module>lego-starter</module>
+        <module>lego-demo</module>
     </modules>
-
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-    </properties>
 
     <groupId>com.lego</groupId>
     <artifactId>yxl</artifactId>
@@ -58,6 +38,18 @@
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -65,7 +57,7 @@
             <dependency>
                 <groupId>com.google.guava</groupId>
                 <artifactId>guava</artifactId>
-                <version>18.0</version>
+                <version>32.1.2-jre</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.commons</groupId>

@@ -4,7 +4,7 @@ logging:
     com.geekhale: debug
     org.springframework.web: trace
     org.springframework.data.rest: trace
-    net.ttddyy.dsproxy.listener: trace
+#    net.ttddyy.dsproxy.listener: trace
 
 spring:
   datasource:
@@ -29,6 +29,11 @@ spring:
       host: 127.0.0.1
       port: 6379
 
+rocketmq:
+  name-server: http://127.0.0.1:9876
+  producer:
+    group: tinyurl-demo
+
 tinyurl:
   number:
     generator:
@@ -40,3 +45,9 @@ tinyurl:
       type: custom-base
   cache:
     enable: true
+  access:
+    incr:
+      consumerGroup: tiny-utl-count-group
+      async:
+        enable: true
+        topic: tiny-utl-count-topic

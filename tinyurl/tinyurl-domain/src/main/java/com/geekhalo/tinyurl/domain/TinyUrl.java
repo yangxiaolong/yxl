@@ -1,8 +1,8 @@
 package com.geekhalo.tinyurl.domain;
 
 import com.google.common.base.Preconditions;
-import com.lego.yxl.bitop.intop.IntMaskOp;
-import com.lego.yxl.command.core.support.AbstractAggRoot;
+import com.lego.yxl.core.bitop.intop.IntMaskOp;
+import com.lego.yxl.core.command.support.AbstractAggRoot;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;

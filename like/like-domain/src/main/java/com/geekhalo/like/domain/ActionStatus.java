@@ -1,6 +1,6 @@
 package com.geekhalo.like.domain;
 
-import com.lego.yxl.enums.CommonEnum;
+import com.lego.yxl.core.enums.CommonEnum;
 
 public enum ActionStatus implements CommonEnum {
     VALID(1, "有效"),

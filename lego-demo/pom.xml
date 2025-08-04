@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>yxl</artifactId>
+        <groupId>com.lego</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>lego-demo</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>lego-demo-async</module>
+        <module>lego-demo-delay</module>
+        <module>lego-demo-enums</module>
+        <module>lego-demo-faultrecovery</module>
+        <module>lego-demo-feign</module>
+        <module>lego-demo-idempotent</module>
+        <module>lego-demo-singlequery</module>
+        <module>lego-demo-command</module>
+        <module>lego-demo-loader</module>
+        <module>lego-demo-validator</module>
+        <module>lego-demo-joininmemory</module>
+        <module>lego-demo-jpatest</module>
+        <module>lego-demo-msg</module>
+        <module>lego-demo-splitter</module>
+        <module>lego-demo-wide</module>
+    </modules>
+
+</project>

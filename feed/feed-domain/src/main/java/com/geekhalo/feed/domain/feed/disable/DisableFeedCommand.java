@@ -1,6 +1,6 @@
 package com.geekhalo.feed.domain.feed.disable;
 
-import com.lego.yxl.command.core.CommandForUpdateById;
+import com.lego.yxl.core.command.CommandForUpdateById;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;

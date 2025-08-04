@@ -2,7 +2,7 @@ package com.geekhalo.like.domain;
 
 import com.geekhalo.like.domain.target.ActionTarget;
 import com.geekhalo.like.domain.user.ActionUser;
-import com.lego.yxl.command.core.CommandWithKeyRepository;
+import com.lego.yxl.core.command.CommandWithKeyRepository;
 
 import java.util.List;
 import java.util.Optional;

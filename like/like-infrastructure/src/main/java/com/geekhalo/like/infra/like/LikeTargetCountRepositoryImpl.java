@@ -4,7 +4,7 @@ import com.geekhalo.like.domain.like.LikeTargetCount;
 import com.geekhalo.like.domain.like.LikeTargetCountRepository;
 import com.geekhalo.like.domain.target.ActionTarget;
 import com.geekhalo.like.infra.support.TargetCountCache;
-import com.lego.yxl.async.core.annotation.AsyncForOrderedBasedRocketMQ;
+import com.lego.yxl.core.async.annotation.AsyncForOrderedBasedRocketMQ;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.aop.framework.AopContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +31,9 @@ public class LikeTargetCountRepositoryImpl implements LikeTargetCountRepository 
     public void incr(ActionTarget target, long count) {
         this.cache.incr(target, count);
         Object o = AopContext.currentProxy();
-        if (o instanceof LikeTargetCountRepositoryImpl){
-            ((LikeTargetCountRepositoryImpl)o).incrForDB(target, count);
-        }else {
+        if (o instanceof LikeTargetCountRepositoryImpl) {
+            ((LikeTargetCountRepositoryImpl) o).incrForDB(target, count);
+        } else {
             this.incrForDB(target, count);
         }
     }

@@ -6,9 +6,9 @@ import com.geekhalo.feed.domain.feed.FeedIndex;
 import com.geekhalo.feed.domain.feed.FeedOwner;
 import com.geekhalo.feed.domain.feed.OwnerType;
 import com.google.common.collect.Lists;
-import org.apache.commons.collections.CollectionUtils;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -56,11 +56,11 @@ public class RedisBasedBoxCacheController {
         do {
             load = boxCache.load(this.feedOwner, this.boxType, score, 10);
             score = load.stream()
-                    .mapToLong(Feed -> Feed.getScore())
+                    .mapToLong(FeedIndex::getScore)
                     .min()
                     .orElse(0);
             batch++;
-        } while (CollectionUtils.isNotEmpty(load));
+        } while (!CollectionUtils.isEmpty(load));
 
         Assertions.assertEquals(realSize / 10 + 1, batch);
     }

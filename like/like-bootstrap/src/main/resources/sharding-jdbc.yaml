@@ -58,11 +58,11 @@ rules:
         actualDataNodes: count-ds0.dislike_target_count_$->{0..7},count-ds1.dislike_target_count_$->{8..15}
         databaseStrategy:
           standard:
-            shardingColumn: user_id
+            shardingColumn: target_id
             shardingAlgorithmName: count_database_inline
         tableStrategy:
           standard:
-            shardingColumn: user_id
+            shardingColumn: target_id
             shardingAlgorithmName: dislike_count_inline
       like_target_count:
         actualDataNodes: count-ds0.like_target_count_$->{0..7},count-ds1.like_target_count_$->{8..15}

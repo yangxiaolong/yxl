@@ -9,10 +9,10 @@ import com.geekhalo.feed.domain.feed.*;
 import com.geekhalo.feed.domain.feed.create.CreateFeedCommand;
 import com.geekhalo.feed.domain.feed.disable.DisableFeedCommand;
 import com.geekhalo.feed.domain.feed.enable.EnableFeedCommand;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -59,7 +59,7 @@ public class FeedCommandApplicationController {
         for (int i = 0; i < 10; i++) {
             FeedOwner feedOwner = new FeedOwner(OwnerType.USER, this.feedOwner.getOwnerId() + i + 1);
             List<FeedIndex> feedIndices = this.boxService.queryInboxByScore(feedOwner, BoxType.IN_BOX, Long.MAX_VALUE, 10);
-            Assertions.assertTrue(CollectionUtils.isNotEmpty(feedIndices));
+            Assertions.assertTrue(!CollectionUtils.isEmpty(feedIndices));
             FeedIndex index = feedIndices.get(0);
             Assertions.assertEquals(feedIndex, index);
         }

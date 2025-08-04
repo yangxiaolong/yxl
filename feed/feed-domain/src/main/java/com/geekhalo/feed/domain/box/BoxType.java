@@ -1,6 +1,6 @@
 package com.geekhalo.feed.domain.box;
 
-import com.lego.yxl.enums.CommonEnum;
+import com.lego.yxl.core.enums.CommonEnum;
 
 public enum BoxType implements CommonEnum {
     IN_BOX(1,  1000, 1000, "输入"),

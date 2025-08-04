@@ -1,0 +1,2 @@
+com.lego.yxl.singlequery.starter.MyBatisBasedSingleQueryConfiguration
+com.lego.yxl.singlequery.starter.JpaBasedSingleQueryConfiguration

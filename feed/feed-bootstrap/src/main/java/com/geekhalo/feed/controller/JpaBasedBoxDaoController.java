@@ -7,10 +7,10 @@ import com.geekhalo.feed.domain.feed.FeedOwner;
 import com.geekhalo.feed.domain.feed.OwnerType;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Assertions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -64,7 +64,7 @@ public class JpaBasedBoxDaoController {
                     .orElse(0);
             batch++;
             allFeedIndexList.addAll(load);
-        } while (CollectionUtils.isNotEmpty(load));
+        } while (!CollectionUtils.isEmpty(load));
 
         Assertions.assertEquals(realSize / 10 + 1, batch);
 

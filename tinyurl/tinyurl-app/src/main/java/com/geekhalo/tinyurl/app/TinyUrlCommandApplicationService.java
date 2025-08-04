@@ -1,7 +1,7 @@
 package com.geekhalo.tinyurl.app;
 
 import com.geekhalo.tinyurl.domain.*;
-import com.lego.yxl.command.core.CommandApplicationServiceDefinition;
+import com.lego.yxl.core.command.CommandApplicationServiceDefinition;
 
 @CommandApplicationServiceDefinition(
         repositoryClass = TinyUrlCommandRepository.class,

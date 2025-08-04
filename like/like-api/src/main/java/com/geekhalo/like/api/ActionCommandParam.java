@@ -1,7 +1,7 @@
 package com.geekhalo.like.api;
 
-import com.lego.yxl.validator.core.common.ValidateErrorHandler;
-import com.lego.yxl.validator.core.common.Verifiable;
+import com.lego.yxl.core.validator.common.ValidateErrorHandler;
+import com.lego.yxl.core.validator.common.Verifiable;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

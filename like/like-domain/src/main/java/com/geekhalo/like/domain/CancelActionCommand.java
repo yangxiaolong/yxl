@@ -1,6 +1,6 @@
 package com.geekhalo.like.domain;
 
-import com.lego.yxl.command.core.CommandForUpdateByKey;
+import com.lego.yxl.core.command.CommandForUpdateByKey;
 
 public abstract class CancelActionCommand extends AbstractActionCommand
         implements CommandForUpdateByKey<ActionKey> {

@@ -2,7 +2,7 @@ package com.geekhalo.like.domain;
 
 import com.geekhalo.like.domain.target.ActionTarget;
 import com.google.common.base.Preconditions;
-import com.lego.yxl.command.core.support.AbstractAggRoot;
+import com.lego.yxl.core.command.support.AbstractAggRoot;
 import jakarta.persistence.*;
 import lombok.*;
 

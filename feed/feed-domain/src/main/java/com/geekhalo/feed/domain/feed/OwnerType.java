@@ -1,6 +1,6 @@
 package com.geekhalo.feed.domain.feed;
 
-import com.lego.yxl.enums.CommonEnum;
+import com.lego.yxl.core.enums.CommonEnum;
 
 public enum OwnerType implements CommonEnum {
     USER(1, "User"),

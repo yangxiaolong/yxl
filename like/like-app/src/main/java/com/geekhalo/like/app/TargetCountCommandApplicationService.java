@@ -5,7 +5,7 @@ import com.geekhalo.like.domain.dislike.DislikeTargetCountRepository;
 import com.geekhalo.like.domain.like.LikeTargetCount;
 import com.geekhalo.like.domain.like.LikeTargetCountRepository;
 import com.geekhalo.like.domain.target.ActionTarget;
-import com.lego.yxl.command.core.support.AbstractCommandService;
+import com.lego.yxl.core.command.support.AbstractCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

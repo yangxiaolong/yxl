@@ -4,9 +4,9 @@ import com.geekhalo.feed.domain.box.BoxDao;
 import com.geekhalo.feed.domain.box.BoxType;
 import com.geekhalo.feed.domain.feed.FeedIndex;
 import com.geekhalo.feed.domain.feed.FeedOwner;
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.util.CollectionUtils;
 
 import java.util.*;
 

@@ -2,7 +2,7 @@ package com.geekhalo.like.app;
 
 import com.geekhalo.like.domain.dislike.*;
 import com.geekhalo.like.domain.like.*;
-import com.lego.yxl.command.core.support.AbstractCommandService;
+import com.lego.yxl.core.command.support.AbstractCommandService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 

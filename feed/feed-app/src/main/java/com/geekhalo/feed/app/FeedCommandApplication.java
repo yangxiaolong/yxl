@@ -5,8 +5,8 @@ import com.geekhalo.feed.domain.feed.FeedCommandRepository;
 import com.geekhalo.feed.domain.feed.create.CreateFeedCommand;
 import com.geekhalo.feed.domain.feed.disable.DisableFeedCommand;
 import com.geekhalo.feed.domain.feed.enable.EnableFeedCommand;
-import com.lego.yxl.command.core.CommandApplicationServiceDefinition;
-import com.lego.yxl.command.core.web.AutoRegisterWebController;
+import com.lego.yxl.core.command.CommandApplicationServiceDefinition;
+import com.lego.yxl.core.command.web.AutoRegisterWebController;
 
 @CommandApplicationServiceDefinition(
         domainClass = Feed.class,

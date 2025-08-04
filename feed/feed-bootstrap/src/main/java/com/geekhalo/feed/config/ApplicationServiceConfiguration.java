@@ -1,6 +1,6 @@
 package com.geekhalo.feed.config;
 
-import com.lego.yxl.command.core.EnableCommandApplicationService;
+import com.lego.yxl.core.command.EnableCommandApplicationService;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
