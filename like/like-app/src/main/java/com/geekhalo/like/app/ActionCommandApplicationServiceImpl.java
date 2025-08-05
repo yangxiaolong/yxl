@@ -31,7 +31,6 @@ class ActionCommandApplicationServiceImpl extends AbstractCommandService
 
     @Override
     public void unLike(UnlikeActionCommand command) {
-
         this.<LikeAction, UnlikeActionCommand, UnlikeActionContext>updaterFor(this.likeActionRepository)
                 .loadBy(cmd -> this.likeActionRepository.findByKey(cmd.getKey()))
                 .contextFactory(UnlikeActionContext::apply)
@@ -42,7 +41,6 @@ class ActionCommandApplicationServiceImpl extends AbstractCommandService
 
     @Override
     public void dislike(DislikeActionCommand command) {
-
         this.<DislikeAction, DislikeActionCommand, DislikeActionContext>syncerFor(this.dislikeActionRepository)
                 .loadBy(cmd -> this.dislikeActionRepository.findByKey(cmd.getKey()))
                 .contextFactory(DislikeActionContext::apply)
@@ -53,7 +51,6 @@ class ActionCommandApplicationServiceImpl extends AbstractCommandService
 
     @Override
     public void unDislike(UndislikeActionCommand command) {
-
         this.<DislikeAction, UndislikeActionCommand, UndislikeActionContext>updaterFor(this.dislikeActionRepository)
                 .loadBy(cmd -> this.dislikeActionRepository.findByKey(cmd.getKey()))
                 .contextFactory(UndislikeActionContext::apply)

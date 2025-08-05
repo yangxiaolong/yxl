@@ -8,8 +8,8 @@ import com.geekhalo.like.domain.dislike.DislikeActionCommand;
 import com.geekhalo.like.domain.dislike.UndislikeActionCommand;
 import com.geekhalo.like.domain.like.LikeActionCommand;
 import com.geekhalo.like.domain.like.UnlikeActionCommand;
+import jakarta.annotation.Resource;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(ActionCommandApi.PATH)
 @Validated
 public class ActionCommandFeignService implements ActionCommandApi {
-    @Autowired
+    @Resource
     private LikeCommandApplicationService likeCommandApplicationService;
-    @Autowired
+    @Resource
     private DislikeCommandApplicationService dislikeCommandApplicationService;
 
     @Override
