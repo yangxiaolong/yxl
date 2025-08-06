@@ -53,7 +53,7 @@ public class ActionQueryFeignService implements ActionQueryApi {
         actionVO.setTargetType(action.getTarget().getType());
         actionVO.setTargetId(action.getTarget().getId());
         actionVO.setUserId(action.getUser().getUserId());
-        actionVO.setValid(action.isValid());
+        actionVO.setValid(action.checkedValid());
         return actionVO;
     }
 }

@@ -10,7 +10,7 @@ import lombok.*;
 @Data
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@Setter(AccessLevel.PRIVATE)
+@Setter(AccessLevel.PROTECTED)
 @MappedSuperclass
 public abstract class AbstractAction extends AbstractAggRoot {
     @Id
@@ -27,13 +27,16 @@ public abstract class AbstractAction extends AbstractAggRoot {
     @Enumerated(EnumType.STRING)
     private ActionStatus status;
 
-    protected void init(AbstractActionContext context){
+    @Transient
+    protected ActionStatus changeToStatus;
+
+    protected void init(AbstractActionContext context) {
         Preconditions.checkArgument(context != null);
         setUser(context.getActionUser());
         setTarget(context.getActionTarget());
     }
 
-    protected boolean cancel(){
+    protected boolean cancel() {
         if (getStatus() != ActionStatus.INVALID) {
             setStatus(ActionStatus.INVALID);
             return true;
@@ -41,7 +44,7 @@ public abstract class AbstractAction extends AbstractAggRoot {
         return false;
     }
 
-    protected boolean mark(){
+    protected boolean mark() {
         if (getStatus() != ActionStatus.VALID) {
             setStatus(ActionStatus.VALID);
             return true;
@@ -49,7 +52,7 @@ public abstract class AbstractAction extends AbstractAggRoot {
         return false;
     }
 
-    public boolean isValid() {
+    public boolean checkedValid() {
         return this.getStatus() == ActionStatus.VALID;
     }
 }
