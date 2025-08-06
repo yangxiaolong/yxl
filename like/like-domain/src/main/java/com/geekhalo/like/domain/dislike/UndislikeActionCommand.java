@@ -1,5 +1,6 @@
 package com.geekhalo.like.domain.dislike;
 
+import com.geekhalo.like.domain.ActionStatus;
 import com.geekhalo.like.domain.CancelActionCommand;
 
 public class UndislikeActionCommand extends CancelActionCommand {
@@ -7,10 +8,9 @@ public class UndislikeActionCommand extends CancelActionCommand {
 
     }
 
-
-    public static UndislikeActionCommand apply(Long userId, String targetType, Long targetId){
+    public static UndislikeActionCommand apply(Long userId, String targetType, Long targetId, ActionStatus status){
         UndislikeActionCommand context = new UndislikeActionCommand();
-        context.init(userId, targetType, targetId);
+        context.init(userId, targetType, targetId, status);
         return context;
     }
 }

@@ -34,9 +34,13 @@ public abstract class AbstractAction extends AbstractAggRoot {
         Preconditions.checkArgument(context != null);
         setUser(context.getActionUser());
         setTarget(context.getActionTarget());
+
+        AbstractActionCommand command = context.getCommand();
+        setChangeToStatus(command.getStatus());
+        setStatus(command.getStatus());
     }
 
-    protected boolean cancel() {
+    /*protected boolean cancel() {
         if (getStatus() != ActionStatus.INVALID) {
             setStatus(ActionStatus.INVALID);
             return true;
@@ -50,9 +54,9 @@ public abstract class AbstractAction extends AbstractAggRoot {
             return true;
         }
         return false;
-    }
+    }*/
 
     public boolean checkedValid() {
-        return this.getStatus() == ActionStatus.VALID;
+        return this.status == ActionStatus.VALID;
     }
 }

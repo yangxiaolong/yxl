@@ -12,13 +12,15 @@ public abstract class AbstractActionCommand {
     private Long userId;
     private String targetType;
     private Long targetId;
+    private ActionStatus status;
 
-    protected void init(Long userId, String targetType, Long targetId) {
+    protected void init(Long userId, String targetType, Long targetId, ActionStatus status) {
         Preconditions.checkArgument(userId != null);
         Preconditions.checkArgument(StringUtils.isNotEmpty(targetType));
         Preconditions.checkArgument(targetType != null);
         this.userId = userId;
         this.targetType = targetType;
         this.targetId = targetId;
+        this.status = status;
     }
 }

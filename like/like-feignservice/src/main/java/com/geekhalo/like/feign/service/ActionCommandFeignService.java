@@ -4,6 +4,7 @@ import com.geekhalo.like.api.ActionCommandApi;
 import com.geekhalo.like.api.ActionCommandParam;
 import com.geekhalo.like.app.DislikeCommandApplicationService;
 import com.geekhalo.like.app.LikeCommandApplicationService;
+import com.geekhalo.like.domain.ActionStatus;
 import com.geekhalo.like.domain.dislike.DislikeActionCommand;
 import com.geekhalo.like.domain.dislike.UndislikeActionCommand;
 import com.geekhalo.like.domain.like.LikeActionCommand;
@@ -29,7 +30,7 @@ public class ActionCommandFeignService implements ActionCommandApi {
     @PostMapping("like")
     public void like(@RequestBody @Valid ActionCommandParam param) {
         LikeActionCommand command = LikeActionCommand
-                .apply(param.getUserId(), param.getTargetType(), param.getTargetId());
+                .apply(param.getUserId(), param.getTargetType(), param.getTargetId(), ActionStatus.VALID);
         this.likeCommandApplicationService.like(command);
     }
 
@@ -37,7 +38,7 @@ public class ActionCommandFeignService implements ActionCommandApi {
     @PostMapping("unlike")
     public void unLike(@RequestBody @Valid ActionCommandParam param) {
         UnlikeActionCommand command = UnlikeActionCommand
-                .apply(param.getUserId(), param.getTargetType(), param.getTargetId());
+                .apply(param.getUserId(), param.getTargetType(), param.getTargetId(), ActionStatus.INVALID);
         this.likeCommandApplicationService.unLike(command);
     }
 
@@ -45,7 +46,7 @@ public class ActionCommandFeignService implements ActionCommandApi {
     @PostMapping("dislike")
     public void dislike(@RequestBody @Valid ActionCommandParam param) {
         DislikeActionCommand command = DislikeActionCommand
-                .apply(param.getUserId(), param.getTargetType(), param.getTargetId());
+                .apply(param.getUserId(), param.getTargetType(), param.getTargetId(), ActionStatus.VALID);
         this.dislikeCommandApplicationService.dislike(command);
     }
 
@@ -53,7 +54,7 @@ public class ActionCommandFeignService implements ActionCommandApi {
     @PostMapping("unDislike")
     public void unDislike(@RequestBody @Valid ActionCommandParam param) {
         UndislikeActionCommand command = UndislikeActionCommand
-                .apply(param.getUserId(), param.getTargetType(), param.getTargetId());
+                .apply(param.getUserId(), param.getTargetType(), param.getTargetId(), ActionStatus.INVALID);
         this.dislikeCommandApplicationService.unDislike(command);
     }
 
