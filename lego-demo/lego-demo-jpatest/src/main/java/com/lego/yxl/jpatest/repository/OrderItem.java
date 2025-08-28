@@ -33,9 +33,9 @@ public class OrderItem {
     private OrderStatus status;
 
     // 维护方：通过@ManyToOne和@JoinColumn指定外键
-    @ManyToOne
-    @JoinColumn(name = "order_id") // 数据库中外键列名
-    private Order order; // 这个属性名就是Order中mappedBy的值
+//    @ManyToOne
+//    @JoinColumn(name = "order_id") // 数据库中外键列名
+//    private Order order; // 这个属性名就是Order中mappedBy的值
 
     public int getRealPrice() {
         return price * amount;

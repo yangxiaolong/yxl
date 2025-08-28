@@ -19,6 +19,13 @@ import java.util.List;
 @Entity
 @Table(name = "tb_order")
 @Setter(AccessLevel.PRIVATE)
+
+//N+1问题, 2. 使用实体图（Entity Graph，JPA 2.1+，推荐，更灵活）
+@NamedEntityGraph(
+        name = "Order.withItems",  // 实体图名称
+        attributeNodes = @NamedAttributeNode("items")  // 需要加载的关联属性
+)
+
 public class Order {
 
     @Id
@@ -44,19 +51,21 @@ public class Order {
     @JoinColumn(name = "user_address_id")
     private OrderAddress address;
 
+    //解决N+1问题, 方式1 使用batch
+    //先查询order表, 再使用in ()查询OrderItem表
     //  订单项
-    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @BatchSize(size = 20)
 //    @Fetch(value = FetchMode.JOIN)  //只能根据id查询才有效
     @JoinColumn(name = "order_id")
-    private List<OrderItem> items = new ArrayList<>();*/
+    private List<OrderItem> items = new ArrayList<>();
 
 
     // 关键：mappedBy的值是“维护方（OrderItem）中关联当前实体（Order）的属性名”
 //    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-    private List<OrderItem> items = new ArrayList<>();
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+//    private List<OrderItem> items = new ArrayList<>();
 
     public static Order create(CreateOrderCommand command) {
         // 创建内存对象
