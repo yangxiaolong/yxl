@@ -45,11 +45,17 @@ public class Order {
     private OrderAddress address;
 
     //  订单项
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    /*@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @BatchSize(size = 20)
 //    @Fetch(value = FetchMode.JOIN)  //只能根据id查询才有效
     @JoinColumn(name = "order_id")
+    private List<OrderItem> items = new ArrayList<>();*/
+
+
+    // 关键：mappedBy的值是“维护方（OrderItem）中关联当前实体（Order）的属性名”
+//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<OrderItem> items = new ArrayList<>();
 
     public static Order create(CreateOrderCommand command) {
