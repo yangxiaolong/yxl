@@ -25,6 +25,10 @@ create table tb_order_item
     status       varchar(32) null
 );
 
+-- 创建序列 将1+N条insert优化为1+1条insert
+CREATE SEQUENCE IF NOT EXISTS tb_order_seq START WITH 1 INCREMENT BY 50;
+CREATE SEQUENCE IF NOT EXISTS tb_order_item_seq START WITH 1 INCREMENT BY 50;
+
 select * from tb_order;
 select * from tb_order_item;
 select * from tb_order_address;

@@ -29,7 +29,13 @@ import java.util.List;
 public class Order {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    // 改用H2支持的SEQUENCE策略
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
+    @SequenceGenerator(
+            name = "order_seq",          // 生成器名称
+            sequenceName = "tb_order_seq", // 数据库中序列的名称
+            allocationSize = 50          // 批量分配ID（与批处理大小匹配）
+    )
     private Long id;
 
     @Column(name = "user_id")
@@ -54,18 +60,18 @@ public class Order {
     //解决N+1问题, 方式1 使用batch
     //先查询order表, 再使用in ()查询OrderItem表
     //  订单项
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 //    @BatchSize(size = 20)
 //    @Fetch(value = FetchMode.JOIN)  //只能根据id查询才有效
-    @JoinColumn(name = "order_id")
-    private List<OrderItem> items = new ArrayList<>();
+//    @JoinColumn(name = "order_id")
+//    private List<OrderItem> items = new ArrayList<>();
 
 
     // 关键：mappedBy的值是“维护方（OrderItem）中关联当前实体（Order）的属性名”
-//    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-//    private List<OrderItem> items = new ArrayList<>();
+    private List<OrderItem> items = new ArrayList<>();
 
     public static Order create(CreateOrderCommand command) {
         // 创建内存对象
@@ -83,7 +89,7 @@ public class Order {
         // 添加订单项
         command.getProducts()
                 .stream()
-                .map(OrderItem::create)
+                .map(s -> OrderItem.create(s, order))
                 .forEach(order::addOrderItem);
 
         order.init();

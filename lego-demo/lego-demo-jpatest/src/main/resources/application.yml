@@ -2,7 +2,7 @@ spring:
   application:
     name: jpa
   datasource:
-    url: jdbc:h2:file:D:/DEV/h2/demo
+    url: jdbc:h2:file:D:/DEV/h2/demo;DB_CLOSE_DELAY=-1  # 增加DB_CLOSE_DELAY避免连接关闭
     driver-class-name: org.h2.Driver
     username: sa
     password: password
@@ -12,10 +12,13 @@ spring:
       path: /h2-console
 
 # N+1 问题
-#  jpa:
-#    properties:
-#      hibernate:
-#        default_batch_fetch_size: 20
+  jpa:
+    properties:
+      hibernate:
+        default_batch_fetch_size: 20
+        order_inserts: true
+        order_updates: true
+        jdbc.batch_size: 50                       # 批处理核心：批量大小
 
 # QueryPlanCache in 内存溢出的问题 hibernate6已经不包含 QueryPlanCache.java
 #  QueryInterpretationCache QueryEngine 实现
@@ -38,3 +41,4 @@ spring:
 logging:
   level:
     net.ttddyy.dsproxy.listener: trace
+    logging.level.org.hibernate.engine.jdbc.batch.internal.BatchBuilderImpl: DEBUG

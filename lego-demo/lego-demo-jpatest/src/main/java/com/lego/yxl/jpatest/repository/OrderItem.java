@@ -13,7 +13,12 @@ import lombok.Setter;
 @Setter(AccessLevel.PRIVATE)
 public class OrderItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_seq")
+    @SequenceGenerator(
+            name = "order_item_seq",
+            sequenceName = "tb_order_item_seq",
+            allocationSize = 50
+    )
     private Long id;
 
     @Column(name = "product_id")
@@ -33,16 +38,18 @@ public class OrderItem {
     private OrderStatus status;
 
     // 维护方：通过@ManyToOne和@JoinColumn指定外键
-//    @ManyToOne
-//    @JoinColumn(name = "order_id") // 数据库中外键列名
-//    private Order order; // 这个属性名就是Order中mappedBy的值
+    @ManyToOne
+    @JoinColumn(name = "order_id") // 数据库中外键列名
+    private Order order; // 这个属性名就是Order中mappedBy的值
 
     public int getRealPrice() {
         return price * amount;
     }
 
-    public static OrderItem create(ProductForBuy product) {
+    public static OrderItem create(ProductForBuy product, Order order) {
         OrderItem orderItem = new OrderItem();
+        orderItem.setOrder(order);
+
         orderItem.setProductId(product.getProductId());
         orderItem.setProductName(product.getProductName());
         orderItem.setPrice(product.getPrice());
