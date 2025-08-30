@@ -12,13 +12,15 @@ import lombok.Setter;
 @Table(name = "tb_order_item")
 @Setter(AccessLevel.PRIVATE)
 public class OrderItem {
+    //    @Id
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_seq")
+//    @SequenceGenerator(
+//            name = "order_item_seq",
+//            sequenceName = "tb_order_item_seq",
+//            allocationSize = 50
+//    )
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_item_seq")
-    @SequenceGenerator(
-            name = "order_item_seq",
-            sequenceName = "tb_order_item_seq",
-            allocationSize = 50
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "product_id")

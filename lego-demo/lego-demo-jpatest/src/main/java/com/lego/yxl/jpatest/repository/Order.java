@@ -7,9 +7,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
-import org.hibernate.annotations.BatchSize;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
@@ -28,14 +25,17 @@ import java.util.List;
 
 public class Order {
 
+    //    @Id
+//    // 改用H2支持的SEQUENCE策略
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
+//    @SequenceGenerator(
+//            name = "order_seq",          // 生成器名称
+//            sequenceName = "tb_order_seq", // 数据库中序列的名称
+//            allocationSize = 50          // 批量分配ID（与批处理大小匹配）
+//    )
     @Id
     // 改用H2支持的SEQUENCE策略
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "order_seq")
-    @SequenceGenerator(
-            name = "order_seq",          // 生成器名称
-            sequenceName = "tb_order_seq", // 数据库中序列的名称
-            allocationSize = 50          // 批量分配ID（与批处理大小匹配）
-    )
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "user_id")
