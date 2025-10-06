@@ -13,12 +13,11 @@ import lombok.*;
 @Setter(AccessLevel.PRIVATE)
 @MappedSuperclass
 public abstract class AbstractAction extends AbstractAggRoot {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @EmbeddedId
+    private ActionId id;
 
-    @Embedded
-    private ActionUser user;
+//    @Embedded
+//    private ActionUser user;
 
     @Embedded
     private ActionTarget target;
@@ -27,9 +26,18 @@ public abstract class AbstractAction extends AbstractAggRoot {
     @Enumerated(EnumType.STRING)
     private ActionStatus status;
 
+    public Long getId() {
+        return id.getId();
+    }
+
+    public ActionUser getUser() {
+        return id.getUser();
+    }
+
     protected void init(AbstractActionContext context){
         Preconditions.checkArgument(context != null);
-        setUser(context.getActionUser());
+        this.id = new ActionId();
+        id.setUser(context.getActionUser());
         setTarget(context.getActionTarget());
     }
 

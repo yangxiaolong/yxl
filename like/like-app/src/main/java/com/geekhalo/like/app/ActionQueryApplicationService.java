@@ -20,13 +20,13 @@ public class ActionQueryApplicationService implements LikeQueryApplicationServic
     @Override
     public List<LikeAction> getLikeByUserAndType(ActionUser user, String type) {
 //         = ActionUser.apply(userId);
-        return this.likeActionRepository.getByUserAndTargetType(user, type);
+        return this.likeActionRepository.getById_UserAndTargetType(user, type);
     }
 
     @Override
     public List<DislikeAction> getDislikeByUserAndType(ActionUser user, String type) {
 //        ActionUser user = ActionUser.apply(userId);
-        return this.dislikeActionRepository.getByUserAndTargetType(user, type);
+        return this.dislikeActionRepository.getById_UserAndTargetType(user, type);
     }
 
 }

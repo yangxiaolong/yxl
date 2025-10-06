@@ -10,12 +10,12 @@ import java.util.Optional;
 public interface AbstractActionRepository<A extends AbstractAction>
         extends CommandWithKeyRepository<A, Long, ActionKey>
         /*,QueryRepository<A, Long>*/ {
-    Optional<A> getByUserAndTarget(ActionUser user, ActionTarget target);
+    Optional<A> findById_UserAndTarget(ActionUser user, ActionTarget target);
 
-    List<A> getByUserAndTargetType(ActionUser user, String type);
+    List<A> getById_UserAndTargetType(ActionUser user, String type);
 
     @Override
     default Optional<A> findByKey(ActionKey key) {
-        return getByUserAndTarget(key.getActionUser(), key.getActionTarget());
+        return findById_UserAndTarget(key.getActionUser(), key.getActionTarget());
     }
 }
