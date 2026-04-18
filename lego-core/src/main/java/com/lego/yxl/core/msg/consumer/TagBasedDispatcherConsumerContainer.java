@@ -13,14 +13,12 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.common.message.MessageExt;
-import org.springframework.core.annotation.AnnotatedElementUtils;
 import org.springframework.core.env.Environment;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Slf4j
 public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContainer {
@@ -62,23 +60,34 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
 
     private void initMethods() {
         List<Method> methods = MethodUtils.getMethodsListWithAnnotation(this.bean.getClass(), HandleTag.class);
+        
         methods.forEach(method -> {
             if (method.getParameterCount() != 1) {
                 log.warn("Method {} must have only one param", method);
                 return;
             }
-            HandleTag handleTag = AnnotatedElementUtils.findMergedAnnotation(method, HandleTag.class);
-            if (Objects.isNull(handleTag)) {
-                String msg = String.format("Tag %s is null", this.bean.getClass().getName());
+            
+            String tag = resolveTag(method);
+            if (tag.isEmpty()) {
+                String msg = String.format("Tag is null or empty for method %s", method.getName());
                 throw new RuntimeException(msg);
             }
-            String tag = handleTag.value();
+            
             if (this.tagMethods.containsKey(tag)) {
                 String msg = String.format("Tag %s On %s is duplicate", tag, this.bean.getClass().getName());
                 throw new RuntimeException(msg);
             }
             this.tagMethods.put(tag, new MethodInvoker(method));
         });
+    }
+    
+    /**
+     * 解析方法的 Tag 值
+     * 如果 @HandleTag 指定了值则使用该值，否则使用方法参数的简单类名
+     */
+    private String resolveTag(Method method) {
+        Class<?> paramType = method.getParameterTypes()[0];
+        return paramType.getSimpleName();
     }
 
     private String findTag() {

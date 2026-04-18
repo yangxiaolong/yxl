@@ -10,22 +10,22 @@ import com.lego.yxl.core.msg.annotation.TagBasedDispatcherMessageConsumer;
 )
 public class AnnotationBasedUserMessageConsumer extends UserMessageConsumer {
 
-    @HandleTag("UserCreatedEvent")
+    @HandleTag
     public void handle(UserEvents.UserCreatedEvent userCreatedEvent) {
         super.handle(userCreatedEvent);
     }
 
-    @HandleTag("UserEnableEvent")
+    @HandleTag
     public void handle(UserEvents.UserEnableEvent userEnableEvent) {
         super.handle(userEnableEvent);
     }
 
-    @HandleTag("UserDisableEvent")
+    @HandleTag
     public void handle(UserEvents.UserDisableEvent userDisableEvent) {
         super.handle(userDisableEvent);
     }
 
-    @HandleTag("UserDeletedEvent")
+    @HandleTag
     public void handle(UserEvents.UserDeletedEvent userDeletedEvent) {
         super.handle(userDeletedEvent);
     }
