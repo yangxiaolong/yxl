@@ -12,6 +12,8 @@ import com.lego.yxl.core.splitter.support.spring.invoker.SplitInvoker;
 import com.lego.yxl.core.splitter.support.spring.invoker.SplitInvokerRegistry;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,8 +49,9 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
         this.splitInvokerRegistry = splitInvokerRegistry;
     }
 
+    @NotNull
     @Override
-    public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+    public Object postProcessAfterInitialization(@NotNull Object bean, @NotNull String beanName) throws BeansException {
         process(bean);
         return bean;
     }
@@ -58,15 +61,18 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
         MethodUtils.getMethodsListWithAnnotation(targetClass, Split.class).forEach(method -> {
             Split split = method.getAnnotation(Split.class);
 
-            SplitInvoker splitInvoker;
-            if (method.getParameterCount() == 1) {
-                splitInvoker = buildSingleParamSplitInvoker(split, method);
-            } else {
-                splitInvoker = buildMultipleParamSplitInvoker(split, method);
-            }
+            SplitInvoker splitInvoker = getSplitInvoker(method, split);
 
             this.splitInvokerRegistry.register(method, splitInvoker);
         });
+    }
+
+    @Nullable
+    private SplitInvoker getSplitInvoker(Method method, Split split) {
+        if (method.getParameterCount() == 1) {
+            return buildSingleParamSplitInvoker(split, method);
+        }
+        return buildMultipleParamSplitInvoker(split, method);
     }
 
     private SplitInvoker buildMultipleParamSplitInvoker(Split split, Method method) {
