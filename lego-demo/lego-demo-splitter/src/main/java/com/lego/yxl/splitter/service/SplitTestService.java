@@ -5,6 +5,7 @@ import com.lego.yxl.core.splitter.annotation.Split;
 import com.lego.yxl.core.splitter.annotation.SplitParam;
 import com.lego.yxl.splitter.param.AnnBasedInputParam;
 import com.lego.yxl.splitter.param.SplittableInputParam;
+import com.lego.yxl.splitter.param.UserPO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -18,87 +19,87 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SplitTestService {
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public List<Long> splitByList(List<Long> params) {
-        return convert(params);
+    @Split(sizePrePartition = 40, taskPreThread = 3)
+    public List<UserPO> splitByList(List<Long> params) {
+        return convert(params, null);
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public List<Long> splitByList(@SplitParam List<Long> params, Long other) {
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public List<UserPO> splitByList(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
-        return convert(params);
+        return convert(params, other);
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public Set<Long> splitByListAsSet(List<Long> params) {
-        return new HashSet<>(convert(params));
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public Set<UserPO> splitByListAsSet(List<Long> params) {
+        return new HashSet<>(convert(params, null));
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public Set<Long> splitByListAsSet(@SplitParam List<Long> params, Long other) {
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public Set<UserPO> splitByListAsSet(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
-        return new HashSet<>(convert(params));
+        return new HashSet<>(convert(params, other));
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
+    @Split(sizePrePartition = 40, taskPreThread = 2)
     public Integer splitByListAsCount(List<Long> params) {
-        return convert(params).size();
+        return convert(params, null).size();
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
+    @Split(sizePrePartition = 40, taskPreThread = 2)
     public Integer splitByListAsCount(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
-        return convert(params).size();
+        return convert(params, other).size();
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public int splitByListAsCount2(List<Long> params) {
-        return convert(params).size();
+//    @Split(sizePrePartition = 40, taskPreThread = 2)
+//    public int splitByListAsCount2(List<Long> params) {
+//        return convert(params, null).size();
+//    }
+//
+//    @Split(sizePrePartition = 40, taskPreThread = 2)
+//    public int splitByListAsCount2(@SplitParam List<Long> params, Long other) {
+//        Preconditions.checkArgument(other != null);
+//        return convert(params, other).size();
+//    }
+
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public long splitByListAsLong(List<Long> params) {
+        return convert(params, null).size();
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public int splitByListAsCount2(@SplitParam List<Long> params, Long other) {
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public long splitByListAsLong(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
-        return convert(params).size();
+        return convert(params, other).size();
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public Long splitByListAsLong(List<Long> params) {
-        return Long.valueOf(convert(params).size());
-    }
-
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public Long splitByListAsLong(@SplitParam List<Long> params, Long other) {
-        Preconditions.checkArgument(other != null);
-        return Long.valueOf(convert(params).size());
-    }
-
-    @Split(sizePrePartition = 2, taskPreThread = 2)
+    @Split(sizePrePartition = 40, taskPreThread = 2)
     public long splitByListAsLong2(List<Long> params) {
-        return Long.valueOf(convert(params).size());
+        return convert(params, null).size();
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
+    @Split(sizePrePartition = 40, taskPreThread = 2)
     public long splitByListAsLong2(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
-        return Long.valueOf(convert(params).size());
+        return convert(params, other).size();
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public List<Long> splitByParam(AnnBasedInputParam param) {
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public List<UserPO> splitByParam(AnnBasedInputParam param) {
         Preconditions.checkArgument(param.getOther() != null);
-        return convert(param.getNumbers());
+        return convert(param.getNumbers(), param.getOther());
     }
 
-    @Split(sizePrePartition = 2, taskPreThread = 2)
-    public List<Long> splitByParam(SplittableInputParam param) {
+    @Split(sizePrePartition = 40, taskPreThread = 2)
+    public List<UserPO> splitByParam(SplittableInputParam param) {
         Preconditions.checkArgument(param.getOther() != null);
-        return convert(param.getNumbers());
+        return convert(param.getNumbers(), param.getOther());
     }
 
 
-    private List<Long> convert(List<Long> input) {
-        if (input.size() > 5) {
+    private List<UserPO> convert(List<Long> input, Long other) {
+        if (input.size() > 1000) {
             throw new RuntimeException("Many Param");
         }
         try {
@@ -108,8 +109,6 @@ public class SplitTestService {
             Thread.currentThread().interrupt();
         }
         log.info("Thread {} run with {}", Thread.currentThread().getName(), input);
-        return input.stream()
-                .map(i -> i + 10000L)
-                .collect(Collectors.toList());
+        return input.stream().map(s -> new UserPO(s, other)).collect(Collectors.toList());
     }
 }
