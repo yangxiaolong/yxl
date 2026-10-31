@@ -103,13 +103,13 @@ public class SplitterAutoConfiguration {
     @Bean
     @Role(ROLE_INFRASTRUCTURE)
     public ParallelMethodExecutor defaultSplitExecutor(ExecutorService defaultExecutor) {
-        return new ParallelMethodExecutor(defaultExecutor, 2);
+        return new ParallelMethodExecutor(defaultExecutor, 1);
     }
 
     @Bean
     @Role(ROLE_INFRASTRUCTURE)
-    public ParallelMethodExecutor defaultSplitExecutor1(ExecutorService defaultExecutor) {
-        return new ParallelMethodExecutor(defaultExecutor, 1);
+    public ParallelMethodExecutor defaultSplitExecutor2(ExecutorService defaultExecutor) {
+        return new ParallelMethodExecutor(defaultExecutor, 2);
     }
 
 

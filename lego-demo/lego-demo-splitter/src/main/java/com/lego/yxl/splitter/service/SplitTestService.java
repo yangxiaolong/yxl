@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SplitTestService {
 
-    @Split(sizePrePartition = 40, executor = "defaultSplitExecutor1")
+    @Split(sizePrePartition = 40, executor = "defaultSplitExecutor2")
     public List<UserPO> splitByList(List<Long> params) {
         return convert(params, null);
     }
