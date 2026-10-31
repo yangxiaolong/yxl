@@ -8,9 +8,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Split {
-    int sizePrePartition() default 20;
-
-    int taskPreThread() default 3;
+    int sizePrePartition() default 1000;
 
     String paramSplitter() default "";
 

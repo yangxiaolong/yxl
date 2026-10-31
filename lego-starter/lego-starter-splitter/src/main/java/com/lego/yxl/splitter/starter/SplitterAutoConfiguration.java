@@ -79,10 +79,15 @@ public class SplitterAutoConfiguration {
     }
 
     @Bean
-    @ConditionalOnMissingBean
     @Role(ROLE_INFRASTRUCTURE)
     public ParallelMethodExecutor defaultSplitExecutor(ExecutorService defaultExecutor) {
         return new ParallelMethodExecutor(defaultExecutor, 2);
+    }
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    public ParallelMethodExecutor defaultSplitExecutor1(ExecutorService defaultExecutor) {
+        return new ParallelMethodExecutor(defaultExecutor, 1);
     }
 
     @Bean

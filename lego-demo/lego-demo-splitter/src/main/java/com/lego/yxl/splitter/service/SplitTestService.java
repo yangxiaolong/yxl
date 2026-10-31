@@ -19,79 +19,79 @@ import java.util.stream.Collectors;
 @Slf4j
 public class SplitTestService {
 
-    @Split(sizePrePartition = 40, taskPreThread = 3)
+    @Split(sizePrePartition = 40, executor = "defaultSplitExecutor10")
     public List<UserPO> splitByList(List<Long> params) {
         return convert(params, null);
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public List<UserPO> splitByList(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
         return convert(params, other);
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public Set<UserPO> splitByListAsSet(List<Long> params) {
         return new HashSet<>(convert(params, null));
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public Set<UserPO> splitByListAsSet(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
         return new HashSet<>(convert(params, other));
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public Integer splitByListAsCount(List<Long> params) {
         return convert(params, null).size();
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public Integer splitByListAsCount(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
         return convert(params, other).size();
     }
 
-//    @Split(sizePrePartition = 40, taskPreThread = 2)
+//    @Split(sizePrePartition = 40)
 //    public int splitByListAsCount2(List<Long> params) {
 //        return convert(params, null).size();
 //    }
 //
-//    @Split(sizePrePartition = 40, taskPreThread = 2)
+//    @Split(sizePrePartition = 40)
 //    public int splitByListAsCount2(@SplitParam List<Long> params, Long other) {
 //        Preconditions.checkArgument(other != null);
 //        return convert(params, other).size();
 //    }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public long splitByListAsLong(List<Long> params) {
         return convert(params, null).size();
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public long splitByListAsLong(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
         return convert(params, other).size();
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public long splitByListAsLong2(List<Long> params) {
         return convert(params, null).size();
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public long splitByListAsLong2(@SplitParam List<Long> params, Long other) {
         Preconditions.checkArgument(other != null);
         return convert(params, other).size();
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public List<UserPO> splitByParam(AnnBasedInputParam param) {
         Preconditions.checkArgument(param.getOther() != null);
         return convert(param.getNumbers(), param.getOther());
     }
 
-    @Split(sizePrePartition = 40, taskPreThread = 2)
+    @Split(sizePrePartition = 40)
     public List<UserPO> splitByParam(SplittableInputParam param) {
         Preconditions.checkArgument(param.getOther() != null);
         return convert(param.getNumbers(), param.getOther());
