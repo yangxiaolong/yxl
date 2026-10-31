@@ -52,11 +52,6 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
     @NotNull
     @Override
     public Object postProcessAfterInitialization(@NotNull Object bean, @NotNull String beanName) throws BeansException {
-        process(bean);
-        return bean;
-    }
-
-    private void process(Object bean) {
         Class<?> targetClass = AopUtils.getTargetClass(bean);
         MethodUtils.getMethodsListWithAnnotation(targetClass, Split.class).forEach(method -> {
             Split split = method.getAnnotation(Split.class);
@@ -65,6 +60,8 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
 
             this.splitInvokerRegistry.register(method, splitInvoker);
         });
+
+        return bean;
     }
 
     @Nullable
@@ -86,22 +83,26 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
             return null;
         }
 
-        MethodExecutor methodExecutor = findMethodExecutor(split);
-        if (methodExecutor == null) {
+        SplitService splitService = buildSplitService(split, method, new InvokeParamsSplitter(paramSplitter));
+        if (splitService == null) {
             return null;
         }
-
-        Class<?> returnType = method.getReturnType();
-        ResultMerger resultMerger = findResultMerger(returnType, split);
-        if (resultMerger == null) {
-            return null;
-        }
-
-        InvokeParamsSplitter invokeParamsSplitter = new InvokeParamsSplitter(paramSplitter);
-
-        SplitService splitService = new DefaultSplitService(invokeParamsSplitter, methodExecutor, resultMerger);
 
         return new MultipleParamSplitInvoker(splitService, method, index, split.sizePrePartition());
+    }
+
+    private SplitInvoker buildSingleParamSplitInvoker(Split split, Method method) {
+        ParamSplitter paramSplitter = findParamSplitter(method.getParameterTypes()[0], split);
+        if (paramSplitter == null) {
+            return null;
+        }
+
+        SplitService splitService = buildSplitService(split, method, paramSplitter);
+        if (splitService == null) {
+            return null;
+        }
+
+        return new SingleParamSplitInvoker(splitService, method, split.sizePrePartition());
     }
 
     private Integer findParamIndex(Method method) {
@@ -115,26 +116,18 @@ public class SplitInvokerProcessor implements BeanPostProcessor {
         return null;
     }
 
-    private SplitInvoker buildSingleParamSplitInvoker(Split split, Method method) {
-        ParamSplitter paramSplitter = findParamSplitter(method.getParameterTypes()[0], split);
-        if (paramSplitter == null) {
-            return null;
-        }
-
+    private SplitService buildSplitService(Split split, Method method, ParamSplitter paramSplitter) {
         MethodExecutor methodExecutor = findMethodExecutor(split);
         if (methodExecutor == null) {
             return null;
         }
 
-        Class<?> returnType = method.getReturnType();
-        ResultMerger resultMerger = findResultMerger(returnType, split);
+        ResultMerger resultMerger = findResultMerger(method.getReturnType(), split);
         if (resultMerger == null) {
             return null;
         }
 
-        SplitService splitService = new DefaultSplitService(paramSplitter, methodExecutor, resultMerger);
-
-        return new SingleParamSplitInvoker(splitService, method, split.sizePrePartition());
+        return new DefaultSplitService(paramSplitter, methodExecutor, resultMerger);
     }
 
     private MethodExecutor findMethodExecutor(Split split) {
