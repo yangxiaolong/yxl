@@ -36,11 +36,11 @@ import static org.springframework.beans.factory.config.BeanDefinition.ROLE_INFRA
 
 /**
  * AutoConfiguration 自动配置主要完成：<br />
- * 1. PointcutAdvisor, 拦截器配置
+ * 1. SplitInvokerRegistry，InvokerRegistry 使用单例特性，共享注册信息
  * <p>
- * 2. BeanProcessor，处理器配置，Spring 启动时，对 @Split 注解进行处理
+ * 2. SplitInvokerProcessor，处理器配置，Spring 启动时，对 @Split 注解进行处理
  * <p>
- * 3. SplitInvokerRegistry，InvokerRegistry 使用单例特性，共享注册信息
+ * 3. SplitInterceptor PointcutAdvisor, 拦截器配置
  * <p>
  * 4. ParallelMethodExecutor，多线程执行器
  * <p>
@@ -60,6 +60,12 @@ public class SplitterAutoConfiguration {
     }
 
     @Bean
+    public SplitInvokerProcessor splitInvokerProcessor(SplitInvokerRegistry splitInvokerRegistry) {
+        return new SplitInvokerProcessor(splitInvokerRegistry);
+    }
+
+
+    @Bean
     @ConditionalOnMissingBean
     @Role(ROLE_INFRASTRUCTURE)
     public SplitInterceptor splitInterceptor(SplitInvokerRegistry splitInvokerRegistry) {
@@ -73,22 +79,6 @@ public class SplitterAutoConfiguration {
         return new DefaultPointcutAdvisor(pointcut, splitInterceptor);
     }
 
-    @Bean
-    public SplitInvokerProcessor splitInvokerProcessor(SplitInvokerRegistry splitInvokerRegistry) {
-        return new SplitInvokerProcessor(splitInvokerRegistry);
-    }
-
-    @Bean
-    @Role(ROLE_INFRASTRUCTURE)
-    public ParallelMethodExecutor defaultSplitExecutor(ExecutorService defaultExecutor) {
-        return new ParallelMethodExecutor(defaultExecutor, 2);
-    }
-
-    @Bean
-    @Role(ROLE_INFRASTRUCTURE)
-    public ParallelMethodExecutor defaultSplitExecutor1(ExecutorService defaultExecutor) {
-        return new ParallelMethodExecutor(defaultExecutor, 1);
-    }
 
     @Bean
     @ConditionalOnMissingBean
@@ -112,27 +102,16 @@ public class SplitterAutoConfiguration {
 
     @Bean
     @Role(ROLE_INFRASTRUCTURE)
-    public ListResultMerger listResultMerger() {
-        return new ListResultMerger();
+    public ParallelMethodExecutor defaultSplitExecutor(ExecutorService defaultExecutor) {
+        return new ParallelMethodExecutor(defaultExecutor, 2);
     }
 
     @Bean
     @Role(ROLE_INFRASTRUCTURE)
-    public LongResultMerger longResultMerger() {
-        return new LongResultMerger();
+    public ParallelMethodExecutor defaultSplitExecutor1(ExecutorService defaultExecutor) {
+        return new ParallelMethodExecutor(defaultExecutor, 1);
     }
 
-    @Bean
-    @Role(ROLE_INFRASTRUCTURE)
-    public IntResultMerger intResultMerger() {
-        return new IntResultMerger();
-    }
-
-    @Bean
-    @Role(ROLE_INFRASTRUCTURE)
-    public SetResultMerger setResultMerger() {
-        return new SetResultMerger();
-    }
 
     @Bean
     @Role(ROLE_INFRASTRUCTURE)
@@ -156,6 +135,31 @@ public class SplitterAutoConfiguration {
     @Role(ROLE_INFRASTRUCTURE)
     public SplittableParamSplitter splittableParamSplitter() {
         return new SplittableParamSplitter();
+    }
+
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    public ListResultMerger listResultMerger() {
+        return new ListResultMerger();
+    }
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    public LongResultMerger longResultMerger() {
+        return new LongResultMerger();
+    }
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    public IntResultMerger intResultMerger() {
+        return new IntResultMerger();
+    }
+
+    @Bean
+    @Role(ROLE_INFRASTRUCTURE)
+    public SetResultMerger setResultMerger() {
+        return new SetResultMerger();
     }
 
 }
