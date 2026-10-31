@@ -1,10 +1,10 @@
 logging:
   level:
     root: info
-    com.lego.yxl: debug
-    org.springframework.web: trace
-    org.springframework.data.rest: trace
-    net.ttddyy.dsproxy.listener: trace
+    com.lego.yxl: info
+    org.springframework.web: info
+    org.springframework.data.rest: info
+    net.ttddyy.dsproxy.listener: info
 
 server:
   port: 8080
