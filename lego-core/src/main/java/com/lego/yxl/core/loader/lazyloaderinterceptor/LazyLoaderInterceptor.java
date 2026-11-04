@@ -35,7 +35,7 @@ public class LazyLoaderInterceptor implements InvocationHandler, MethodIntercept
     }
 
     @Override
-    public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] objects) throws Throwable {
         if (isGetter(method)) {
             String propertyName = getPropertyName(method);
             PropertyLazyLoader propertyLazyLoader = this.lazyLoaderCache.get(propertyName);
@@ -46,7 +46,7 @@ public class LazyLoaderInterceptor implements InvocationHandler, MethodIntercept
                     return data;
                 }
 
-                data = propertyLazyLoader.loadData(o);
+                data = propertyLazyLoader.loadData(proxy);
 
                 if (data != null) {
                     FieldUtils.writeField(target, propertyName, data, true);
