@@ -22,7 +22,7 @@ public class UserRepository {
     }
 
     public User getById(Long id){
-        log.info("Get User By Id {}", id);
+        log.info("==Do Get User By Id {}", id);
         TimeUtils.sleepAsMS(3);
         return createUser(id);
     }

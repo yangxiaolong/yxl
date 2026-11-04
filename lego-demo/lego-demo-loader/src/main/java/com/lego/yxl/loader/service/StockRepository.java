@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 public class StockRepository {
 
     public Stock getByProductId(Long productId){
-        log.info("Get Stock By Product Id {}", productId);
+        log.info("==Do Get Stock By Product Id {}", productId);
 
         return Stock.builder()
                 .id(RandomUtils.nextLong())

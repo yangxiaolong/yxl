@@ -23,7 +23,7 @@ public class ProductRepository {
 
     public Product getById(Long id){
         TimeUtils.sleepAsMS(3);
-        log.info("Get Product By Id {}", id);
+        log.info("==Do Get Product By Id {}", id);
         return createProduct(id);
     }
 

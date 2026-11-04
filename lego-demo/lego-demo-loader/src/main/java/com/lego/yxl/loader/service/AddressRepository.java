@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
 @Slf4j
 public class AddressRepository {
     public Address getDefaultAddressByUserId(Long userId) {
-        log.info("Load Default Address For User {}", userId);
+        log.info("==Do Load Default Address For User {}", userId);
         Address address = createAddress(RandomUtils.nextLong());
         address.setUserId(userId);
         return address;
