@@ -35,7 +35,7 @@ public class LazyLoaderInterceptorFactory {
         }
         return propertyLazyLoaders.stream()
                 .filter(Objects::nonNull)
-                .collect(toMap(loader -> loader.getField().getName(), Function.identity()));
+                .collect(toMap(l -> l.getField().getName(), Function.identity(), (a, b) -> a));
     }
 
 }
