@@ -1,4 +1,4 @@
-package com.lego.yxl.loader.service;
+package com.lego.yxl.loader.repository;
 
 import lombok.Builder;
 import lombok.Data;

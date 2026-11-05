@@ -1,4 +1,4 @@
-package com.lego.yxl.loader.service;
+package com.lego.yxl.loader.repository;
 
 import com.lego.yxl.core.util.TimeUtils;
 import lombok.extern.slf4j.Slf4j;

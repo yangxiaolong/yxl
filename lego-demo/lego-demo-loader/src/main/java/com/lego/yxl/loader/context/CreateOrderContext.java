@@ -1,10 +1,10 @@
 package com.lego.yxl.loader.context;
 
-import com.lego.yxl.loader.service.Address;
-import com.lego.yxl.loader.service.Price;
-import com.lego.yxl.loader.service.Product;
-import com.lego.yxl.loader.service.Stock;
-import com.lego.yxl.loader.service.User;
+import com.lego.yxl.loader.repository.Address;
+import com.lego.yxl.loader.repository.Price;
+import com.lego.yxl.loader.repository.Product;
+import com.lego.yxl.loader.repository.Stock;
+import com.lego.yxl.loader.repository.User;
 
 public interface CreateOrderContext {
 

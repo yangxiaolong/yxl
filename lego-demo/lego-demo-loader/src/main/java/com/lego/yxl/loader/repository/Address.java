@@ -1,4 +1,4 @@
-package com.lego.yxl.loader.service;
+package com.lego.yxl.loader.repository;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,12 +7,11 @@ import lombok.NoArgsConstructor;
 
 @Builder
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Order {
+@AllArgsConstructor
+public class Address {
     private Long id;
     private Long userId;
-    private Long addressId;
-    private Long productId;
-    private String descr;
+    private String detail;
+
 }
