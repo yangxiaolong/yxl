@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-@LazyLoadBy("#{@priceService.getByUserAndProduct(${userId}, ${productId})}")
+@LazyLoadBy("#{@priceRepository.getByUserAndProduct(${userId}, ${productId})}")
 public @interface LazyLoadPriceByUserAndProduct {
 
     String userId();

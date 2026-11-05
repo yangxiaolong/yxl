@@ -25,6 +25,6 @@ public class CreateOrderContextV2 implements CreateOrderContext{
     @LazyLoadBy("#{@stockRepository.getByProductId(product.id)}")
     private Stock stock;
 
-    @LazyLoadBy("#{@priceService.getByUserAndProduct(user.id, product.id)}")
+    @LazyLoadBy("#{@priceRepository.getByUserAndProduct(user.id, product.id)}")
     private Price price;
 }
