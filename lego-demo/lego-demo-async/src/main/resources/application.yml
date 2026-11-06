@@ -1,6 +1,6 @@
 logging:
   pattern:
-    console: "[%thread] %-5level %-40.40logger{39} : %m%n%wEx"
+    console: "[%-15.15thread] %-5level %-40.40logger{39} : %m%n%wEx"
   level:
     root: info
     com.lego.yxl: info
