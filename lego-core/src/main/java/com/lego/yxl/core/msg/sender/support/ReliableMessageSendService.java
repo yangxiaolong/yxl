@@ -48,11 +48,11 @@ public class ReliableMessageSendService {
     public void saveAndSend(Message message) {
         LocalMessage localMessage = convertToLocalMessage(message);
 
-        saveToDB(localMessage);
+        saveToDB(localMessage);// ① 先落库
 
         SendMessageTask sendMessageTask = buildTask(localMessage);
 
-        addCallbackOrRunTask(sendMessageTask);
+        addCallbackOrRunTask(sendMessageTask);// ② 事务后发送
     }
 
     private void addCallbackOrRunTask(SendMessageTask sendMessageTask) {

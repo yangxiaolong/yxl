@@ -13,6 +13,7 @@ import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.springframework.aop.support.AopUtils;
 import org.springframework.core.env.Environment;
 
 import java.lang.reflect.Method;
@@ -59,7 +60,9 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
     }
 
     private void initMethods() {
-        List<Method> methods = MethodUtils.getMethodsListWithAnnotation(this.bean.getClass(), HandleTag.class);
+        // 使用代理背后的真实类型扫描注解，避免 CGLIB 代理覆盖方法后 @HandleTag 丢失
+        Class<?> targetClass = AopUtils.getTargetClass(this.bean);
+        List<Method> methods = MethodUtils.getMethodsListWithAnnotation(targetClass, HandleTag.class);
         
         methods.forEach(method -> {
             if (method.getParameterCount() != 1) {
@@ -74,11 +77,16 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
             }
             
             if (this.tagMethods.containsKey(tag)) {
-                String msg = String.format("Tag %s On %s is duplicate", tag, this.bean.getClass().getName());
+                String msg = String.format("Tag %s On %s is duplicate", tag, targetClass.getName());
                 throw new RuntimeException(msg);
             }
             this.tagMethods.put(tag, new MethodInvoker(method));
         });
+
+        if (this.tagMethods.isEmpty()) {
+            String msg = String.format("No @HandleTag method found on %s", targetClass.getName());
+            throw new RuntimeException(msg);
+        }
     }
     
     /**
