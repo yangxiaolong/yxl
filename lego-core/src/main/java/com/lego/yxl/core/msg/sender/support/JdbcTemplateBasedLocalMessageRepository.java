@@ -7,8 +7,8 @@ import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.JdbcTransactionManager;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -43,9 +43,9 @@ public class JdbcTemplateBasedLocalMessageRepository implements LocalMessageRepo
     private final String tableName;
 
 
-    public JdbcTemplateBasedLocalMessageRepository(DataSource dataSource, String tableName) {
-        DataSourceTransactionManager dataSourceTransactionManager = new DataSourceTransactionManager(dataSource);
-        this.transactionTemplate = new TransactionTemplate(dataSourceTransactionManager);
+    public JdbcTemplateBasedLocalMessageRepository(
+            DataSource dataSource, String tableName, JdbcTransactionManager jdbcTransactionManager) {
+        this.transactionTemplate = new TransactionTemplate(jdbcTransactionManager);
         this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
         this.tableName = tableName;
     }
