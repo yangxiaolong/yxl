@@ -11,15 +11,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Message {
-    private boolean orderly;
+    private boolean orderly;// 是否顺序消息
 
     private String topic;
 
-    private String shardingKey;
+    private String shardingKey;// 顺序消息的队列选择键
 
-    private String msgKey;
+    private String msgKey;// 业务唯一键，用于查询/幂等
 
     private String tag;
 
-    private String msg;
+    private String msg;// 消息体
 }
