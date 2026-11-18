@@ -106,27 +106,28 @@ public class TestMessageSenderController {
     public void loadAndSend() throws InterruptedException {
         setUp();
 
-        // 处理消费表中待发送数据
+        //1 处理消费表中待发送数据
         this.reliableMessageCompensator.compensate(DateUtils.addSeconds(new Date(), -120), 1000);
 
-        // 进行 error 标记， MessageSender 发送请求直接失败
+        //2 进行 error 标记， MessageSender 发送请求直接失败
         this.testMessageSender.markError();
+        //3
         for (int i = 0; i < 10; i++) {
             // 执行业务逻辑，业务逻辑不受影响
             this.testMessageSenderService.testSuccess();
         }
-        // 清理 error 标记，MessageSender 正常发送
+        //5 清理 error 标记，MessageSender 正常发送
         this.testMessageSender.cleanError();
 
 
         {
-            // 检测消息表中存在待处理的任务
+            //4 检测消息表中存在待处理的任务
             List<LocalMessage> localMessages = localMessageRepository
                     .loadNotSuccessByUpdateGt(DateUtils.addSeconds(new Date(), -60), 100);
             Assertions.assertEquals(10, localMessages.size());
         }
 
-        // 对消息进行补充处理
+        //6 对消息进行补充处理
         this.reliableMessageCompensator.compensate(DateUtils.addSeconds(new Date(), -60), 5);
 
         {
@@ -136,11 +137,11 @@ public class TestMessageSenderController {
             Assertions.assertEquals(10, localMessages.size());
         }
 
-        // 等待时间超时
+        //7 等待时间超时
         TimeUnit.SECONDS.sleep(15);
 
         this.testMessageSender.clean();
-        // 对消息进行补充处理
+        //8 对消息进行补充处理
         this.reliableMessageCompensator.compensate(DateUtils.addSeconds(new Date(), -60), 50);
 
         {
