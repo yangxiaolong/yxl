@@ -38,6 +38,8 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
     @Override
     protected DefaultMQPushConsumer createConsumer() throws Exception {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer();
+
+        //1
         String nameServer = resolve(this.tagBasedDispatcherMessageConsumer.nameServer());
         consumer.setNamesrvAddr(nameServer);
 
@@ -45,9 +47,13 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
         consumer.setConsumerGroup(group);
 
         String topic = resolve(this.tagBasedDispatcherMessageConsumer.topic());
-        String tag = findTag();
-        consumer.subscribe(topic, tag);
 
+        //2 findTag()` 把 map 里所有 tag 用 `||` 拼起来，一次性精准订阅，
+        // 例如 `UserCreatedEvent||UserEnableEvent||UserDisableEvent||UserDeletedEvent`。
+        // 这正好解决了前面说的「`*` 全量拉取浪费带宽」的问题。
+        String tag = findTag();
+
+        consumer.subscribe(topic, tag);
         consumer.setMessageListener(new DefaultMessageListenerOrderly());
 
         log.info("success to subscribe  {}, topic {}, tag {}, group {}", nameServer, topic, tag, group);
@@ -62,28 +68,36 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
 
     private void initMethods() {
         // 使用代理背后的真实类型扫描注解，避免 CGLIB 代理覆盖方法后 @HandleTag 丢失
+        //1 用 `AopUtils.getTargetClass(this.bean)` 拿真实类型，
+        //  用 `MethodUtils.getMethodsListWithAnnotation` 找出所有 `@HandleTag` 方法
         Class<?> targetClass = AopUtils.getTargetClass(this.bean);
         List<Method> methods = MethodUtils.getMethodsListWithAnnotation(targetClass, HandleTag.class);
 
         methods.forEach(method -> {
+            //2 校验方法必须**只有一个参数**，否则告警并跳过；
             if (method.getParameterCount() != 1) {
                 log.warn("Method {} must have only one param", method);
                 return;
             }
 
+            //3 解析 tag：取参数类型的 `getSimpleName()`，为空直接抛异常；
             String tag = resolveTag(method);
             if (tag.isEmpty()) {
                 String msg = String.format("Tag is null or empty for method %s", method.getName());
                 throw new RuntimeException(msg);
             }
 
+            //4 校验 tag **不能重复**，重复直接抛异常；
             if (this.tagMethods.containsKey(tag)) {
                 String msg = String.format("Tag %s On %s is duplicate", tag, targetClass.getName());
                 throw new RuntimeException(msg);
             }
+            //5 然后把 `tag -> MethodInvoker` 放进 `ConcurrentMap`。
+            // 这里的 `MethodInvoker` 提前缓存了 `Method` 和泛型参数类型，运行期就不用再反射解析类型了。
             this.tagMethods.put(tag, new MethodInvoker(method));
         });
 
+        //6 如果一个 `@HandleTag` 都没有，直接抛异常，快速失败。
         if (this.tagMethods.isEmpty()) {
             String msg = String.format("No @HandleTag method found on %s", targetClass.getName());
             throw new RuntimeException(msg);

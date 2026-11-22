@@ -21,6 +21,7 @@ public abstract class AbstractConsumerContainer implements ConsumerContainer {
     }
 
     protected String resolve(String value) {
+        //1 resolve` 会走 Spring 的 `Environment.resolvePlaceholders`，所以注解里可以写 `${...}` 占位符
         if (StringUtils.hasText(value)) {
             return this.environment.resolvePlaceholders(value);
         }
