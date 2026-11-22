@@ -21,7 +21,7 @@ public class TagBasedDispatcherConsumerContainerRegistry extends AbstractConsume
     public Object postProcessAfterInitialization(@NotNull Object proxy, @NotNull String beanName)
             throws BeansException {
         // 1. 获取 @TagBasedDispatcherMessageConsumer 注解方法
-        Class targetCls = AopUtils.getTargetClass(proxy);
+        Class<?> targetCls = AopUtils.getTargetClass(proxy);
 
         TagBasedDispatcherMessageConsumer tagBasedDispatcherMessageConsumer
                 = AnnotatedElementUtils.findMergedAnnotation(targetCls, TagBasedDispatcherMessageConsumer.class);
