@@ -2,6 +2,7 @@ package com.lego.yxl.msg;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
 /**
@@ -9,7 +10,9 @@ import org.springframework.context.annotation.EnableAspectJAutoProxy;
  * https://mp.weixin.qq.com/s/J_x5HP9jd4CuEsv0JV4Qfw
  * https://mp.weixin.qq.com/s/mrAVSwpufh_TgohhEvnJqQ
  */
-@SpringBootApplication(scanBasePackages = {
+@SpringBootApplication(
+        exclude = DataSourceAutoConfiguration.class,
+        scanBasePackages = {
         "com.lego.yxl.msg",
         "com.lego.yxl.msg.starter"}
 )

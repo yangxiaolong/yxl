@@ -13,12 +13,20 @@ import org.springframework.stereotype.Service;
         topic = "consumer-test-topic-1",
         consumerGroup = "user-message-consumer-1",
         selectorExpression = "*",
+        //第二点靠消费模式。原生写法是 `@RocketMQMessageListener`
+        // 上设置 `consumeMode = ConsumeMode.ORDERLY`，
+        // 并实现 `RocketMQListener<MessageExt>`。
         consumeMode = ConsumeMode.ORDERLY
 )
 @Slf4j
 public class RocketBasedUserMessageConsumer extends UserMessageConsumer
         implements RocketMQListener<MessageExt> {
 
+    /**
+     第一，tag 的维护成本高
+     第二，模板代码淹没业务
+     第三，API 侵入
+     */
     @Override
     public void onMessage(MessageExt message) {
         String tag = message.getTags();

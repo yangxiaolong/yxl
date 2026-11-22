@@ -85,8 +85,15 @@ public abstract class UserMessageConsumerSupport {
         Message<String> msg = MessageBuilder
                 .withPayload(json)
                 .build();
+        //1 destination` 是 `topic:tag` 的形式，
+        // 这是 RocketMQ 的推荐用法——**一个应用一个 topic，消息子类型用 tag 标识；
         String destination = createDestination(topic, tag);
-        SendResult sendResult = this.rocketMQTemplate.syncSendOrderly(destination, msg, shardingKey, 2000);
+
+        //2 `syncSendOrderly` 而不是普通 `syncSend`，这是顺序发送的入口；
+        //第三个参数 `shardingKey` 传的是 `userId`，
+        //3 RocketMQ 会按它选择队列，所以**同一个用户的事件一定落在同一个队列里**
+        SendResult sendResult = this.rocketMQTemplate
+                .syncSendOrderly(destination, msg, shardingKey, 2000);
         log.info("Send result is {} for msg {}", sendResult, msg);
     }
 
