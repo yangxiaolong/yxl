@@ -26,19 +26,23 @@ public class RocketBasedUserMessageConsumer extends UserMessageConsumer
         log.info("handle msg body {}", new String(body));
         switch (tag) {
             case "UserCreatedEvent" -> {
-                UserEvents.UserCreatedEvent createdEvent = JSON.parseObject(body, UserEvents.UserCreatedEvent.class);
+                UserEvents.UserCreatedEvent createdEvent =
+                        JSON.parseObject(body, UserEvents.UserCreatedEvent.class);
                 handle(createdEvent);
             }
             case "UserEnableEvent" -> {
-                UserEvents.UserEnableEvent enableEvent = JSON.parseObject(body, UserEvents.UserEnableEvent.class);
+                UserEvents.UserEnableEvent enableEvent =
+                        JSON.parseObject(body, UserEvents.UserEnableEvent.class);
                 handle(enableEvent);
             }
             case "UserDisableEvent" -> {
-                UserEvents.UserDisableEvent disableEvent = JSON.parseObject(body, UserEvents.UserDisableEvent.class);
+                UserEvents.UserDisableEvent disableEvent =
+                        JSON.parseObject(body, UserEvents.UserDisableEvent.class);
                 handle(disableEvent);
             }
             case "UserDeletedEvent" -> {
-                UserEvents.UserDeletedEvent deletedEvent = JSON.parseObject(body, UserEvents.UserDeletedEvent.class);
+                UserEvents.UserDeletedEvent deletedEvent =
+                        JSON.parseObject(body, UserEvents.UserDeletedEvent.class);
                 handle(deletedEvent);
             }
         }
