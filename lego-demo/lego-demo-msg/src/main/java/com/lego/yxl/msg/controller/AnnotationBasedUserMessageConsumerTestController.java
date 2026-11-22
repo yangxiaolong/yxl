@@ -14,6 +14,7 @@ public class AnnotationBasedUserMessageConsumerTestController extends UserMessag
     @Autowired
     private AnnotationBasedUserMessageConsumer userMessageConsumer;
 
+    @Override
     protected String getTopic() {
         return "consumer-test-topic-2";
     }

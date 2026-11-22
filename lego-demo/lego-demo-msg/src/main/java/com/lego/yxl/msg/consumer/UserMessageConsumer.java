@@ -18,22 +18,26 @@ public class UserMessageConsumer{
     }
 
     public void handle(UserEvents.UserCreatedEvent userCreatedEvent){
-        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent(userCreatedEvent.getUserId(), userId -> new ArrayList<>());
+        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent
+                (userCreatedEvent.getUserId(), userId -> new ArrayList<>());
         userEvents.add(userCreatedEvent);
     }
 
     public void handle(UserEvents.UserEnableEvent userEnableEvent){
-        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent(userEnableEvent.getUserId(), userId -> new ArrayList<>());
+        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent
+                (userEnableEvent.getUserId(), userId -> new ArrayList<>());
         userEvents.add(userEnableEvent);
     }
 
     public void handle(UserEvents.UserDisableEvent userDisableEvent){
-        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent(userDisableEvent.getUserId(), userId -> new ArrayList<>());
+        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent
+                (userDisableEvent.getUserId(), userId -> new ArrayList<>());
         userEvents.add(userDisableEvent);
     }
 
     public void handle(UserEvents.UserDeletedEvent userDeletedEvent){
-        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent(userDeletedEvent.getUserId(), userId -> new ArrayList<>());
+        List<UserEvents.UserEvent> userEvents = this.events.computeIfAbsent
+                (userDeletedEvent.getUserId(), userId -> new ArrayList<>());
         userEvents.add(userDeletedEvent);
     }
 }
