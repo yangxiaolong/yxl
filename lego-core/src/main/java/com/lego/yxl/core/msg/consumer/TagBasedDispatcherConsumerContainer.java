@@ -26,9 +26,10 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
     private final TagBasedDispatcherMessageConsumer tagBasedDispatcherMessageConsumer;
     private final Map<String, MethodInvoker> tagMethods = Maps.newConcurrentMap();
 
-    public TagBasedDispatcherConsumerContainer(Environment environment,
-                                               Object bean,
-                                               TagBasedDispatcherMessageConsumer tagBasedDispatcherMessageConsumer) {
+    public TagBasedDispatcherConsumerContainer(
+            Environment environment,
+            Object bean,
+            TagBasedDispatcherMessageConsumer tagBasedDispatcherMessageConsumer) {
         super(environment, bean);
         Preconditions.checkArgument(tagBasedDispatcherMessageConsumer != null);
         this.tagBasedDispatcherMessageConsumer = tagBasedDispatcherMessageConsumer;
@@ -63,19 +64,19 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
         // 使用代理背后的真实类型扫描注解，避免 CGLIB 代理覆盖方法后 @HandleTag 丢失
         Class<?> targetClass = AopUtils.getTargetClass(this.bean);
         List<Method> methods = MethodUtils.getMethodsListWithAnnotation(targetClass, HandleTag.class);
-        
+
         methods.forEach(method -> {
             if (method.getParameterCount() != 1) {
                 log.warn("Method {} must have only one param", method);
                 return;
             }
-            
+
             String tag = resolveTag(method);
             if (tag.isEmpty()) {
                 String msg = String.format("Tag is null or empty for method %s", method.getName());
                 throw new RuntimeException(msg);
             }
-            
+
             if (this.tagMethods.containsKey(tag)) {
                 String msg = String.format("Tag %s On %s is duplicate", tag, targetClass.getName());
                 throw new RuntimeException(msg);
@@ -88,7 +89,7 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
             throw new RuntimeException(msg);
         }
     }
-    
+
     /**
      * 解析方法的 Tag 值
      * 如果 @HandleTag 指定了值则使用该值，否则使用方法参数的简单类名

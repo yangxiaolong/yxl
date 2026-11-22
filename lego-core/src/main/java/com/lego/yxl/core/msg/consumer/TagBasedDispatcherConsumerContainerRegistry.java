@@ -23,16 +23,16 @@ public class TagBasedDispatcherConsumerContainerRegistry extends AbstractConsume
         // 1. 获取 @TagBasedDispatcherMessageConsumer 注解方法
         Class<?> targetCls = AopUtils.getTargetClass(proxy);
 
-        TagBasedDispatcherMessageConsumer tagBasedDispatcherMessageConsumer
-                = AnnotatedElementUtils.findMergedAnnotation(targetCls, TagBasedDispatcherMessageConsumer.class);
-        if (tagBasedDispatcherMessageConsumer != null) {
+        TagBasedDispatcherMessageConsumer consumer = AnnotatedElementUtils
+                .findMergedAnnotation(targetCls, TagBasedDispatcherMessageConsumer.class);
+        if (consumer != null) {
             // 2. 为每个 @TagBasedDispatcherMessageConsumer 注册 TagBasedDispatcherConsumerContainer
             // Object bean = AopProxyUtils.getSingletonTarget(proxy);
             TagBasedDispatcherConsumerContainer consumerContainer =
                     new TagBasedDispatcherConsumerContainer(
                             this.getEnvironment(),
                             proxy,
-                            tagBasedDispatcherMessageConsumer);
+                            consumer);
             consumerContainer.afterPropertiesSet();
 
             this.getConsumerContainers().add(consumerContainer);
