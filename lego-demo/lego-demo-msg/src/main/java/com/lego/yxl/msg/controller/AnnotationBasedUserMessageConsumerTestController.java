@@ -27,6 +27,7 @@ public class AnnotationBasedUserMessageConsumerTestController extends UserMessag
     public void userEvents() throws InterruptedException {
         setUp();
 
+        //5 对每个用户断言：收到 4 条，且顺序必须是 创建 → 启用 → 停用 → 注销。
         getUserEvents();
     }
 }

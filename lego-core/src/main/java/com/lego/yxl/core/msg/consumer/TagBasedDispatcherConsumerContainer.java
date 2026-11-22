@@ -123,6 +123,7 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
     private class DefaultMessageListenerOrderly implements MessageListenerOrderly {
         @Override
         public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
+            //分发链路是：**取 tag → 查 map → 反序列化 → 反射调用**。
             for (MessageExt messageExt : msgs) {
                 log.debug("received msg: {}", messageExt);
                 try {
@@ -134,6 +135,8 @@ public class TagBasedDispatcherConsumerContainer extends AbstractConsumerContain
                             log.warn("Failed to find Invoker for Tag {}", tag);
                             continue;
                         }
+
+                        //invoke()
                         methodInvoker.invoke(messageExt.getBody());
                     }
                     long costTime = System.currentTimeMillis() - now;

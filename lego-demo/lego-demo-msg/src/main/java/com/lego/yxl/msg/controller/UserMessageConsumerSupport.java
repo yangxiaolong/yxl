@@ -28,14 +28,19 @@ public abstract class UserMessageConsumerSupport {
     protected abstract UserMessageConsumer getUserMessageConsumer();
 
     public void setUp() throws InterruptedException {
+        //1 清空本地缓存；
         this.getUserMessageConsumer().clean();
 
+        //2 造 100 个用户，每个用户按顺序发四条事件：创建、启用、停用、注销；
         this.userIds = new ArrayList<>();
         for (int i = 0; i < 100; i++) {
             userIds.add(10000L + i);
         }
+
+        //3 发送时 `shardingKey = userId`，保证同一用户同队列；
         this.userIds.forEach(this::sendMessage);
 
+        //4 停顿 3 秒，等消费完成；
         TimeUnit.SECONDS.sleep(3);
     }
 
