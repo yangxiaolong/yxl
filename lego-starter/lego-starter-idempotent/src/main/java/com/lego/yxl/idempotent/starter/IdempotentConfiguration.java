@@ -24,21 +24,23 @@ public class IdempotentConfiguration extends IdempotentConfigurationSupport {
     @Resource
     private RedisConnectionFactory redisConnectionFactory;
 
+    //7.1 两个执行器工厂，Bean 名就是路由键
     @Bean("dbExecutorFactory")
     public IdempotentExecutorFactory dbExecutorFactory(JpaBasedExecutionRecordRepository recordRepository) {
         return createExecutorFactory(recordRepository);
     }
-
     @Bean("redisExecutorFactory")
     public IdempotentExecutorFactory redisExecutorFactory(ExecutionRecordRepository executionRecordRepository) {
         return createExecutorFactory(executionRecordRepository);
     }
 
+    //7.2 存储实现：一行构造参数，决定了能力边界
     @Bean
     public ExecutionRecordRepository executionRecordRepository(RedisTemplate<String, ExecutionRecord> recordRedisTemplate) {
         return new RedisBasedExecutionRecordRepository("ide-%s-%s", Duration.ofDays(7), recordRedisTemplate);
     }
 
+    //7.3 RedisTemplate：两套序列化，别搞混
     @Bean
     public RedisTemplate<String, ExecutionRecord> recordRedisTemplate() {
         RedisTemplate<String, ExecutionRecord> redisTemplate = new RedisTemplate<>();

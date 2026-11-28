@@ -31,6 +31,12 @@ public abstract class IdempotentConfigurationSupport {
     public PointcutAdvisor idempotentPointcutAdvisor(IdempotentInterceptor idempotentInterceptor) {
         AnnotationMatchingPointcut pointcut = new AnnotationMatchingPointcut(null, Idempotent.class);
         DefaultPointcutAdvisor advisor = new DefaultPointcutAdvisor(pointcut, idempotentInterceptor);
+        /*
+        IdempotentInterceptor` 会给每个被注解的方法缓存一个 `IdempotentExecutor`，
+        而且幂等切面的 order 是 0，优先级高于事务切面。也就是说，**幂等拦截在事务外层**。
+        这样业务方法抛异常、事务回滚之后，执行记录仍然能被正常更新为“失败”。
+        如果顺序反了，失败记录可能跟着事务一起回滚，重试时就查不到档案了。
+         */
         advisor.setOrder(0);
         return advisor;
     }
