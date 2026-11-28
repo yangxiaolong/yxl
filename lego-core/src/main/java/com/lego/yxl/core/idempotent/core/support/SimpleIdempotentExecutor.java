@@ -28,7 +28,8 @@ public class SimpleIdempotentExecutor implements IdempotentExecutor {
 
     @Override
     public Object invoke(MethodInvocation invocation) throws Throwable {
-        String key = this.idempotentKeyParser.parse(this.meta.paramNames(), invocation.getArguments(), this.meta.keyEl());
+        String key = this.idempotentKeyParser.parse(
+                this.meta.paramNames(), invocation.getArguments(), this.meta.keyEl());
         ExecutionRecord executionRecord = getOrCreateExecutionRecord(this.meta.group(), key);
         if (executionRecord.isDone()) {
             // 已完成，直接使用上次执行结果

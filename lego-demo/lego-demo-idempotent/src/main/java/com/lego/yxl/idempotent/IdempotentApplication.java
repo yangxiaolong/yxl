@@ -11,11 +11,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  * https://mp.weixin.qq.com/s/SeV8JvoHLHduB9w-jiInAQ
  */
 @SpringBootApplication(scanBasePackages = {
-        "com.lego.yxl.idempotent.starter",
-        "com.lego.yxl.singlequery.starter",
+//        "com.lego.yxl.idempotent.starter",
+//        "com.lego.yxl.singlequery.starter",
         "com.lego.yxl.idempotent"
 })
-@EnableAspectJAutoProxy(proxyTargetClass = true)
 @EnableJpaRepositories(basePackages = {
         "com.lego.yxl.core.idempotent.core.support.repository"
 }, repositoryFactoryBeanClass = JpaBasedQueryObjectRepositoryFactoryBean.class)
